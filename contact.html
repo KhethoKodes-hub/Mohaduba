@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohaduba · Contact Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --white: #ffffff;
+            --light-green: #e4f2db;
+            --mid-green: #7ab86a;
+            --primary: #2d6a30;
+            --dark: #16381a;
+            --shadow-green: rgba(22, 56, 26, 0.18);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: linear-gradient(160deg, #ffffff 0%, #f0f9ea 35%, #dff0d4 65%, #c9e5b8 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: var(--dark);
+        }
+
+        /* ── NAV ── */
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(255,255,255,0.55);
+            backdrop-filter: blur(18px) saturate(180%);
+            -webkit-backdrop-filter: blur(18px) saturate(180%);
+            border-bottom: 1px solid rgba(255,255,255,0.5);
+            box-shadow: 0 4px 30px rgba(45,106,48,0.08);
+            padding: 0 1.5rem; height: 68px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; letter-spacing: -0.5px; color: var(--dark); text-decoration: none; display: flex; align-items: center; gap: 6px; }
+        .nav-logo span { color: var(--primary); }
+        .nav-links { display: flex; align-items: center; gap: 0.25rem; list-style: none; }
+        .nav-links a { text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--dark); padding: 0.45rem 0.9rem; border-radius: 50px; transition: all 0.22s ease; }
+        .nav-links a:hover { background: var(--light-green); color: var(--primary); }
+        .nav-links a.active { background: var(--light-green); color: var(--primary); font-weight: 600; }
+        .nav-cta { background: linear-gradient(135deg, #2d6a30, #1c4520) !important; color: white !important; padding: 0.5rem 1.2rem !important; border-radius: 50px !important; box-shadow: 0 4px 14px rgba(22,56,26,0.3); }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(22,56,26,0.4) !important; }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+        .hamburger span { display: block; width: 24px; height: 2px; background: var(--dark); border-radius: 4px; transition: all 0.25s; }
+        .mobile-menu { display: none; position: fixed; top: 68px; left: 0; right: 0; background: rgba(255,255,255,0.97); backdrop-filter: blur(20px); border-bottom: 1px solid var(--light-green); padding: 1rem 1.5rem 1.5rem; z-index: 99; flex-direction: column; gap: 0.25rem; }
+        .mobile-menu a { display: block; text-decoration: none; color: var(--dark); font-size: 1rem; font-weight: 500; padding: 0.75rem 1rem; border-radius: 12px; transition: all 0.2s; }
+        .mobile-menu a:hover { background: var(--light-green); color: var(--primary); }
+        .mobile-menu.open { display: flex; }
+
+        .contact-hero {
+            position: relative;
+            min-height: 68vh;
+            display: flex; align-items: flex-end; overflow: hidden;
+        }
+        .contact-hero-bg {
+            position: absolute; inset: 0;
+            background-image: url('./assets/hero5.png');
+            background-size: cover; background-position: center 40%;
+            filter: brightness(0.45) saturate(1.3);
+            transition: transform 8s ease;
+        }
+        .contact-hero:hover .contact-hero-bg { transform: scale(1.03); }
+        .contact-hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(0deg, rgba(14,36,16,0.95) 0%, rgba(14,36,16,0.2) 55%, transparent 100%);
+        }
+        .contact-hero-content {
+            position: relative; z-index: 2; width: 100%;
+            max-width: 1200px; margin: 0 auto;
+            padding: 0 1.5rem 4.5rem;
+        }
+        .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 1.2rem; }
+        .breadcrumb a { color: #7ab86a; text-decoration: none; }
+        .breadcrumb a:hover { color: #a8d994; }
+        .contact-hero-title { font-family: 'Playfair Display', serif; font-size: clamp(3.2rem, 8.5vw, 7rem); font-weight: 900; line-height: 0.95; color: white; letter-spacing: -3px; margin-bottom: 1.2rem; }
+        .contact-hero-title em { font-style: italic; color: #a8d994; }
+        .contact-hero-sub { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.1rem, 2.5vw, 1.5rem); color: rgba(255,255,255,0.65); font-weight: 300; max-width: 500px; line-height: 1.65; }
+
+        .hero-info-strip {
+            position: relative; z-index: 3;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255,255,255,0.15);
+        }
+        .hero-info-inner {
+            max-width: 1200px; margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex; gap: 0; flex-wrap: wrap;
+        }
+        .info-strip-item {
+            display: flex; align-items: center; gap: 10px;
+            padding: 0.65rem 1.5rem;
+            border-right: 1px solid rgba(255,255,255,0.12);
+            flex: 1; min-width: 180px;
+            transition: background 0.2s;
+        }
+        .info-strip-item:last-child { border-right: none; }
+        .info-strip-item:hover { background: rgba(255,255,255,0.07); }
+        .info-strip-icon { font-size: 1.1rem; }
+        .info-strip-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #7ab86a; display: block; }
+        .info-strip-value { font-size: 0.85rem; color: rgba(255,255,255,0.88); font-weight: 500; }
+        .info-strip-value a { color: inherit; text-decoration: none; }
+        .info-strip-value a:hover { color: #a8d994; }
+
+        .section-wrap { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+        .section-eyebrow { font-size: 0.68rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--primary); display: block; margin-bottom: 0.6rem; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 700; line-height: 1.1; color: var(--dark); letter-spacing: -1px; }
+        .section-title em { font-style: italic; color: var(--primary); }
+        .accent-bar { width: 56px; height: 4px; background: linear-gradient(90deg, var(--primary), var(--mid-green)); border-radius: 4px; margin: 1rem 0 1.5rem; }
+
+        .glass-card { background: rgba(255,255,255,0.55); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border: 1px solid rgba(255,255,255,0.75); border-radius: 28px; box-shadow: 0 16px 64px rgba(22,56,26,0.1); transition: all 0.3s ease; }
+        .glass-card:hover { box-shadow: 0 24px 80px rgba(22,56,26,0.18); transform: translateY(-4px); border-color: #c0dfb2; }
+
+        .contact-main { padding: 6rem 1.5rem 4rem; }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 2.5rem; align-items: start; }
+
+        .details-stack { display: flex; flex-direction: column; gap: 1.5rem; }
+
+        .detail-card {
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.8);
+            border-radius: 24px;
+            padding: 1.8rem;
+            display: flex; gap: 1.2rem; align-items: flex-start;
+            transition: all 0.25s ease;
+        }
+        .detail-card:hover { background: white; border-color: #b5dba8; box-shadow: 0 12px 40px rgba(22,56,26,0.12); transform: translateX(6px); }
+        .detail-card-icon {
+            width: 52px; height: 52px; flex-shrink: 0;
+            background: linear-gradient(135deg, #e4f2db, #c0ddb0);
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem;
+            transition: all 0.25s;
+        }
+        .detail-card:hover .detail-card-icon { background: linear-gradient(135deg, #3a8040, #1f5522); box-shadow: 0 6px 20px rgba(22,56,26,0.3); }
+        .detail-card-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--primary); margin-bottom: 4px; }
+        .detail-card-value { font-size: 1rem; font-weight: 600; color: var(--dark); line-height: 1.4; }
+        .detail-card-value a { color: inherit; text-decoration: none; }
+        .detail-card-value a:hover { color: var(--primary); }
+        .detail-card-sub { font-size: 0.78rem; color: #5a7a5e; margin-top: 4px; line-height: 1.5; }
+
+        .hours-card {
+            background: linear-gradient(135deg, rgba(45,106,48,0.08), rgba(122,184,106,0.1));
+            border: 1px solid rgba(45,106,48,0.2);
+            border-radius: 24px;
+            padding: 1.8rem;
+            transition: all 0.25s ease;
+        }
+        .hours-card:hover { background: rgba(255,255,255,0.7); border-color: #b5dba8; box-shadow: 0 12px 40px rgba(22,56,26,0.1); }
+        .hours-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+        .hours-row { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid rgba(45,106,48,0.08); font-size: 0.88rem; }
+        .hours-row:last-child { border-bottom: none; }
+        .hours-day { color: #4a6b4e; font-weight: 500; }
+        .hours-time { color: var(--dark); font-weight: 600; }
+        .hours-time.closed { color: #9aaa9d; font-weight: 400; font-style: italic; }
+        .open-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(45,106,48,0.1); border: 1px solid rgba(45,106,48,0.25); border-radius: 50px; padding: 0.35rem 0.9rem; font-size: 0.72rem; font-weight: 700; color: var(--primary); margin-top: 1rem; }
+        .open-dot { width: 7px; height: 7px; border-radius: 50%; background: #3a8040; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+
+        .form-card { padding: 2.5rem; }
+        .form-card-header { margin-bottom: 2rem; }
+        .form-group { margin-bottom: 1.25rem; }
+        .form-label { display: block; font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; }
+        .form-input {
+            width: 100%; padding: 0.9rem 1.1rem;
+            background: rgba(255,255,255,0.7);
+            border: 1.5px solid rgba(45,106,48,0.2);
+            border-radius: 14px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem; color: var(--dark);
+            transition: all 0.22s ease;
+            outline: none;
+        }
+        .form-input::placeholder { color: #9aaa9d; }
+        .form-input:focus { background: white; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(45,106,48,0.12); }
+        .form-input:hover { border-color: rgba(45,106,48,0.4); }
+        textarea.form-input { resize: vertical; min-height: 120px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+        .form-select {
+            width: 100%; padding: 0.9rem 1.1rem;
+            background: rgba(255,255,255,0.7);
+            border: 1.5px solid rgba(45,106,48,0.2);
+            border-radius: 14px;
+            font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--dark);
+            transition: all 0.22s ease; outline: none; cursor: pointer; appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%232d6a30' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 1rem center;
+        }
+        .form-select:focus { background-color: white; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(45,106,48,0.12); }
+
+        .submit-btn {
+            width: 100%; padding: 1rem 2rem;
+            background: linear-gradient(135deg, #3a8040, #1f5522);
+            color: white; font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem; font-weight: 700; letter-spacing: 0.5px;
+            border: none; border-radius: 16px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            box-shadow: 0 8px 32px rgba(20,55,22,0.4);
+            transition: all 0.25s ease; margin-top: 0.5rem;
+        }
+        .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(20,55,22,0.5); background: linear-gradient(135deg, #45944c, #2d6a30); }
+        .submit-btn:active { transform: translateY(0); }
+
+        .form-footer-note { text-align: center; margin-top: 1rem; font-size: 0.75rem; color: #6a8a6e; display: flex; align-items: center; justify-content: center; gap: 6px; }
+
+        .founder-section { padding: 2rem 1.5rem 5rem; }
+        .founder-card {
+            position: relative;
+            border-radius: 28px;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(14,36,16,0.92), rgba(22,60,26,0.88));
+        }
+        .founder-card-bg {
+            position: absolute; inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1585320806297-9794b3e4aaae?w=1600&q=80&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+            filter: brightness(0.18) saturate(1.3);
+        }
+        .founder-card-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(14,36,16,0.93) 0%, rgba(14,36,16,0.7) 100%); }
+        .founder-card-content {
+            position: relative; z-index: 2;
+            padding: 3rem;
+            display: flex; gap: 2.5rem; align-items: center;
+        }
+        .founder-avatar {
+            width: 100px; height: 100px; flex-shrink: 0;
+            background: linear-gradient(135deg, #3a8040, #1f5522);
+            border-radius: 24px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 3rem;
+            border: 3px solid rgba(255,255,255,0.2);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+        }
+        .founder-name { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; color: white; margin-bottom: 0.3rem; }
+        .founder-role { font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #7ab86a; margin-bottom: 0.75rem; }
+        .founder-bio { font-size: 0.92rem; color: rgba(255,255,255,0.7); line-height: 1.7; max-width: 560px; }
+        .founder-contact-pills { display: flex; gap: 0.75rem; margin-top: 1.2rem; flex-wrap: wrap; }
+        .founder-pill {
+            display: flex; align-items: center; gap: 8px;
+            background: rgba(255,255,255,0.12); backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 50px; padding: 0.5rem 1rem;
+            font-size: 0.82rem; font-weight: 500; color: rgba(255,255,255,0.85);
+            text-decoration: none; transition: all 0.22s;
+        }
+        .founder-pill:hover { background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.5); transform: translateY(-2px); }
+        .bbbee-corner {
+            position: absolute; top: 1.5rem; right: 1.5rem;
+            background: linear-gradient(135deg, #1f5522, #2d6a30);
+            color: white; padding: 0.5rem 1rem; border-radius: 50px;
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 1px;
+        }
+
+        .directions-section { padding: 2rem 1.5rem 5rem; }
+        .directions-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 2rem; align-items: stretch; }
+
+        .map-card {
+            border-radius: 28px; overflow: hidden;
+            position: relative; min-height: 340px;
+            background: linear-gradient(135deg, #c8e6b8, #a8d498, #88c278);
+            border: 2px solid rgba(255,255,255,0.6);
+            box-shadow: 0 16px 64px rgba(22,56,26,0.15);
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s;
+        }
+        .map-card:hover { box-shadow: 0 24px 80px rgba(22,56,26,0.22); transform: translateY(-4px); }
+        .map-pattern {
+            position: absolute; inset: 0; opacity: 0.15;
+            background-image:
+                repeating-linear-gradient(0deg, rgba(22,56,26,0.4) 0px, rgba(22,56,26,0.4) 1px, transparent 1px, transparent 40px),
+                repeating-linear-gradient(90deg, rgba(22,56,26,0.4) 0px, rgba(22,56,26,0.4) 1px, transparent 1px, transparent 40px);
+        }
+        .map-content { position: relative; z-index: 2; text-align: center; padding: 2rem; }
+        .map-pin { font-size: 4rem; display: block; margin-bottom: 1rem; filter: drop-shadow(0 8px 16px rgba(22,56,26,0.4)); animation: float 3s ease-in-out infinite; }
+        @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
+        .map-address { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--dark); margin-bottom: 0.4rem; }
+        .map-sub { font-size: 0.82rem; color: #3a5c3e; }
+        .map-open-link {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: linear-gradient(135deg, #2d6a30, #1c4520);
+            color: white; font-size: 0.82rem; font-weight: 600;
+            padding: 0.6rem 1.4rem; border-radius: 50px;
+            text-decoration: none; margin-top: 1rem;
+            box-shadow: 0 6px 20px rgba(22,56,26,0.35);
+            transition: all 0.22s;
+        }
+        .map-open-link:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(22,56,26,0.45); }
+
+        .directions-info { display: flex; flex-direction: column; gap: 1rem; }
+        .dir-item {
+            background: rgba(255,255,255,0.6); backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.8);
+            border-radius: 18px; padding: 1.2rem 1.4rem;
+            display: flex; gap: 1rem; align-items: flex-start;
+            transition: all 0.22s;
+        }
+        .dir-item:hover { background: white; border-color: #b5dba8; box-shadow: 0 8px 24px rgba(22,56,26,0.1); transform: translateX(5px); }
+        .dir-icon { font-size: 1.3rem; flex-shrink: 0; }
+        .dir-title { font-size: 0.88rem; font-weight: 700; color: var(--dark); margin-bottom: 2px; }
+        .dir-body { font-size: 0.78rem; color: #5a7a5e; line-height: 1.55; }
+
+        .closing-section { padding: 2rem 1.5rem 5rem; }
+        .closing-inner {
+            background: rgba(255,255,255,0.55); backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.75); border-radius: 28px;
+            padding: 3rem; text-align: center;
+            box-shadow: 0 16px 64px rgba(22,56,26,0.1);
+        }
+        .closing-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: var(--dark); margin-bottom: 0.5rem; letter-spacing: -1px; }
+        .closing-title em { font-style: italic; color: var(--primary); }
+        .closing-sub { font-size: 1rem; color: #4a6b4e; max-width: 480px; margin: 0 auto 2rem; line-height: 1.65; }
+        .closing-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+        .btn-primary { background: linear-gradient(135deg, #3a8040, #1f5522); color: white; font-size: 0.9rem; font-weight: 600; padding: 0.85rem 2rem; border-radius: 50px; border: none; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 8px 32px rgba(20,55,22,0.5); transition: all 0.25s ease; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(20,55,22,0.6); }
+        .btn-outline { background: transparent; color: var(--primary); font-size: 0.9rem; font-weight: 600; padding: 0.85rem 2rem; border-radius: 50px; border: 2px solid var(--primary); cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.25s ease; }
+        .btn-outline:hover { background: var(--light-green); transform: translateY(-3px); }
+        .reg-chip { display: inline-flex; align-items: center; gap: 8px; background: rgba(45,106,48,0.08); border: 1px solid rgba(45,106,48,0.2); border-radius: 50px; padding: 0.5rem 1.2rem; font-size: 0.75rem; font-weight: 600; color: var(--primary); }
+
+        footer { background: linear-gradient(180deg, #0c2410, #091b0c); padding: 3rem 1.5rem 2rem; color: rgba(255,255,255,0.6); }
+        .footer-inner { max-width: 1200px; margin: 0 auto; }
+        .footer-top { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.08); gap: 2rem; flex-wrap: wrap; }
+        .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: white; letter-spacing: -0.5px; }
+        .footer-logo span { color: #7ab86a; }
+        .footer-tagline { font-size: 0.8rem; color: rgba(255,255,255,0.45); margin-top: 4px; font-style: italic; }
+        .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .footer-links a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+        .footer-links a:hover { color: #7ab86a; }
+        .footer-bottom { margin-top: 1.5rem; font-size: 0.75rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        @media (max-width: 1024px) {
+            .contact-grid { grid-template-columns: 1fr; }
+            .directions-grid { grid-template-columns: 1fr; }
+            .map-card { min-height: 260px; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .form-row { grid-template-columns: 1fr; }
+            .founder-card-content { flex-direction: column; text-align: center; }
+            .founder-contact-pills { justify-content: center; }
+            .bbbee-corner { top: 1rem; right: 1rem; font-size: 0.65rem; }
+            .hero-info-inner { gap: 0; }
+            .info-strip-item { min-width: 140px; }
+        }
+        @media (max-width: 480px) {
+            .contact-hero-title { letter-spacing: -1px; }
+            .info-strip-item { padding: 0.5rem 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <a href="mohaduba-homepage.html" class="nav-logo">Mohaduba<span>●</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+
+            <li><a href="contact.html" class="active nav-cta">Get in Touch</a></li>
+        </ul>
+        <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html" onclick="toggleMenu()">Home</a>
+        <a href="about.html" onclick="toggleMenu()">About</a>
+        <a href="services.html" onclick="toggleMenu()">Services</a>
+        <a href="contact.html" onclick="toggleMenu()" style="background:var(--light-green);color:var(--primary);font-weight:600;">Contact ✓</a>
+    </div>
+
+    <section class="contact-hero">
+        <div class="contact-hero-bg"></div>
+        <div class="contact-hero-overlay"></div>
+        <div class="contact-hero-content">
+            <div class="breadcrumb">
+                <a href="index.html">Mohaduba</a>
+                <span>›</span>
+                <span>Contact Us</span>
+            </div>
+            <h1 class="contact-hero-title">Get in <em>Touch</em><br>with Us.</h1>
+            <p class="contact-hero-sub">We're here to help — whether you need plants, expert advice, a quote, or just want to say hello at the nursery.</p>
+        </div>
+    </section>
+
+    <div class="hero-info-strip">
+        <div class="hero-info-inner">
+            <div class="info-strip-item">
+                <span class="info-strip-icon">📍</span>
+                <div>
+                    <span class="info-strip-label">Address</span>
+                    <span class="info-strip-value">H115Plot, Seven Miles, Kuruman</span>
+                </div>
+            </div>
+            <div class="info-strip-item">
+                <span class="info-strip-icon">📞</span>
+                <div>
+                    <span class="info-strip-label">Phone</span>
+                    <span class="info-strip-value"><a href="tel:+27822243736">+27 82-224-3736</a></span>
+                </div>
+            </div>
+            <div class="info-strip-item">
+                <span class="info-strip-icon">✉️</span>
+                <div>
+                    <span class="info-strip-label">Email</span>
+                    <span class="info-strip-value"><a href="mailto:josephsedumedi53@gmail.com">josephsedumedi53@gmail.com</a></span>
+                </div>
+            </div>
+            <div class="info-strip-item">
+                <span class="info-strip-icon">🕒</span>
+                <div>
+                    <span class="info-strip-label">Hours</span>
+                    <span class="info-strip-value">Mon–Fri 8:00–17:00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="contact-main">
+        <div class="section-wrap">
+            <div class="contact-grid">
+
+                <div class="details-stack">
+                    <div class="reveal">
+                        <span class="section-eyebrow">Reach us</span>
+                        <h2 class="section-title">Contact <em>details</em></h2>
+                        <div class="accent-bar"></div>
+                    </div>
+
+                    <div class="detail-card reveal reveal-delay-1">
+                        <div class="detail-card-icon">📍</div>
+                        <div>
+                            <div class="detail-card-label">Physical Address</div>
+                            <div class="detail-card-value">H115Plot, Seven Miles<br>Kuruman, 8460</div>
+                            <div class="detail-card-sub">Conveniently located for Kuruman and the surrounding areas. Plenty of parking available.</div>
+                        </div>
+                    </div>
+
+                    <div class="detail-card reveal reveal-delay-1">
+                        <div class="detail-card-icon">📞</div>
+                        <div>
+                            <div class="detail-card-label">Phone / WhatsApp</div>
+                            <div class="detail-card-value"><a href="tel:+27822243736">+27 82-224-3736</a></div>
+                            <div class="detail-card-sub">Call or WhatsApp Joseph Sedumedi directly. Available during nursery hours.</div>
+                        </div>
+                    </div>
+
+                    <div class="detail-card reveal reveal-delay-2">
+                        <div class="detail-card-icon">✉️</div>
+                        <div>
+                            <div class="detail-card-label">Email Address</div>
+                            <div class="detail-card-value"><a href="mailto:josephsedumedi53@gmail.com">josephsedumedi53@gmail.com</a></div>
+                            <div class="detail-card-sub">We aim to reply within 24 hours. Ideal for quotes and bulk enquiries.</div>
+                        </div>
+                    </div>
+
+                    <div class="hours-card reveal reveal-delay-2">
+                        <div class="hours-title">🕒 Nursery Hours</div>
+                        <div class="hours-row"><span class="hours-day">Monday – Friday</span><span class="hours-time">08:00 – 17:00</span></div>
+                        <div class="hours-row"><span class="hours-day">Saturday</span><span class="hours-time">08:00 – 15:00</span></div>
+                        <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time closed">By appointment only</span></div>
+                        <div class="open-badge"><div class="open-dot"></div> Walk-ins always welcome</div>
+                    </div>
+                </div>
+
+                <div class="glass-card form-card reveal reveal-delay-1">
+                    <div class="form-card-header">
+                        <span class="section-eyebrow">Send a message</span>
+                        <h3 class="section-title" style="font-size:clamp(1.5rem,3vw,2rem);">We'd love to <em>hear</em> from you</h3>
+                        <p style="font-size:0.85rem;color:#5a7a5e;margin-top:0.5rem;line-height:1.55;">Fill in the form and Joseph or a team member will get back to you promptly.</p>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">First Name</label>
+                            <input type="text" class="form-input" placeholder="e.g. Thabo">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" class="form-input" placeholder="e.g. Mokoena">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" class="form-input" placeholder="your@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Phone / WhatsApp</label>
+                        <input type="tel" class="form-input" placeholder="+27 …">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">I'm enquiring about</label>
+                        <select class="form-select">
+                            <option value="" disabled selected>Select a topic…</option>
+                            <option>Bedding plants &amp; shrubs</option>
+                            <option>Trees &amp; landscaping</option>
+                            <option>Vegetable plants</option>
+                            <option>Garden accessories</option>
+                            <option>Fertilizers &amp; soils</option>
+                            <option>Contractor bulk order</option>
+                            <option>General enquiry</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Message</label>
+                        <textarea class="form-input" placeholder="Tell us what you need, how many, any specific requests…"></textarea>
+                    </div>
+
+                    <button class="submit-btn" onclick="handleSubmit(this)">
+                        <span>📨</span> Send Message
+                    </button>
+
+                    <div class="form-footer-note">
+                        🔒 Your details are safe with us — no spam, ever.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="founder-section">
+        <div class="section-wrap">
+            <div class="founder-card reveal">
+                <div class="founder-card-bg"></div>
+                <div class="founder-card-overlay"></div>
+                <div class="founder-card-content">
+                    <div class="founder-avatar">🧑🏿‍🌾</div>
+                    <div>
+                        <div class="founder-role">Founder &amp; Managing Director</div>
+                        <div class="founder-name">Joseph Sedumedi</div>
+                        <p class="founder-bio">Joseph personally oversees all aspects of Mohaduba — from ordering merchandise and tree stock to greenhouse maintenance and customer relations. Feel free to ask for him directly when you visit or call. He loves talking plants.</p>
+                        <div class="founder-contact-pills">
+                            <a href="tel:+27822243736" class="founder-pill">📞 +27 82-224-3736</a>
+                            <a href="mailto:josephsedumedi53@gmail.com" class="founder-pill">✉️ josephsedumedi53@gmail.com</a>
+                            <span class="founder-pill">📍 Seven Miles, Kuruman</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bbbee-corner">★ 100% Black Owned</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="directions-section">
+        <div class="section-wrap">
+            <div style="margin-bottom:2.5rem;" class="reveal">
+                <span class="section-eyebrow">Find us</span>
+                <h2 class="section-title">How to <em>reach</em> us</h2>
+            </div>
+            <div class="directions-grid">
+                <div class="map-card reveal">
+                    <div class="map-pattern"></div>
+                    <div class="map-content">
+                        <span class="map-pin">📍</span>
+                        <div class="map-address">H115Plot, Seven Miles</div>
+                        <div class="map-sub">Kuruman, 8460 · Northern Cape, South Africa</div>
+                        <a href="https://maps.google.com/?q=Kuruman+Seven+Miles" target="_blank" rel="noopener" class="map-open-link">
+                            🗺️ Open in Google Maps
+                        </a>
+                    </div>
+                </div>
+
+                <div class="directions-info">
+                    <div class="dir-item reveal reveal-delay-1">
+                        <span class="dir-icon">🚗</span>
+                        <div>
+                            <div class="dir-title">By car from Kuruman central</div>
+                            <div class="dir-body">Approximately 7 miles from the Kuruman town centre. Follow the Seven Miles route — Mohaduba is at H115Plot with ample parking on site.</div>
+                        </div>
+                    </div>
+                    <div class="dir-item reveal reveal-delay-1">
+                        <span class="dir-icon">🏗️</span>
+                        <div>
+                            <div class="dir-title">Contractors &amp; bulk deliveries</div>
+                            <div class="dir-body">We cater for contractors with larger volumes. Call ahead on +27 82-224-3736 to arrange a convenient time for loading and collection.</div>
+                        </div>
+                    </div>
+                    <div class="dir-item reveal reveal-delay-2">
+                        <span class="dir-icon">🌍</span>
+                        <div>
+                            <div class="dir-title">Service area</div>
+                            <div class="dir-body">We serve Kuruman and all surrounding areas including rural communities and landscaping contractors across the Northern Cape region.</div>
+                        </div>
+                    </div>
+                    <div class="dir-item reveal reveal-delay-2">
+                        <span class="dir-icon">🅿️</span>
+                        <div>
+                            <div class="dir-title">Parking &amp; access</div>
+                            <div class="dir-body">Plenty of parking available on site. Walk-ins welcome during nursery hours — no appointment necessary for retail visitors.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="closing-section">
+        <div class="section-wrap">
+            <div class="closing-inner reveal">
+                <h2 class="closing-title">We'd love to meet you<br>at <em>Mohaduba</em></h2>
+                <p class="closing-sub">Come explore our plants, get expert advice, and take home something beautiful for your garden. See you at Seven Miles!</p>
+                <div class="closing-btns">
+                    <a href="tel:+27822243736" class="btn-primary">📞 Call Now</a>
+                    <a href="mailto:josephsedumedi53@gmail.com" class="btn-outline">✉️ Send Email</a>
+                </div>
+                <div class="reg-chip">🏷️ Reg: 2017/360951/07 &nbsp;·&nbsp; 100% Black Owned</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-top">
+                <div>
+                    <div class="footer-logo">Mohaduba<span>●</span></div>
+                    <div class="footer-tagline">Rooted in Kuruman, grown with passion</div>
+                </div>
+                <div class="footer-links">
+                    <a href="mohaduba-homepage.html">Home</a>
+                    <a href="mohaduba-about.html">About</a>
+                    <a href="mohaduba-services.html">Services</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2024 Mohaduba Enterprise Nursery · Kuruman</span>
+                <span>100% Black Owned &amp; Managed · Reg. 2017/360951/07</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('open');
+        }
+
+        const revealEls = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+            });
+        }, { threshold: 0.1 });
+        revealEls.forEach(el => observer.observe(el));
+
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.nav');
+            nav.style.background = window.scrollY > 50 ? 'rgba(255,255,255,0.88)' : 'rgba(255,255,255,0.55)';
+        });
+
+        function handleSubmit(btn) {
+            btn.innerHTML = '<span>✅</span> Message Sent!';
+            btn.style.background = 'linear-gradient(135deg, #1f5522, #154d1a)';
+            btn.disabled = true;
+            setTimeout(() => {
+                btn.innerHTML = '<span>📨</span> Send Message';
+                btn.style.background = '';
+                btn.disabled = false;
+            }, 3000);
+        }
+    </script>
+
+</body>
+</html>

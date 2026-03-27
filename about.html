@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohaduba · About Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --white: #ffffff;
+            --cream: #f8fdf5;
+            --light-green: #e4f2db;
+            --mid-green: #7ab86a;
+            --primary: #2d6a30;
+            --dark: #16381a;
+            --glass: rgba(255,255,255,0.18);
+            --glass-border: rgba(255,255,255,0.35);
+            --shadow-green: rgba(22, 56, 26, 0.18);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: linear-gradient(160deg, #ffffff 0%, #f0f9ea 35%, #dff0d4 65%, #c9e5b8 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: var(--dark);
+        }
+
+        /* ── NAV ── */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(255,255,255,0.55);
+            backdrop-filter: blur(18px) saturate(180%);
+            -webkit-backdrop-filter: blur(18px) saturate(180%);
+            border-bottom: 1px solid rgba(255,255,255,0.5);
+            box-shadow: 0 4px 30px rgba(45,106,48,0.08);
+            padding: 0 1.5rem;
+            height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            color: var(--dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .nav-logo span { color: var(--primary); }
+        .nav-links { display: flex; align-items: center; gap: 0.25rem; list-style: none; }
+        .nav-links a {
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--dark);
+            padding: 0.45rem 0.9rem;
+            border-radius: 50px;
+            transition: all 0.22s ease;
+        }
+        .nav-links a:hover { background: var(--light-green); color: var(--primary); }
+        .nav-links a.active { background: var(--light-green); color: var(--primary); font-weight: 600; }
+        .nav-cta {
+            background: linear-gradient(135deg, #2d6a30, #1c4520) !important;
+            color: white !important;
+            padding: 0.5rem 1.2rem !important;
+            border-radius: 50px !important;
+            box-shadow: 0 4px 14px rgba(22,56,26,0.3);
+        }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(22,56,26,0.4) !important; }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 4px;
+            background: none;
+            border: none;
+        }
+        .hamburger span { display: block; width: 24px; height: 2px; background: var(--dark); border-radius: 4px; transition: all 0.25s; }
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 68px; left: 0; right: 0;
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--light-green);
+            padding: 1rem 1.5rem 1.5rem;
+            z-index: 99;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        .mobile-menu a { display: block; text-decoration: none; color: var(--dark); font-size: 1rem; font-weight: 500; padding: 0.75rem 1rem; border-radius: 12px; transition: all 0.2s; }
+        .mobile-menu a:hover { background: var(--light-green); color: var(--primary); }
+        .mobile-menu.open { display: flex; }
+
+        .about-hero {
+            position: relative;
+            min-height: 72vh;
+            display: flex;
+            align-items: flex-end;
+            overflow: hidden;
+            padding-bottom: 0;
+        }
+        .about-hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('./assets/hero2.png');
+            background-size: cover;
+            background-position: center 35%;
+            filter: brightness(0.5) saturate(1.3);
+            transition: transform 8s ease;
+        }
+        .about-hero:hover .about-hero-bg { transform: scale(1.03); }
+        .about-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, rgba(14,36,16,0.92) 0%, rgba(14,36,16,0.3) 50%, transparent 100%);
+        }
+        .about-hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+        }
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 1.2rem;
+        }
+        .breadcrumb a { color: #7ab86a; text-decoration: none; }
+        .breadcrumb a:hover { color: #a8d994; }
+        .about-hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.5rem, 9vw, 7rem);
+            font-weight: 900;
+            line-height: 0.95;
+            color: white;
+            letter-spacing: -3px;
+            margin-bottom: 1.2rem;
+        }
+        .about-hero-title em { font-style: italic; color: #a8d994; }
+        .about-hero-sub {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            color: rgba(255,255,255,0.65);
+            font-weight: 300;
+            max-width: 560px;
+            line-height: 1.6;
+        }
+
+        .hero-pills {
+            position: relative;
+            z-index: 3;
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255,255,255,0.15);
+        }
+        .hero-pills-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .hero-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50px;
+            padding: 0.45rem 1rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.85);
+            letter-spacing: 0.3px;
+            transition: all 0.2s;
+        }
+        .hero-pill:hover { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.4); }
+        .hero-pill-dot { width: 6px; height: 6px; border-radius: 50%; background: #7ab86a; }
+
+        .section-wrap { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+        .section-eyebrow {
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 0.6rem;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--dark);
+            letter-spacing: -1px;
+        }
+        .section-title em { font-style: italic; color: var(--primary); }
+        .accent-bar {
+            width: 56px; height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--mid-green));
+            border-radius: 4px;
+            margin: 1rem 0 1.5rem;
+        }
+
+        .glass-card {
+            background: rgba(255,255,255,0.55);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255,255,255,0.75);
+            border-radius: 28px;
+            box-shadow: 0 16px 64px rgba(22,56,26,0.1);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            box-shadow: 0 24px 80px rgba(22,56,26,0.18);
+            transform: translateY(-4px);
+            border-color: #c0dfb2;
+        }
+
+        /* ── STORY SECTION ── */
+        .story-section { padding: 6rem 1.5rem; }
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .story-img-wrap { position: relative; }
+        .story-img {
+            width: 100%;
+            height: 560px;
+            object-fit: cover;
+            border-radius: 28px;
+            display: block;
+        }
+        .story-img-overlay {
+            position: absolute;
+            inset: 0;
+            border-radius: 28px;
+            background: linear-gradient(180deg, transparent 55%, rgba(14,36,16,0.5) 100%);
+        }
+        .story-float-card {
+            position: absolute;
+            bottom: 1.5rem; left: 1.5rem; right: 1.5rem;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.9);
+            border-radius: 18px;
+            padding: 1.2rem 1.5rem;
+            box-shadow: 0 12px 40px rgba(22,56,26,0.2);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .story-float-avatar {
+            width: 52px; height: 52px;
+            background: linear-gradient(135deg, #2d6a30, #1c4520);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            box-shadow: 0 6px 20px rgba(22,56,26,0.35);
+        }
+        .story-float-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--primary); }
+        .story-float-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--dark); }
+        .story-float-sub { font-size: 0.72rem; color: #6a8a6e; margin-top: 1px; }
+        .bbbee-tag {
+            margin-left: auto;
+            background: linear-gradient(135deg, #1f5522, #2d6a30);
+            color: white;
+            padding: 0.4rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .story-body {
+            font-size: 1.05rem;
+            line-height: 1.85;
+            color: #3a5c3e;
+        }
+
+        .quote-section {
+            padding: 5rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .quote-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1600&q=80&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.25) saturate(1.4);
+        }
+        .quote-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(14,36,16,0.94) 0%, rgba(22,60,26,0.88) 100%);
+        }
+        .quote-inner {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            text-align: center;
+        }
+        .quote-mark {
+            font-family: 'Playfair Display', serif;
+            font-size: 8rem;
+            line-height: 0.6;
+            color: rgba(168,217,148,0.25);
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .quote-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 300;
+            font-style: italic;
+            color: white;
+            line-height: 1.5;
+            margin-bottom: 2rem;
+        }
+        .quote-text em { color: #a8d994; font-style: normal; }
+        .quote-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .quote-author-avatar {
+            width: 52px; height: 52px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3a8040, #1f5522);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            border: 3px solid rgba(255,255,255,0.2);
+        }
+        .quote-author-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: white;
+        }
+        .quote-author-role { font-size: 0.75rem; color: rgba(255,255,255,0.5); }
+
+        .mission-section { padding: 6rem 1.5rem; }
+        .mission-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+        .mission-card { padding: 2.5rem; }
+        .mission-icon {
+            width: 56px; height: 56px;
+            background: linear-gradient(135deg, #3a8040, #1f5522);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 24px rgba(22,56,26,0.3);
+        }
+        .mission-body {
+            font-size: 1rem;
+            line-height: 1.85;
+            color: #3a5c3e;
+        }
+        .mission-quote-block {
+            margin-top: 1.5rem;
+            padding: 1rem 1.5rem;
+            border-left: 3px solid var(--primary);
+            background: rgba(45,106,48,0.06);
+            border-radius: 0 12px 12px 0;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--dark);
+        }
+
+        .objectives-card { padding: 2.5rem; }
+        .objective-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(45,106,48,0.1);
+        }
+        .objective-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .objective-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: rgba(45,106,48,0.2);
+            line-height: 1;
+            min-width: 32px;
+        }
+        .objective-text {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #3a5c3e;
+        }
+        .objective-text strong { color: var(--dark); font-weight: 600; display: block; margin-bottom: 2px; }
+
+        .timeline-section { padding: 4rem 1.5rem 6rem; }
+        .timeline-header { text-align: center; margin-bottom: 4rem; }
+        .timeline-track {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0; bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary), var(--mid-green));
+            transform: translateX(-50%);
+        }
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 1fr 60px 1fr;
+            gap: 0;
+            margin-bottom: 3rem;
+            align-items: center;
+        }
+        .timeline-item:nth-child(odd) .timeline-content { grid-column: 1; text-align: right; padding-right: 2rem; }
+        .timeline-item:nth-child(odd) .timeline-empty { grid-column: 3; }
+        .timeline-item:nth-child(even) .timeline-content { grid-column: 3; text-align: left; padding-left: 2rem; order: 3; }
+        .timeline-item:nth-child(even) .timeline-empty { grid-column: 1; order: 1; }
+        .timeline-center { grid-column: 2; display: flex; justify-content: center; align-items: center; z-index: 2; position: relative; }
+        .timeline-dot {
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3a8040, #1f5522);
+            border: 4px solid white;
+            box-shadow: 0 0 0 3px var(--primary), 0 8px 24px rgba(22,56,26,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+        .timeline-card {
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.8);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(22,56,26,0.1);
+            transition: all 0.25s ease;
+        }
+        .timeline-card:hover { background: white; box-shadow: 0 16px 48px rgba(22,56,26,0.15); transform: scale(1.02); }
+        .timeline-era {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+        .timeline-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.4rem;
+        }
+        .timeline-card-body { font-size: 0.83rem; line-height: 1.6; color: #4a6b4e; }
+
+        .values-section { padding: 2rem 1.5rem 6rem; }
+        .values-header { text-align: center; margin-bottom: 3rem; }
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.2rem;
+        }
+        .value-card {
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.8);
+            border-radius: 20px;
+            padding: 1.8rem 1.2rem;
+            text-align: center;
+            transition: all 0.25s ease;
+        }
+        .value-card:hover {
+            background: white;
+            border-color: #b5dba8;
+            box-shadow: 0 12px 40px rgba(22,56,26,0.12);
+            transform: translateY(-5px);
+        }
+        .value-icon { font-size: 2.2rem; margin-bottom: 0.75rem; display: block; }
+        .value-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.4rem;
+        }
+        .value-body { font-size: 0.78rem; line-height: 1.55; color: #4a6b4e; }
+
+        .offer-section {
+            padding: 5rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .offer-section-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(45,106,48,0.05) 100%);
+        }
+        .offer-inner { position: relative; z-index: 1; }
+        .offer-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+        .offer-img-wrap { position: relative; }
+        .offer-img {
+            width: 100%;
+            height: 440px;
+            object-fit: cover;
+            border-radius: 28px;
+        }
+        .offer-img-overlay {
+            position: absolute;
+            inset: 0;
+            border-radius: 28px;
+            background: linear-gradient(180deg, transparent 50%, rgba(14,36,16,0.4) 100%);
+        }
+        .offer-tags {
+            position: absolute;
+            bottom: 1.5rem; left: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            max-width: 90%;
+        }
+        .offer-tag {
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(8px);
+            color: var(--dark);
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 0.35rem 0.8rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.9);
+        }
+
+        .offer-list { display: flex; flex-direction: column; gap: 0.85rem; margin-top: 1.5rem; }
+        .offer-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 1.2rem;
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.8);
+            border-radius: 14px;
+            transition: all 0.22s ease;
+        }
+        .offer-item:hover {
+            background: white;
+            box-shadow: 0 8px 24px rgba(22,56,26,0.1);
+            transform: translateX(6px);
+        }
+        .offer-item-icon { font-size: 1.3rem; flex-shrink: 0; }
+        .offer-item-title { font-size: 0.88rem; font-weight: 600; color: var(--dark); }
+        .offer-item-sub { font-size: 0.76rem; color: #5a7a5e; margin-top: 1px; }
+
+        .contact-strip {
+            padding: 5rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .contact-strip-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.28) saturate(1.4);
+        }
+        .contact-strip-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(14,36,16,0.93) 0%, rgba(22,60,26,0.86) 100%);
+        }
+        .contact-strip-inner {
+            position: relative;
+            z-index: 2;
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 3rem;
+            align-items: center;
+        }
+        .strip-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 700;
+            color: white;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+        .strip-title em { color: #a8d994; font-style: italic; }
+        .strip-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-top: 1rem;
+        }
+        .strip-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.75);
+        }
+        .strip-detail-icon { font-size: 1rem; }
+        .strip-detail a { color: inherit; text-decoration: none; }
+        .strip-detail a:hover { color: #a8d994; }
+        .strip-actions { display: flex; flex-direction: column; gap: 0.75rem; flex-shrink: 0; }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3a8040, #1f5522);
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 0.85rem 2rem;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 8px 32px rgba(20,55,22,0.5);
+            transition: all 0.25s ease;
+            white-space: nowrap;
+            justify-content: center;
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(20,55,22,0.6); }
+        .btn-ghost {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1.5px solid rgba(255,255,255,0.35);
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.85rem 2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+            justify-content: center;
+        }
+        .btn-ghost:hover { background: rgba(255,255,255,0.2); transform: translateY(-3px); }
+
+        footer {
+            background: linear-gradient(180deg, #0c2410, #091b0c);
+            padding: 3rem 1.5rem 2rem;
+            color: rgba(255,255,255,0.6);
+        }
+        .footer-inner { max-width: 1200px; margin: 0 auto; }
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: white; letter-spacing: -0.5px; }
+        .footer-logo span { color: #7ab86a; }
+        .footer-tagline { font-size: 0.8rem; color: rgba(255,255,255,0.45); margin-top: 4px; font-style: italic; }
+        .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .footer-links a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+        .footer-links a:hover { color: #7ab86a; }
+        .footer-bottom { margin-top: 1.5rem; font-size: 0.75rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        @media (max-width: 1024px) {
+            .story-grid, .mission-grid, .offer-grid { grid-template-columns: 1fr; }
+            .story-img { height: 360px; }
+            .offer-img { height: 320px; }
+            .values-grid { grid-template-columns: repeat(2, 1fr); }
+            .contact-strip-inner { grid-template-columns: 1fr; }
+            .strip-actions { flex-direction: row; }
+            .timeline-line { display: none; }
+            .timeline-item { grid-template-columns: 1fr; }
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content { grid-column: 1; text-align: left; padding: 0; }
+            .timeline-item:nth-child(odd) .timeline-empty,
+            .timeline-item:nth-child(even) .timeline-empty { display: none; }
+            .timeline-center { justify-content: flex-start; margin-bottom: 0.75rem; }
+            .timeline-item:nth-child(even) .timeline-center { order: -1; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .values-grid { grid-template-columns: repeat(2, 1fr); }
+            .strip-actions { flex-direction: column; }
+            .hero-pills-inner { gap: 0.5rem; }
+            .bbbee-tag { display: none; }
+        }
+        @media (max-width: 480px) {
+            .values-grid { grid-template-columns: 1fr 1fr; }
+            .about-hero-title { letter-spacing: -1px; }
+            .story-float-card { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <a href="mohaduba-homepage.html" class="nav-logo">Mohaduba<span>●</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+            <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+
+            <li><a href="contact.html" class="nav-cta">Get in Touch</a></li>
+        </ul>
+        <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html" onclick="toggleMenu()">Home</a>
+        <a href="about.html" onclick="toggleMenu()">About</a>
+        <a href="services.html" onclick="toggleMenu()">Services</a>
+        <a href="contact.html" onclick="toggleMenu()" style="background:var(--light-green);color:var(--primary);font-weight:600;">Get in Touch →</a>
+    </div>
+
+    <section class="about-hero">
+        <div class="about-hero-bg"></div>
+        <div class="about-hero-overlay"></div>
+        <div class="about-hero-content">
+            <div class="breadcrumb">
+                <a href="mohaduba-homepage.html">Mohaduba</a>
+                <span>›</span>
+                <span>About Us</span>
+            </div>
+            <h1 class="about-hero-title">Our <em>Story</em>,<br>Our Roots.</h1>
+            <p class="about-hero-sub">A dream grown leaf by leaf — from Kuruman's Seven Miles to every garden we touch.</p>
+        </div>
+    </section>
+
+    <div class="hero-pills">
+        <div class="hero-pills-inner">
+            <div class="hero-pill"><div class="hero-pill-dot"></div> 100% Black Owned</div>
+            <div class="hero-pill"><div class="hero-pill-dot"></div> Reg. 2017/360951/07</div>
+            <div class="hero-pill"><div class="hero-pill-dot"></div> Seven Miles, Kuruman</div>
+            <div class="hero-pill"><div class="hero-pill-dot"></div> Own Greenhouses</div>
+            <div class="hero-pill"><div class="hero-pill-dot"></div> Est. 2017</div>
+        </div>
+    </div>
+
+    <section class="story-section">
+        <div class="section-wrap">
+            <div class="story-grid">
+                <div class="story-img-wrap reveal">
+                    <img
+                        src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=900&q=80&auto=format&fit=crop"
+                        alt="Lush nursery garden at Mohaduba"
+                        class="story-img"
+                        loading="lazy"
+                    />
+                    <div class="story-img-overlay"></div>
+                    <div class="story-float-card">
+                        <div class="story-float-avatar">🧑🏿‍🌾</div>
+                        <div>
+                            <div class="story-float-label">Founder &amp; Manager</div>
+                            <div class="story-float-name">Joseph Sedumedi</div>
+                            <div class="story-float-sub">Kuruman, Northern Cape</div>
+                        </div>
+                        <div class="bbbee-tag">★ 100% Black Owned</div>
+                    </div>
+                </div>
+
+                <!-- text -->
+                <div class="reveal reveal-delay-1">
+                    <span class="section-eyebrow">Our story</span>
+                    <h2 class="section-title">Rooted in <em>Kuruman</em>, grown with passion</h2>
+                    <div class="accent-bar"></div>
+                    <p class="story-body">
+                        Mohaduba Enterprise Nursery is not just a business — it is the lifelong dream of <strong>Joseph Sedumedi</strong>, realized and thriving. What started as a vision to bring a stylish, respected garden centre to the Kuruman area has blossomed into a flourishing nursery known for its knowledgeable staff and exceptional variety of plants.
+                    </p>
+                    <p class="story-body" style="margin-top:1.2rem;">
+                        For the past several years, the nursery has experienced substantial growth — reaching new customers, expanding greenhouse production, and building a reputation for creative marketing and quality garden supplies. Joseph personally manages every aspect of the operation, from ordering trees and merchandise to nurturing the state-of-the-art greenhouses.
+                    </p>
+                    <p class="story-body" style="margin-top:1.2rem;">
+                        Today, Mohaduba serves both residential garden lovers and professional landscaping contractors, offering a one-stop destination for plants, trees, and all the accessories a great garden needs.
+                    </p>
+
+                    <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:2rem;">
+                        <div style="display:flex;align-items:center;gap:8px;background:rgba(45,106,48,0.08);border:1px solid rgba(45,106,48,0.2);border-radius:12px;padding:0.65rem 1rem;font-size:0.83rem;font-weight:500;color:var(--dark);">
+                            🏭 Own Greenhouse Grown
+                        </div>
+                        <div style="display:flex;align-items:center;gap:8px;background:rgba(45,106,48,0.08);border:1px solid rgba(45,106,48,0.2);border-radius:12px;padding:0.65rem 1rem;font-size:0.83rem;font-weight:500;color:var(--dark);">
+                            🤝 Residential &amp; Contractors
+                        </div>
+                        <div style="display:flex;align-items:center;gap:8px;background:rgba(45,106,48,0.08);border:1px solid rgba(45,106,48,0.2);border-radius:12px;padding:0.65rem 1rem;font-size:0.83rem;font-weight:500;color:var(--dark);">
+                            📍 Seven Miles, Kuruman
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOUNDER QUOTE -->
+    <section class="quote-section">
+        <div class="quote-bg"></div>
+        <div class="quote-overlay"></div>
+        <div class="quote-inner reveal">
+            <span class="quote-mark">"</span>
+            <p class="quote-text">
+                Mohaduba is my heritage and my offering to the community — a place where <em>plants thrive</em> and people feel at home. Every customer leaves with a smile and the right advice.
+            </p>
+            <div class="quote-author">
+                <div class="quote-author-avatar">🌱</div>
+                <div style="text-align:left;">
+                    <div class="quote-author-name">Joseph Sedumedi</div>
+                    <div class="quote-author-role">Founder &amp; Managing Director · Mohaduba Enterprise Nursery</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MISSION + OBJECTIVES -->
+    <section class="mission-section">
+        <div class="section-wrap">
+            <div style="text-align:center;margin-bottom:3.5rem;" class="reveal">
+                <span class="section-eyebrow">Our purpose</span>
+                <h2 class="section-title">Mission &amp; <em>Objectives</em></h2>
+            </div>
+            <div class="mission-grid">
+                <div class="glass-card mission-card reveal">
+                    <div class="mission-icon">🌿</div>
+                    <span class="section-eyebrow">Mission statement</span>
+                    <h3 class="section-title" style="font-size:clamp(1.5rem,3vw,2rem);margin-bottom:1rem;">What <em>drives</em> us every day</h3>
+                    <p class="mission-body">
+                        Mohaduba Enterprise Nursery is dedicated to providing a wide variety of plants and trees in an aesthetic setting. Customer service is at the heart of everything we do — we want each customer to have a pleasant, memorable shopping experience.
+                    </p>
+                    <p class="mission-body" style="margin-top:1rem;">
+                        It is the intention of our staff to answer questions with genuine expertise and to offer thoughtful advice when needed. We believe an informed customer is a happy customer.
+                    </p>
+                    <div class="mission-quote-block">
+                        "Intelligently staffed with caring, well-informed employees — a friendly open atmosphere where customers feel at home."
+                    </div>
+                </div>
+
+                <div class="glass-card objectives-card reveal reveal-delay-1">
+                    <div class="mission-icon" style="background:linear-gradient(135deg,#1f5522,#2d6a30);">🎯</div>
+                    <span class="section-eyebrow">Strategic objectives</span>
+                    <h3 class="section-title" style="font-size:clamp(1.4rem,3vw,1.8rem);margin-bottom:1.5rem;">Our <em>commitments</em></h3>
+
+                    <div class="objective-item">
+                        <span class="objective-num">01</span>
+                        <div class="objective-text"><strong>Stylish &amp; respected centre</strong>A garden destination Kuruman and surrounding areas can be genuinely proud of.</div>
+                    </div>
+                    <div class="objective-item">
+                        <span class="objective-num">02</span>
+                        <div class="objective-text"><strong>Expert, caring staff</strong>Well-informed employees who treat every customer as a valued guest and garden companion.</div>
+                    </div>
+                    <div class="objective-item">
+                        <span class="objective-num">03</span>
+                        <div class="objective-text"><strong>Competitive pricing</strong>Prices reviewed periodically to ensure affordability without ever compromising quality.</div>
+                    </div>
+                    <div class="objective-item">
+                        <span class="objective-num">04</span>
+                        <div class="objective-text"><strong>Top-notch service</strong>Consistent excellence at our Seven Miles location — every visit, every season.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TIMELINE -->
+    <section class="timeline-section">
+        <div class="section-wrap">
+            <div class="timeline-header reveal">
+                <span class="section-eyebrow">Growth journey</span>
+                <h2 class="section-title">From dream to <em>flourishing</em> reality</h2>
+            </div>
+            <div class="timeline-track">
+                <div class="timeline-line"></div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-card reveal">
+                            <div class="timeline-era">The Dream</div>
+                            <div class="timeline-card-title">A Vision Takes Root</div>
+                            <div class="timeline-card-body">Joseph Sedumedi nurtures the idea of a black-owned nursery for years — finally launching Mohaduba Enterprise Nursery in Kuruman with a bold vision for the community.</div>
+                        </div>
+                    </div>
+                    <div class="timeline-center">
+                        <div class="timeline-dot">🌱</div>
+                    </div>
+                    <div class="timeline-empty"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-empty"></div>
+                    <div class="timeline-center">
+                        <div class="timeline-dot">🏭</div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-card reveal reveal-delay-1">
+                            <div class="timeline-era">Expansion</div>
+                            <div class="timeline-card-title">Greenhouses &amp; Growth</div>
+                            <div class="timeline-card-body">State-of-the-art greenhouses established, enabling the nursery to grow most of its own plants on-site. Customer base expands significantly across Kuruman and the Northern Cape.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-card reveal">
+                            <div class="timeline-era">Community</div>
+                            <div class="timeline-card-title">Creative Marketing &amp; Reach</div>
+                            <div class="timeline-card-body">Creative marketing campaigns help Mohaduba reach new residential and contractor customers — building a reputation for quality, variety, and genuine expertise.</div>
+                        </div>
+                    </div>
+                    <div class="timeline-center">
+                        <div class="timeline-dot">📈</div>
+                    </div>
+                    <div class="timeline-empty"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-empty"></div>
+                    <div class="timeline-center">
+                        <div class="timeline-dot">🌳</div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-card reveal reveal-delay-1">
+                            <div class="timeline-era">Today &amp; Beyond</div>
+                            <div class="timeline-card-title">A Thriving Destination</div>
+                            <div class="timeline-card-body">Mohaduba is now known as Kuruman's premier nursery — offering hundreds of plant varieties, garden accessories, expert advice, and a welcoming atmosphere for every visitor.</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- VALUES -->
+    <section class="values-section">
+        <div class="section-wrap">
+            <div class="values-header reveal">
+                <span class="section-eyebrow">Why choose us</span>
+                <h2 class="section-title">Keys to our <em>success</em></h2>
+            </div>
+            <div class="values-grid">
+                <div class="value-card reveal">
+                    <span class="value-icon">🧠</span>
+                    <div class="value-title">Expert Knowledge</div>
+                    <div class="value-body">Our staff are trained and passionate plant lovers who answer questions with expertise and genuine care.</div>
+                </div>
+                <div class="value-card reveal reveal-delay-1">
+                    <span class="value-icon">🏷️</span>
+                    <div class="value-title">Affordable Quality</div>
+                    <div class="value-body">Competitive prices reviewed regularly, so great plants and garden supplies never have to break the bank.</div>
+                </div>
+                <div class="value-card reveal reveal-delay-2">
+                    <span class="value-icon">📍</span>
+                    <div class="value-title">Great Location</div>
+                    <div class="value-body">Conveniently situated at Seven Miles, Kuruman — easy to reach for both residential gardeners and contractors.</div>
+                </div>
+                <div class="value-card reveal reveal-delay-3">
+                    <span class="value-icon">🌿</span>
+                    <div class="value-title">Own Greenhouses</div>
+                    <div class="value-body">Most plants grown on-site in state-of-the-art greenhouses, guaranteeing freshness and a wide variety year-round.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHAT WE OFFER -->
+    <section class="offer-section">
+        <div class="offer-section-bg"></div>
+        <div class="section-wrap offer-inner">
+            <div style="margin-bottom:3rem;" class="reveal">
+                <span class="section-eyebrow">Products &amp; services</span>
+                <h2 class="section-title">Everything your <em>garden</em> needs</h2>
+            </div>
+            <div class="offer-grid">
+                <div class="offer-img-wrap reveal">
+                    <img
+                        src="https://images.unsplash.com/photo-1467043198406-dc953a3defa0?w=900&q=80&auto=format&fit=crop"
+                        alt="Garden plants and accessories"
+                        class="offer-img"
+                        loading="lazy"
+                    />
+                    <div class="offer-img-overlay"></div>
+                    <div class="offer-tags">
+                        <span class="offer-tag">🪴 Bedding Plants</span>
+                        <span class="offer-tag">🌳 Trees</span>
+                        <span class="offer-tag">🥬 Vegetables</span>
+                        <span class="offer-tag">💧 Fountains</span>
+                        <span class="offer-tag">🪨 Stepping Stones</span>
+                    </div>
+                </div>
+
+                <div class="reveal reveal-delay-1">
+                    <p style="font-size:1rem;line-height:1.8;color:#3a5c3e;margin-bottom:1.5rem;">
+                        From colourful bedding plants to mature trees, from vegetable seedlings to premium garden accessories — Mohaduba is your one-stop garden destination in the Northern Cape.
+                    </p>
+                    <div class="offer-list">
+                        <div class="offer-item">
+                            <span class="offer-item-icon">🌸</span>
+                            <div>
+                                <div class="offer-item-title">Bedding Plants &amp; Shrubs</div>
+                                <div class="offer-item-sub">Seasonal colour and hardy shrubs, greenhouse-grown for freshness</div>
+                            </div>
+                        </div>
+                        <div class="offer-item">
+                            <span class="offer-item-icon">🌳</span>
+                            <div>
+                                <div class="offer-item-title">Trees &amp; Shade Trees</div>
+                                <div class="offer-item-sub">Indigenous and exotic trees for every landscape</div>
+                            </div>
+                        </div>
+                        <div class="offer-item">
+                            <span class="offer-item-icon">🥦</span>
+                            <div>
+                                <div class="offer-item-title">Vegetable Plants</div>
+                                <div class="offer-item-sub">Starter vegetable seedlings and herbs for your kitchen garden</div>
+                            </div>
+                        </div>
+                        <div class="offer-item">
+                            <span class="offer-item-icon">⛲</span>
+                            <div>
+                                <div class="offer-item-title">Fountains &amp; Stepping Stones</div>
+                                <div class="offer-item-sub">Beautiful garden décor and features for every outdoor space</div>
+                            </div>
+                        </div>
+                        <div class="offer-item">
+                            <span class="offer-item-icon">🌱</span>
+                            <div>
+                                <div class="offer-item-title">Fertilizers, Soils &amp; Tools</div>
+                                <div class="offer-item-sub">Premium potting mixes, composts, fertilizers and all your garden tools</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT STRIP -->
+    <section class="contact-strip">
+        <div class="contact-strip-bg"></div>
+        <div class="contact-strip-overlay"></div>
+        <div class="contact-strip-inner reveal">
+            <div>
+                <h2 class="strip-title">Ready to <em>visit</em><br>Mohaduba?</h2>
+                <div class="strip-details">
+                    <div class="strip-detail"><span class="strip-detail-icon">📍</span> H115Plot, Seven Miles, Kuruman, 8460</div>
+                    <div class="strip-detail"><span class="strip-detail-icon">📞</span> <a href="tel:+27822243736">+27 82-224-3736</a></div>
+                    <div class="strip-detail"><span class="strip-detail-icon">✉️</span> <a href="mailto:josephsedumedi53@gmail.com">josephsedumedi53@gmail.com</a></div>
+                    <div class="strip-detail"><span class="strip-detail-icon">🏷️</span> Reg: 2017/360951/07</div>
+                </div>
+            </div>
+            <div class="strip-actions">
+                <a href="tel:+27822243736" class="btn-primary">📞 Call Now</a>
+                <a href="mailto:josephsedumedi53@gmail.com" class="btn-ghost">✉️ Email Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-top">
+                <div>
+                    <div class="footer-logo">Mohaduba<span>●</span></div>
+                    <div class="footer-tagline">Rooted in Kuruman, grown with passion</div>
+                </div>
+                <div class="footer-links">
+                    <a href="mohaduba-homepage.html">Home</a>
+                    <a href="#">About</a>
+                    <a href="mohaduba-homepage.html#products">Products</a>
+                    <a href="mohaduba-homepage.html#contact">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2024 Mohaduba Enterprise Nursery · Kuruman</span>
+                <span>100% Black Owned &amp; Managed · Reg. 2017/360951/07</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('open');
+        }
+
+        const revealEls = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+            });
+        }, { threshold: 0.1 });
+        revealEls.forEach(el => observer.observe(el));
+
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const el = document.querySelector(a.getAttribute('href'));
+                if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth' }); }
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.nav');
+            nav.style.background = window.scrollY > 50 ? 'rgba(255,255,255,0.88)' : 'rgba(255,255,255,0.55)';
+        });
+    </script>
+
+</body>
+</html>

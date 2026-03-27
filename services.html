@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohaduba · Services & Products</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --white: #ffffff;
+            --cream: #f8fdf5;
+            --light-green: #e4f2db;
+            --mid-green: #7ab86a;
+            --primary: #2d6a30;
+            --dark: #16381a;
+            --glass: rgba(255,255,255,0.18);
+            --glass-border: rgba(255,255,255,0.35);
+            --shadow-green: rgba(22, 56, 26, 0.18);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: linear-gradient(160deg, #ffffff 0%, #f0f9ea 35%, #dff0d4 65%, #c9e5b8 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: var(--dark);
+        }
+
+        /* ── NAV ── */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(255,255,255,0.55);
+            backdrop-filter: blur(18px) saturate(180%);
+            -webkit-backdrop-filter: blur(18px) saturate(180%);
+            border-bottom: 1px solid rgba(255,255,255,0.5);
+            box-shadow: 0 4px 30px rgba(45,106,48,0.08);
+            padding: 0 1.5rem;
+            height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            color: var(--dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .nav-logo span { color: var(--primary); }
+        .nav-links { display: flex; align-items: center; gap: 0.25rem; list-style: none; }
+        .nav-links a {
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--dark);
+            padding: 0.45rem 0.9rem;
+            border-radius: 50px;
+            transition: all 0.22s ease;
+        }
+        .nav-links a:hover { background: var(--light-green); color: var(--primary); }
+        .nav-links a.active { background: var(--light-green); color: var(--primary); font-weight: 600; }
+        .nav-cta {
+            background: linear-gradient(135deg, #2d6a30, #1c4520) !important;
+            color: white !important;
+            padding: 0.5rem 1.2rem !important;
+            border-radius: 50px !important;
+            box-shadow: 0 4px 14px rgba(22,56,26,0.3);
+        }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(22,56,26,0.4) !important; }
+
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+        .hamburger span { display: block; width: 24px; height: 2px; background: var(--dark); border-radius: 4px; transition: all 0.25s; }
+        .mobile-menu {
+            display: none; position: fixed; top: 68px; left: 0; right: 0;
+            background: rgba(255,255,255,0.97); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--light-green);
+            padding: 1rem 1.5rem 1.5rem; z-index: 99;
+            flex-direction: column; gap: 0.25rem;
+        }
+        .mobile-menu a { display: block; text-decoration: none; color: var(--dark); font-size: 1rem; font-weight: 500; padding: 0.75rem 1rem; border-radius: 12px; transition: all 0.2s; }
+        .mobile-menu a:hover { background: var(--light-green); color: var(--primary); }
+        .mobile-menu.open { display: flex; }
+
+        /* ── SERVICES HERO ── */
+        .services-hero {
+            position: relative;
+            min-height: 72vh;
+            display: flex;
+            align-items: flex-end;
+            overflow: hidden;
+        }
+        .services-hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('./assets/hero3.png');
+            background-size: cover;
+            background-position: center 40%;
+            filter: brightness(0.48) saturate(1.3);
+            transition: transform 8s ease;
+        }
+        .services-hero:hover .services-hero-bg { transform: scale(1.03); }
+        .services-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, rgba(14,36,16,0.94) 0%, rgba(14,36,16,0.25) 55%, transparent 100%);
+        }
+        .services-hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem 4.5rem;
+        }
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 1.2rem;
+        }
+        .breadcrumb a { color: #7ab86a; text-decoration: none; }
+        .breadcrumb a:hover { color: #a8d994; }
+
+        .services-hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.2rem, 8.5vw, 7rem);
+            font-weight: 900;
+            line-height: 0.95;
+            color: white;
+            letter-spacing: -3px;
+            margin-bottom: 1.2rem;
+        }
+        .services-hero-title em { font-style: italic; color: #a8d994; }
+        .services-hero-sub {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            color: rgba(255,255,255,0.65);
+            font-weight: 300;
+            max-width: 580px;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        .hero-tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.25);
+            color: rgba(255,255,255,0.88);
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 0.45rem 1rem;
+            border-radius: 50px;
+            transition: all 0.22s;
+        }
+        .hero-tag:hover { background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.45); }
+
+        /* category tabs bar */
+        .tabs-bar {
+            position: relative;
+            z-index: 3;
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255,255,255,0.15);
+        }
+        .tabs-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            gap: 0;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .tabs-inner::-webkit-scrollbar { display: none; }
+        .tab-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 1rem 1.4rem;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.6);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            white-space: nowrap;
+            text-decoration: none;
+        }
+        .tab-item:hover { color: rgba(255,255,255,0.9); border-bottom-color: rgba(255,255,255,0.4); }
+        .tab-item.active { color: #a8d994; border-bottom-color: #a8d994; }
+
+        /* ── SHARED ── */
+        .section-wrap { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+        .section-eyebrow { font-size: 0.68rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--primary); display: block; margin-bottom: 0.6rem; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 700; line-height: 1.1; color: var(--dark); letter-spacing: -1px; }
+        .section-title em { font-style: italic; color: var(--primary); }
+        .accent-bar { width: 56px; height: 4px; background: linear-gradient(90deg, var(--primary), var(--mid-green)); border-radius: 4px; margin: 1rem 0 1.5rem; }
+
+        .glass-card {
+            background: rgba(255,255,255,0.55);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255,255,255,0.75);
+            border-radius: 28px;
+            box-shadow: 0 16px 64px rgba(22,56,26,0.1);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover { box-shadow: 0 24px 80px rgba(22,56,26,0.18); transform: translateY(-4px); border-color: #c0dfb2; }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3a8040, #1f5522);
+            color: white; font-size: 0.9rem; font-weight: 600;
+            padding: 0.85rem 2rem; border-radius: 50px; border: none; cursor: pointer;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+            box-shadow: 0 8px 32px rgba(20,55,22,0.5); transition: all 0.25s ease;
+            white-space: nowrap; justify-content: center;
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(20,55,22,0.6); }
+        .btn-ghost {
+            background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
+            border: 1.5px solid rgba(255,255,255,0.35); color: white;
+            font-size: 0.9rem; font-weight: 500; padding: 0.85rem 2rem; border-radius: 50px;
+            cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+            transition: all 0.25s ease; white-space: nowrap; justify-content: center;
+        }
+        .btn-ghost:hover { background: rgba(255,255,255,0.2); transform: translateY(-3px); }
+
+        /* ── INTRO SECTION ── */
+        .intro-section { padding: 6rem 1.5rem 4rem; }
+        .intro-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 3rem; align-items: center; }
+
+        .intro-img-wrap { position: relative; }
+        .intro-img { width: 100%; height: 500px; object-fit: cover; border-radius: 28px; display: block; }
+        .intro-img-overlay { position: absolute; inset: 0; border-radius: 28px; background: linear-gradient(180deg, transparent 50%, rgba(14,36,16,0.45) 100%); }
+        .greenhouse-badge {
+            position: absolute;
+            top: 1.5rem; right: 1.5rem;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 1rem 1.2rem;
+            box-shadow: 0 12px 40px rgba(22,56,26,0.2);
+            text-align: center;
+        }
+        .greenhouse-badge-icon { font-size: 2rem; display: block; margin-bottom: 4px; }
+        .greenhouse-badge-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--primary); }
+        .greenhouse-badge-value { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; color: var(--dark); }
+
+        .intro-body { font-size: 1.05rem; line-height: 1.85; color: #3a5c3e; margin-bottom: 1.2rem; }
+        .intro-pills { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+        .intro-pill {
+            display: flex; align-items: center; gap: 8px;
+            background: rgba(45,106,48,0.08); border: 1px solid rgba(45,106,48,0.2);
+            border-radius: 50px; padding: 0.5rem 1rem;
+            font-size: 0.82rem; font-weight: 500; color: var(--dark);
+            transition: all 0.2s;
+        }
+        .intro-pill:hover { background: rgba(45,106,48,0.14); transform: translateY(-2px); }
+
+        /* ── PLANTS SECTION ── */
+        .plants-section { padding: 2rem 1.5rem 5rem; }
+        .category-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: var(--dark);
+            letter-spacing: -0.5px;
+        }
+        .category-title em { font-style: italic; color: var(--primary); }
+        .category-sub { font-size: 0.82rem; color: #6a8a6e; font-style: italic; }
+
+        .plants-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+
+        .plant-card {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            height: 340px;
+            cursor: pointer;
+        }
+        .plant-card-bg {
+            position: absolute; inset: 0;
+            background-size: cover; background-position: center;
+            filter: brightness(0.68) saturate(1.2);
+            transition: transform 0.55s ease, filter 0.4s ease;
+        }
+        .plant-card:hover .plant-card-bg { transform: scale(1.1); filter: brightness(0.55) saturate(1.4); }
+        .plant-card-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(0deg, rgba(14,36,16,0.9) 0%, transparent 55%);
+        }
+        .plant-card-badge {
+            position: absolute; top: 1rem; left: 1rem;
+            background: rgba(255,255,255,0.18);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50px;
+            padding: 0.3rem 0.8rem;
+            font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: white;
+        }
+        .plant-card-content {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            padding: 1.4rem;
+        }
+        .plant-card-icon { font-size: 1.8rem; display: block; margin-bottom: 0.3rem; }
+        .plant-card-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: white; line-height: 1.2; }
+        .plant-card-desc {
+            font-size: 0.78rem; color: rgba(255,255,255,0.7); line-height: 1.5;
+            margin-top: 0.3rem;
+            opacity: 0; transform: translateY(8px); transition: all 0.3s ease;
+        }
+        .plant-card:hover .plant-card-desc { opacity: 1; transform: translateY(0); }
+        .plant-card-tag {
+            display: inline-block;
+            background: rgba(168,217,148,0.25);
+            border: 1px solid rgba(168,217,148,0.4);
+            color: #a8d994;
+            font-size: 0.68rem; font-weight: 700;
+            padding: 0.2rem 0.6rem;
+            border-radius: 50px;
+            margin-top: 0.5rem;
+            opacity: 0; transform: translateY(6px); transition: all 0.3s 0.06s ease;
+        }
+        .plant-card:hover .plant-card-tag { opacity: 1; transform: translateY(0); }
+
+        /* ── ACCESSORIES SECTION ── */
+        .accessories-section { padding: 2rem 1.5rem 5rem; }
+        .accessories-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+
+        .acc-card {
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.8);
+            border-radius: 22px;
+            padding: 2rem 1.5rem;
+            display: flex;
+            gap: 1.2rem;
+            align-items: flex-start;
+            transition: all 0.25s ease;
+        }
+        .acc-card:hover { background: white; border-color: #b5dba8; box-shadow: 0 12px 40px rgba(22,56,26,0.12); transform: translateY(-4px); }
+        .acc-icon-wrap {
+            width: 52px; height: 52px; flex-shrink: 0;
+            background: linear-gradient(135deg, #e4f2db, #c0ddb0);
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.25s;
+        }
+        .acc-card:hover .acc-icon-wrap { background: linear-gradient(135deg, #3a8040, #1f5522); box-shadow: 0 6px 20px rgba(22,56,26,0.3); }
+        .acc-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+        .acc-body { font-size: 0.82rem; line-height: 1.55; color: #4a6b4e; }
+
+        /* ── GREENHOUSE FEATURE ── */
+        .greenhouse-section { padding: 2rem 1.5rem 5rem; }
+        .greenhouse-feature {
+            position: relative;
+            border-radius: 32px;
+            overflow: hidden;
+            min-height: 420px;
+            display: flex;
+            align-items: center;
+        }
+        .greenhouse-feature-bg {
+            position: absolute; inset: 0;
+            background-image: url('./assets/greenhouse1.png');
+            background-size: cover; background-position: center 30%;
+            filter: brightness(0.4) saturate(1.3);
+            transition: transform 6s ease;
+        }
+        .greenhouse-feature:hover .greenhouse-feature-bg { transform: scale(1.04); }
+        .greenhouse-feature-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(90deg, rgba(14,36,16,0.92) 0%, rgba(14,36,16,0.5) 55%, rgba(14,36,16,0.15) 100%);
+        }
+        .greenhouse-feature-content {
+            position: relative; z-index: 2;
+            padding: 3.5rem;
+            max-width: 600px;
+        }
+        .greenhouse-feature-eyebrow { font-size: 0.68rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: #7ab86a; margin-bottom: 0.8rem; display: block; }
+        .greenhouse-feature-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: white; line-height: 1.15; letter-spacing: -1px; margin-bottom: 1rem; }
+        .greenhouse-feature-title em { font-style: italic; color: #a8d994; }
+        .greenhouse-feature-body { font-size: 1rem; color: rgba(255,255,255,0.7); line-height: 1.75; margin-bottom: 2rem; }
+        .greenhouse-stats { display: flex; gap: 2rem; flex-wrap: wrap; }
+        .greenhouse-stat { }
+        .greenhouse-stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: #a8d994; line-height: 1; display: block; }
+        .greenhouse-stat-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+
+        /* ── SERVICE COMMITMENT ── */
+        .commitment-section { padding: 2rem 1.5rem 5rem; }
+        .commitment-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .commitment-card {
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.8);
+            border-radius: 24px;
+            padding: 2rem;
+            border-left: 5px solid var(--primary);
+            transition: all 0.25s;
+        }
+        .commitment-card:hover { background: white; border-left-color: var(--dark); box-shadow: 0 16px 48px rgba(22,56,26,0.13); transform: translateY(-3px); }
+        .commitment-icon { font-size: 2.5rem; display: block; margin-bottom: 1rem; }
+        .commitment-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--dark); margin-bottom: 0.5rem; }
+        .commitment-body { font-size: 0.88rem; line-height: 1.7; color: #4a6b4e; }
+
+        /* ── FULL CATALOGUE ── */
+        .catalogue-section { padding: 2rem 1.5rem 5rem; }
+        .catalogue-card { padding: 2.5rem; }
+        .catalogue-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 2rem; }
+        .catalogue-col { padding: 0 1.5rem; border-right: 1px solid rgba(45,106,48,0.1); }
+        .catalogue-col:first-child { padding-left: 0; }
+        .catalogue-col:last-child { border-right: none; padding-right: 0; }
+        .catalogue-col-title { font-size: 0.65rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--primary); margin-bottom: 1rem; display: block; }
+        .catalogue-item {
+            display: flex; align-items: center; gap: 8px;
+            padding: 0.55rem 0;
+            border-bottom: 1px solid rgba(45,106,48,0.07);
+            font-size: 0.85rem; color: #3a5c3e;
+            transition: all 0.2s;
+        }
+        .catalogue-item:last-child { border-bottom: none; }
+        .catalogue-item:hover { color: var(--primary); padding-left: 4px; }
+        .catalogue-item-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--mid-green); flex-shrink: 0; }
+        .catalogue-note { margin-top: 1.5rem; padding: 0.85rem 1.2rem; background: rgba(45,106,48,0.06); border-radius: 12px; font-size: 0.8rem; font-style: italic; color: #5a7a5e; }
+
+        /* ── CTA SECTION ── */
+        .cta-section {
+            padding: 5rem 1.5rem;
+            position: relative; overflow: hidden;
+        }
+        .cta-bg {
+            position: absolute; inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+            filter: brightness(0.28) saturate(1.4);
+        }
+        .cta-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(14,36,16,0.93) 0%, rgba(22,60,26,0.86) 100%); }
+        .cta-inner {
+            position: relative; z-index: 2;
+            max-width: 1100px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center;
+        }
+        .cta-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: white; line-height: 1.2; margin-bottom: 0.5rem; }
+        .cta-title em { color: #a8d994; font-style: italic; }
+        .cta-details { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem; }
+        .cta-detail { display: flex; align-items: center; gap: 0.75rem; font-size: 0.88rem; color: rgba(255,255,255,0.7); }
+        .cta-detail a { color: inherit; text-decoration: none; }
+        .cta-detail a:hover { color: #a8d994; }
+        .cta-actions { display: flex; flex-direction: column; gap: 0.75rem; flex-shrink: 0; }
+
+        /* ── FOOTER ── */
+        footer { background: linear-gradient(180deg, #0c2410, #091b0c); padding: 3rem 1.5rem 2rem; color: rgba(255,255,255,0.6); }
+        .footer-inner { max-width: 1200px; margin: 0 auto; }
+        .footer-top { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.08); gap: 2rem; flex-wrap: wrap; }
+        .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: white; letter-spacing: -0.5px; }
+        .footer-logo span { color: #7ab86a; }
+        .footer-tagline { font-size: 0.8rem; color: rgba(255,255,255,0.45); margin-top: 4px; font-style: italic; }
+        .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .footer-links a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+        .footer-links a:hover { color: #7ab86a; }
+        .footer-bottom { margin-top: 1.5rem; font-size: 0.75rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+
+        /* ── SCROLL REVEAL ── */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1024px) {
+            .intro-grid { grid-template-columns: 1fr; }
+            .intro-img { height: 360px; }
+            .plants-grid { grid-template-columns: repeat(2, 1fr); }
+            .accessories-grid { grid-template-columns: repeat(2, 1fr); }
+            .catalogue-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+            .catalogue-col { padding: 0; border-right: none; }
+            .cta-inner { grid-template-columns: 1fr; }
+            .cta-actions { flex-direction: row; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .plants-grid { grid-template-columns: 1fr 1fr; }
+            .accessories-grid { grid-template-columns: 1fr; }
+            .commitment-grid { grid-template-columns: 1fr; }
+            .catalogue-grid { grid-template-columns: 1fr 1fr; }
+            .greenhouse-feature-content { padding: 2rem; }
+            .cta-actions { flex-direction: column; }
+        }
+        @media (max-width: 480px) {
+            .plants-grid { grid-template-columns: 1fr; }
+            .catalogue-grid { grid-template-columns: 1fr; }
+            .services-hero-title { letter-spacing: -1px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav class="nav">
+        <a href="mohaduba-homepage.html" class="nav-logo">Mohaduba<span>●</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html" class="active">Services</a></li>
+            <li><a href="contact.html">Contact</a></li>
+
+            <li><a href="contact.html" class="nav-cta">Get in Touch</a></li>
+        </ul>
+        <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html" onclick="toggleMenu()">Home</a>
+        <a href="about.html" onclick="toggleMenu()">About</a>
+        <a href="services.html" onclick="toggleMenu()">Services</a>
+                <a href="contact.html" onclick="toggleMenu()">Contact</a>
+
+        <a href="contact.html" onclick="toggleMenu()" style="background:var(--light-green);color:var(--primary);font-weight:600;">Get in Touch →</a>
+    </div>
+
+    <!-- HERO -->
+    <section class="services-hero">
+        <div class="services-hero-bg"></div>
+        <div class="services-hero-overlay"></div>
+        <div class="services-hero-content">
+            <div class="breadcrumb">
+                <a href="mohaduba-homepage.html">Mohaduba</a>
+                <span>›</span>
+                <span>Services &amp; Products</span>
+            </div>
+            <h1 class="services-hero-title">What We<br><em>Grow</em> &amp; Offer.</h1>
+            <p class="services-hero-sub">From greenhouse-grown bedding plants to shade trees, garden tools to decorative fountains — everything your garden dreams of.</p>
+            <div class="hero-tag-row">
+                <span class="hero-tag">🌸 Bedding Plants</span>
+                <span class="hero-tag">🌳 Trees</span>
+                <span class="hero-tag">🥬 Vegetables</span>
+                <span class="hero-tag">⛲ Fountains</span>
+                <span class="hero-tag">🪨 Stepping Stones</span>
+                <span class="hero-tag">🌱 Soils &amp; Fertilizers</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- TABS BAR -->
+    <div class="tabs-bar">
+        <div class="tabs-inner">
+            <a href="#plants" class="tab-item active">🌳 Plants &amp; Trees</a>
+            <a href="#accessories" class="tab-item">⛲ Accessories</a>
+            <a href="#greenhouse" class="tab-item">🏭 Our Greenhouses</a>
+            <a href="#commitment" class="tab-item">🤝 Our Service</a>
+            <a href="#catalogue" class="tab-item">📋 Full Catalogue</a>
+        </div>
+    </div>
+
+    <!-- INTRO -->
+    <section class="intro-section">
+        <div class="section-wrap">
+            <div class="intro-grid">
+                <!-- image -->
+                <div class="intro-img-wrap reveal">
+                    <img
+                        src="assets/greenhouse1.png"
+                        alt="Mohaduba nursery plant selection"
+                        class="intro-img"
+                        loading="lazy"
+                    />
+                    <div class="intro-img-overlay"></div>
+                    <div class="greenhouse-badge">
+                        <span class="greenhouse-badge-icon">🏭</span>
+                        <div class="greenhouse-badge-label">Grown on-site</div>
+                        <div class="greenhouse-badge-value">Own Greenhouses</div>
+                    </div>
+                </div>
+
+                <!-- text -->
+                <div class="reveal reveal-delay-1">
+                    <span class="section-eyebrow">Our offering</span>
+                    <h2 class="section-title">Grown with care,<br><em>offered</em> with pride</h2>
+                    <div class="accent-bar"></div>
+                    <p class="intro-body">
+                        At Mohaduba Enterprise Nursery, we cultivate a wide universe of plants and garden essentials — from bedding flowers to shade trees, and every garden tool in between. We take pride in what we grow and in the advice we give.
+                    </p>
+                    <p class="intro-body">
+                        Most of our plants are grown <strong>on-site in state-of-the-art greenhouses</strong>, ensuring robust, healthy, acclimatised stock perfectly suited to the Kuruman climate. Whether you're a homeowner, landscaping contractor, or renter, we have the perfect green addition waiting for you.
+                    </p>
+                    <div class="intro-pills">
+                        <div class="intro-pill">🏭 On-site greenhouse grown</div>
+                        <div class="intro-pill">🏡 Residential &amp; contractors</div>
+                        <div class="intro-pill">🌍 Kuruman, Northern Cape</div>
+                        <div class="intro-pill">🧠 Expert staff advice</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PLANTS & TREES -->
+    <section class="plants-section" id="plants">
+        <div class="section-wrap">
+            <div class="category-header reveal">
+                <div>
+                    <span class="section-eyebrow">Living collection</span>
+                    <h2 class="category-title">Plants &amp; <em>Trees</em></h2>
+                </div>
+                <span class="category-sub">Most varieties greenhouse-grown on-site</span>
+            </div>
+            <div class="plants-grid">
+
+                <div class="plant-card reveal">
+                    <div class="plant-card-bg" style="background-image:url('./assets/beddingplant.png')"></div>
+                    <div class="plant-card-overlay"></div>
+                    <div class="plant-card-badge">Seasonal</div>
+                    <div class="plant-card-content">
+                        <span class="plant-card-icon">🌸</span>
+                        <div class="plant-card-title">Bedding Plants</div>
+                        <div class="plant-card-desc">Colourful annuals and perennials for beds, borders and containers — renewed every season.</div>
+                        <span class="plant-card-tag">Wide variety</span>
+                    </div>
+                </div>
+
+                <div class="plant-card reveal reveal-delay-1">
+                    <div class="plant-card-bg" style="background-image:url('./assets/shrubsss.png')"></div>
+                    <div class="plant-card-overlay"></div>
+                    <div class="plant-card-badge">Structure</div>
+                    <div class="plant-card-content">
+                        <span class="plant-card-icon">🌿</span>
+                        <div class="plant-card-title">Shrubs</div>
+                        <div class="plant-card-desc">Evergreen and flowering shrubs for garden structure — native and exotic varieties available.</div>
+                        <span class="plant-card-tag">Native &amp; exotic</span>
+                    </div>
+                </div>
+
+                <div class="plant-card reveal reveal-delay-2">
+                    <div class="plant-card-bg" style="background-image:url('./assets/treeees.png')"></div>
+                    <div class="plant-card-overlay"></div>
+                    <div class="plant-card-badge">Landscape</div>
+                    <div class="plant-card-content">
+                        <span class="plant-card-icon">🌳</span>
+                        <div class="plant-card-title">Trees</div>
+                        <div class="plant-card-desc">Shade trees, fruit trees and ornamentals in advanced sizes for residential and contractor use.</div>
+                        <span class="plant-card-tag">Advanced sizes</span>
+                    </div>
+                </div>
+
+                <div class="plant-card reveal reveal-delay-3">
+                    <div class="plant-card-bg" style="background-image:url('./assets/plantveg.png')"></div>
+                    <div class="plant-card-overlay"></div>
+                    <div class="plant-card-badge">Edible</div>
+                    <div class="plant-card-content">
+                        <span class="plant-card-icon">🍅</span>
+                        <div class="plant-card-title">Vegetable Plants</div>
+                        <div class="plant-card-desc">Tomatoes, peppers, herbs, leafy greens — starter plants ready for your kitchen garden.</div>
+                        <span class="plant-card-tag">Kitchen ready</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ACCESSORIES -->
+    <section class="accessories-section" id="accessories">
+        <div class="section-wrap">
+            <div class="category-header reveal">
+                <div>
+                    <span class="section-eyebrow">Hard goods &amp; supplies</span>
+                    <h2 class="category-title">Garden <em>Accessories</em></h2>
+                </div>
+            </div>
+            <div class="accessories-grid">
+
+                <div class="acc-card reveal">
+                    <div class="acc-icon-wrap">⛲</div>
+                    <div>
+                        <div class="acc-title">Fountains</div>
+                        <div class="acc-body">Decorative water features that bring movement and tranquility to any outdoor space. Various sizes and styles available.</div>
+                    </div>
+                </div>
+
+                <div class="acc-card reveal reveal-delay-1">
+                    <div class="acc-icon-wrap">🪨</div>
+                    <div>
+                        <div class="acc-title">Stepping Stones</div>
+                        <div class="acc-body">Create beautiful garden pathways with our range of stepping stones and paving options. Durable and stylish.</div>
+                    </div>
+                </div>
+
+                <div class="acc-card reveal reveal-delay-2">
+                    <div class="acc-icon-wrap">🔧</div>
+                    <div>
+                        <div class="acc-title">Garden Tools</div>
+                        <div class="acc-body">From spades and forks to pruners and watering cans — quality tools for every gardening task, big or small.</div>
+                    </div>
+                </div>
+
+                <div class="acc-card reveal">
+                    <div class="acc-icon-wrap">🧪</div>
+                    <div>
+                        <div class="acc-title">Fertilizers</div>
+                        <div class="acc-body">A curated range of organic and compound fertilizers to feed your plants and keep your garden thriving throughout the year.</div>
+                    </div>
+                </div>
+
+                <div class="acc-card reveal reveal-delay-1">
+                    <div class="acc-icon-wrap">🪴</div>
+                    <div>
+                        <div class="acc-title">Potting Soils</div>
+                        <div class="acc-body">Premium potting mixes, composts and bark mulch for container gardens, raised beds and planting holes.</div>
+                    </div>
+                </div>
+
+                <div class="acc-card reveal reveal-delay-2">
+                    <div class="acc-icon-wrap">🚿</div>
+                    <div>
+                        <div class="acc-title">Watering Equipment</div>
+                        <div class="acc-body">Watering cans, hose pipes, sprinklers and irrigation supplies — keeping your garden hydrated the right way.</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- GREENHOUSE FEATURE -->
+    <section class="greenhouse-section" id="greenhouse">
+        <div class="section-wrap">
+            <div class="greenhouse-feature reveal">
+                <div class="greenhouse-feature-bg"></div>
+                <div class="greenhouse-feature-overlay"></div>
+                <div class="greenhouse-feature-content">
+                    <span class="greenhouse-feature-eyebrow">Our advantage</span>
+                    <h2 class="greenhouse-feature-title">Grown in our<br><em>own greenhouses</em></h2>
+                    <p class="greenhouse-feature-body">
+                        We take immense pride in our state-of-the-art greenhouses, where the majority of our plants are nurtured from seedlings to sturdy, healthy specimens. On-site cultivation means healthier roots, varieties perfectly acclimatised to the Northern Cape, and a sustainable growing cycle — all just steps from our sales area.
+                    </p>
+                    <div class="greenhouse-stats">
+                        <div class="greenhouse-stat">
+                            <span class="greenhouse-stat-num">Most</span>
+                            <span class="greenhouse-stat-label">Plants on-site grown</span>
+                        </div>
+                        <div class="greenhouse-stat">
+                            <span class="greenhouse-stat-num">100%</span>
+                            <span class="greenhouse-stat-label">Locally acclimatised</span>
+                        </div>
+                        <div class="greenhouse-stat">
+                            <span class="greenhouse-stat-num">Year</span>
+                            <span class="greenhouse-stat-label">Round availability</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMMITMENT -->
+    <section class="commitment-section" id="commitment">
+        <div class="section-wrap">
+            <div style="margin-bottom:2.5rem;" class="reveal">
+                <span class="section-eyebrow">Our promise</span>
+                <h2 class="section-title">Service you can <em>rely on</em></h2>
+            </div>
+            <div class="commitment-grid">
+                <div class="commitment-card reveal">
+                    <span class="commitment-icon">🧑🏿‍🌾</span>
+                    <div class="commitment-title">Expert Advice, Always</div>
+                    <div class="commitment-body">Every customer is greeted by knowledgeable, well-informed staff who can answer questions, recommend the right plant for your soil and climate, and offer practical care advice. That's our commitment — not just selling plants, but empowering you to grow.</div>
+                </div>
+                <div class="commitment-card reveal reveal-delay-1">
+                    <span class="commitment-icon">🏗️</span>
+                    <div class="commitment-title">Contractors &amp; Homeowners Welcome</div>
+                    <div class="commitment-body">We supply reliable quality and volume for landscaping contractors who need consistency. Residential customers receive the same dedication — whether you need a single bedding plant or an entire landscape supply. Everyone leaves Mohaduba satisfied.</div>
+                </div>
+                <div class="commitment-card reveal reveal-delay-2">
+                    <span class="commitment-icon">🏷️</span>
+                    <div class="commitment-title">Competitive, Honest Pricing</div>
+                    <div class="commitment-body">Our prices are reviewed periodically to ensure affordability without compromising on quality. We believe great plants and garden supplies should be accessible to everyone in our community — from first-time gardeners to seasoned landscapers.</div>
+                </div>
+                <div class="commitment-card reveal reveal-delay-3">
+                    <span class="commitment-icon">😊</span>
+                    <div class="commitment-title">A Welcoming Atmosphere</div>
+                    <div class="commitment-body">Mohaduba is more than a nursery — it's a place where customers feel genuinely at home. We've worked hard to create a friendly, open environment where you can browse freely, ask questions without hesitation, and always leave with a smile.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FULL CATALOGUE -->
+    <section class="catalogue-section" id="catalogue">
+        <div class="section-wrap">
+            <div class="glass-card catalogue-card reveal">
+                <span class="section-eyebrow">Full offering</span>
+                <h2 class="section-title">Complete range <em>at a glance</em></h2>
+                <div class="catalogue-grid">
+                    <div class="catalogue-col">
+                        <span class="catalogue-col-title">Plants</span>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Bedding plants</div>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Perennials</div>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Shrubs (evergreen)</div>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Flowering shrubs</div>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Groundcovers</div>
+                    </div>
+                    <div class="catalogue-col">
+                        <span class="catalogue-col-title">Trees &amp; Edibles</span>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Shade trees</div>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Fruit trees</div>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Ornamental trees</div>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Vegetable plants</div>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Herbs</div>
+                    </div>
+                    <div class="catalogue-col">
+                        <span class="catalogue-col-title">Décor &amp; Features</span>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Fountains</div>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Stepping stones</div>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Pebbles &amp; mulch</div>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Garden ornaments</div>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Pots &amp; planters</div>
+                    </div>
+                    <div class="catalogue-col">
+                        <span class="catalogue-col-title">Supplies &amp; Tools</span>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Garden tools</div>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Fertilizers</div>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Potting soils</div>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Composts</div>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Watering equipment</div>
+                    </div>
+                </div>
+                <div class="catalogue-note">
+                    ✳ Most plants are greenhouse-grown on site — availability varies by season. Ask our staff for current stock and recommendations.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="cta-bg"></div>
+        <div class="cta-overlay"></div>
+        <div class="section-wrap">
+            <div class="cta-inner reveal">
+                <div>
+                    <h2 class="cta-title">Ready to <em>visit</em><br>our nursery?</h2>
+                    <div class="cta-details">
+                        <div class="cta-detail">📍 H115Plot, Seven Miles, Kuruman, 8460</div>
+                        <div class="cta-detail">📞 <a href="tel:+27822243736">+27 82-224-3736</a></div>
+                        <div class="cta-detail">✉️ <a href="mailto:josephsedumedi53@gmail.com">josephsedumedi53@gmail.com</a></div>
+                        <div class="cta-detail">🏷️ Reg: 2017/360951/07</div>
+                    </div>
+                </div>
+                <div class="cta-actions">
+                    <a href="tel:+27822243736" class="btn-primary">📞 Call Now</a>
+                    <a href="mailto:josephsedumedi53@gmail.com" class="btn-ghost">✉️ Email Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-top">
+                <div>
+                    <div class="footer-logo">Mohaduba<span>●</span></div>
+                    <div class="footer-tagline">Rooted in Kuruman, grown with passion</div>
+                </div>
+                <div class="footer-links">
+                    <a href="mohaduba-homepage.html">Home</a>
+                    <a href="mohaduba-about.html">About</a>
+                    <a href="#">Services</a>
+                    <a href="mohaduba-homepage.html#contact">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2024 Mohaduba Enterprise Nursery · Kuruman</span>
+                <span>100% Black Owned &amp; Managed · Reg. 2017/360951/07</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('open');
+        }
+
+        const revealEls = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+            });
+        }, { threshold: 0.1 });
+        revealEls.forEach(el => observer.observe(el));
+
+        // Active tab highlight on scroll
+        const tabLinks = document.querySelectorAll('.tab-item');
+        const sections = ['plants','accessories','greenhouse','commitment','catalogue'].map(id => document.getElementById(id));
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(sec => {
+                if (sec && window.scrollY >= sec.offsetTop - 120) current = sec.id;
+            });
+            tabLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+            });
+
+            const nav = document.querySelector('.nav');
+            nav.style.background = window.scrollY > 50 ? 'rgba(255,255,255,0.88)' : 'rgba(255,255,255,0.55)';
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                const el = document.querySelector(a.getAttribute('href'));
+                if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth' }); }
+            });
+        });
+    </script>
+
+</body>
+</html>
