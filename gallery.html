@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery · Mohaduba Enterprise Nursery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: linear-gradient(160deg, #ffffff 0%, #f0f9ea 35%, #dff0d4 65%, #c9e5b8 100%);
+            min-height: 100vh;
+            color: #16381a;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(255,255,255,0.55);
+            backdrop-filter: blur(18px) saturate(180%);
+            border-bottom: 1px solid rgba(255,255,255,0.5);
+            padding: 0 1.5rem;
+            height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: #16381a; display: flex; align-items: center; gap: 6px; }
+        .nav-logo span { color: #2d6a30; }
+        .nav-links { display: flex; align-items: center; gap: 0.25rem; list-style: none; }
+        .nav-links a { text-decoration: none; font-size: 0.85rem; font-weight: 500; color: #16381a; padding: 0.45rem 0.9rem; border-radius: 50px; transition: all 0.22s ease; }
+        .nav-links a:hover { background: #e4f2db; color: #2d6a30; }
+        .nav-cta { background: linear-gradient(135deg, #2d6a30, #1c4520); color: white !important; padding: 0.5rem 1.2rem !important; border-radius: 50px !important; }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+        .hamburger span { display: block; width: 24px; height: 2px; background: #16381a; border-radius: 4px; }
+        .mobile-menu { display: none; position: fixed; top: 68px; left: 0; right: 0; background: rgba(255,255,255,0.97); backdrop-filter: blur(20px); padding: 1rem 1.5rem; z-index: 99; flex-direction: column; gap: 0.25rem; }
+        .mobile-menu a { display: block; text-decoration: none; color: #16381a; padding: 0.75rem 1rem; border-radius: 12px; }
+        .mobile-menu.open { display: flex; }
+
+        /* Gallery Styles */
+        .gallery-header { padding: 120px 1.5rem 60px; text-align: center; max-width: 1200px; margin: 0 auto; }
+        .section-eyebrow { font-size: 0.7rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: #2d6a30; display: block; margin-bottom: 0.6rem; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; color: #16381a; }
+        .section-title em { font-style: italic; color: #2d6a30; }
+
+        .gallery-grid { max-width: 1400px; margin: 0 auto; padding: 0 1.5rem 80px; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+        .gallery-item { position: relative; border-radius: 20px; overflow: hidden; cursor: pointer; aspect-ratio: 1/0.9; background: #e4f2db; transition: all 0.3s ease; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+        .gallery-item:hover img { transform: scale(1.05); }
+        .gallery-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.7)); padding: 1rem; color: white; opacity: 0; transition: opacity 0.3s ease; }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-title { font-weight: 600; font-size: 0.9rem; }
+        .gallery-desc { font-size: 0.75rem; opacity: 0.8; }
+
+        /* Admin Panel */
+        .admin-toggle { position: fixed; bottom: 24px; right: 24px; z-index: 200; }
+        .admin-btn { background: linear-gradient(135deg, #2d6a30, #1c4520); color: white; border: none; padding: 12px 20px; border-radius: 50px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); transition: all 0.2s; }
+        .admin-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.25); }
+
+        .admin-panel { position: fixed; top: 0; right: -500px; width: 100%; max-width: 500px; height: 100vh; background: white; z-index: 1000; box-shadow: -4px 0 30px rgba(0,0,0,0.2); transition: right 0.3s ease; overflow-y: auto; }
+        .admin-panel.open { right: 0; }
+        .admin-header { background: #2d6a30; color: white; padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+        .admin-header h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; }
+        .close-admin { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+        .admin-content { padding: 1.5rem; }
+
+        .form-group { margin-bottom: 1.2rem; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 0.3rem; color: #16381a; }
+        .form-group input, .form-group textarea { width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 12px; font-family: inherit; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #2d6a30; }
+
+        /* Upload Area */
+        .upload-area { border: 2px dashed #2d6a30; border-radius: 16px; padding: 1.5rem; text-align: center; background: #f8fdf5; cursor: pointer; transition: all 0.2s; margin-bottom: 1rem; }
+        .upload-area:hover { background: #e4f2db; border-color: #1c4520; }
+        .upload-area.drag-over { background: #d4e8c8; border-color: #2d6a30; }
+        .upload-icon { font-size: 2rem; color: #2d6a30; margin-bottom: 0.5rem; }
+        .upload-text { color: #3a5c3e; font-size: 0.85rem; }
+        .image-preview { width: 100px; height: 100px; object-fit: cover; border-radius: 12px; margin-top: 0.5rem; display: none; }
+        .save-btn { background: linear-gradient(135deg, #2d6a30, #1c4520); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 50px; cursor: pointer; font-weight: 600; width: 100%; margin-top: 0.5rem; }
+
+        .gallery-items-list { margin-top: 2rem; border-top: 1px solid #eee; padding-top: 1rem; max-height: 400px; overflow-y: auto; }
+        .list-item { display: flex; gap: 1rem; padding: 0.75rem; border-bottom: 1px solid #eee; align-items: center; }
+        .list-item img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; }
+        .list-item-info { flex: 1; }
+        .list-item-title { font-weight: 600; font-size: 0.85rem; }
+        .list-item-desc { font-size: 0.7rem; color: #666; }
+        .delete-btn { background: #dc2626; color: white; border: none; padding: 0.3rem 0.8rem; border-radius: 8px; cursor: pointer; font-size: 0.7rem; }
+        .edit-btn { background: #f59e0b; color: white; border: none; padding: 0.3rem 0.8rem; border-radius: 8px; cursor: pointer; font-size: 0.7rem; margin-right: 0.3rem; }
+
+        /* Lightbox */
+        .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1100; justify-content: center; align-items: center; cursor: pointer; }
+        .lightbox img { max-width: 90%; max-height: 90%; object-fit: contain; border-radius: 8px; }
+        .lightbox-close { position: absolute; top: 20px; right: 30px; color: white; font-size: 2rem; cursor: pointer; }
+
+        .empty-gallery { text-align: center; padding: 60px; color: #666; grid-column: 1 / -1; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .admin-panel { max-width: 100%; }
+            .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav">
+        <div class="nav-logo"><img src="./assets/Mologo.png" alt="Mohaduba Logo" style="height: 60px; width: auto;"></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="contact.html" class="nav-cta">Get in Touch</a></li>
+        </ul>
+        <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="contact.html">Contact</a>
+        <a href="contact.html" style="background:#e4f2db;color:#2d6a30;font-weight:600;">Get in Touch →</a>
+    </div>
+
+    <div class="gallery-header">
+        <span class="section-eyebrow">🌿 Our Work</span>
+        <h1 class="section-title">Photo <em>Gallery</em></h1>
+        <p style="max-width: 600px; margin: 1rem auto 0; color: #3a5c3e;">Explore our nursery, plants, and projects. Click on any image to view full size.</p>
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid">
+        <div class="empty-gallery">Loading gallery...</div>
+    </div>
+
+    <!-- Admin Toggle Button -->
+    <div class="admin-toggle">
+        <button class="admin-btn" onclick="showAdminLogin()">
+            <i class="fas fa-edit"></i> Edit Gallery
+        </button>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-header">
+            <h3><i class="fas fa-images"></i> Gallery Manager</h3>
+            <button class="close-admin" onclick="closeAdminPanel()">&times;</button>
+        </div>
+        <div class="admin-content">
+            <div id="adminAuth" style="display: none;">
+                <div class="form-group">
+                    <label>Enter Password to Edit Gallery</label>
+                    <input type="password" id="adminPassword" placeholder="Enter password">
+                    <button class="save-btn" style="margin-top: 1rem;" onclick="authenticateAdmin()">Login</button>
+                </div>
+                <!--<p style="font-size: 0.7rem; color: #666; margin-top: 1rem;">Default password: <strong>admin123</strong> (change it after first login)</p>-->
+            </div>
+            <div id="adminControls" style="display: none;">
+                <h4 style="margin-bottom: 1rem;">Add New Image</h4>
+                
+                <!-- File Upload Area -->
+                <div class="upload-area" id="uploadArea" onclick="document.getElementById('imageFile').click()">
+                    <div class="upload-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                    <div class="upload-text">Click or drag & drop image here</div>
+                    <div class="upload-text" style="font-size: 0.7rem; margin-top: 0.25rem;">Supports JPG, PNG, GIF (max 5MB)</div>
+                    <input type="file" id="imageFile" accept="image/jpeg,image/png,image/gif,image/webp" style="display: none;" onchange="handleFileSelect(this)">
+                </div>
+                
+                <div id="selectedImagePreview" style="text-align: center;">
+                    <img id="previewImg" class="image-preview" style="display: none;">
+                </div>
+                
+                <div class="form-group">
+                    <label>Or Image URL (optional)</label>
+                    <input type="text" id="imageUrl" placeholder="https://...">
+                </div>
+                
+                <div class="form-group">
+                    <label>Title *</label>
+                    <input type="text" id="imageTitle" placeholder="e.g., Flowering Plants">
+                </div>
+                <div class="form-group">
+                    <label>Description (optional)</label>
+                    <textarea id="imageDesc" rows="2" placeholder="Brief description of this image..."></textarea>
+                </div>
+                <button class="save-btn" onclick="addGalleryImage()">
+                    <i class="fas fa-plus"></i> Add to Gallery
+                </button>
+
+                <div class="gallery-items-list" id="galleryItemsList">
+                    <h4 style="margin: 1rem 0;">Manage Existing Images</h4>
+                    <!-- List of images will appear here -->
+                </div>
+
+                <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #eee;">
+                    <button class="save-btn" style="background: #dc2626;" onclick="changeAdminPassword()">
+                        <i class="fas fa-key"></i> Change Admin Password
+                    </button>
+                    <button class="save-btn" style="background: #6b7280; margin-top: 0.5rem;" onclick="exportGalleryData()">
+                        <i class="fas fa-download"></i> Backup Gallery
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightboxImg" src="" alt="">
+    </div>
+
+    <footer style="background: linear-gradient(180deg, #0c2410, #091b0c); padding: 3rem 1.5rem 2rem; color: rgba(255,255,255,0.6); margin-top: 0;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.08); flex-wrap: wrap; gap: 2rem;">
+                <div>
+                    <div class="nav-logo" style="color: white;"><img src="./assets/Mologo2.png" style="height: 80px; width: auto;" alt="Mohaduba Logo"></div>
+                    <div style="font-size: 0.8rem; color: rgba(255,255,255,0.45); margin-top: 4px;">Rooted in Kuruman, grown with passion</div>
+                </div>
+                <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                    <a href="index.html#about" style="color: rgba(255,255,255,0.55); text-decoration: none;">About</a>
+                    <a href="index.html#products" style="color: rgba(255,255,255,0.55); text-decoration: none;">Products</a>
+                    <a href="gallery.html" style="color: rgba(255,255,255,0.55); text-decoration: none;">Gallery</a>
+                    <a href="index.html#contact" style="color: rgba(255,255,255,0.55); text-decoration: none;">Contact</a>
+                </div>
+            </div>
+            <div style="margin-top: 1.5rem; font-size: 0.75rem; display: flex; justify-content: space-between; flex-wrap: wrap;">
+                <span>© 2024 Mohaduba Enterprise Nursery · Kuruman</span>
+                <span>100% Black Owned &amp; Managed · Reg. 2017/360951/07</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Gallery data stored in localStorage
+        let galleryItems = [];
+        let selectedFile = null;
+
+        // Load gallery from localStorage or use default images
+        function loadGalleryData() {
+            const stored = localStorage.getItem('mohaduba_gallery');
+            if (stored) {
+                galleryItems = JSON.parse(stored);
+            } else {
+                // Default sample images
+                galleryItems = [
+                    { id: Date.now() + 1, url: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80', title: 'Lush Green Nursery', desc: 'Our beautiful greenhouse with thriving plants', isBase64: false },
+                    { id: Date.now() + 2, url: 'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=600&q=80', title: 'Colorful Flower Beds', desc: 'Seasonal flowers ready for your garden', isBase64: false },
+                    { id: Date.now() + 3, url: 'https://images.unsplash.com/photo-1558389186-438424b3b6e6?w=600&q=80', title: 'Succulent Collection', desc: 'Low-maintenance succulents for any space', isBase64: false },
+                    { id: Date.now() + 4, url: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=600&q=80', title: 'Vegetable Seedlings', desc: 'Fresh veggie starters for your kitchen garden', isBase64: false },
+                    { id: Date.now() + 5, url: 'https://images.unsplash.com/photo-1523348837708-15c4ad3243d9?w=600&q=80', title: 'Shade Trees', desc: 'Beautiful indigenous trees for landscaping', isBase64: false },
+                    { id: Date.now() + 6, url: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80', title: 'Nursery Aerial View', desc: 'Our state-of-the-art facilities', isBase64: false }
+                ];
+                saveGalleryData();
+            }
+            renderGallery();
+        }
+
+        function saveGalleryData() {
+            localStorage.setItem('mohaduba_gallery', JSON.stringify(galleryItems));
+        }
+
+        function renderGallery() {
+            const grid = document.getElementById('galleryGrid');
+            if (!grid) return;
+            
+            if (galleryItems.length === 0) {
+                grid.innerHTML = '<div class="empty-gallery">✨ No images yet. Click "Edit Gallery" to add your first image!</div>';
+                return;
+            }
+
+            grid.innerHTML = galleryItems.map(item => `
+                <div class="gallery-item" onclick="openLightbox('${item.url}', '${escapeHtml(item.title)}')">
+                    <img src="${item.url}" alt="${escapeHtml(item.title)}" loading="lazy" onerror="this.src='https://placehold.co/600x400/e4f2db/2d6a30?text=Image+Not+Found'">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">${escapeHtml(item.title)}</div>
+                        <div class="gallery-desc">${escapeHtml(item.desc || '')}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderAdminList() {
+            const listContainer = document.getElementById('galleryItemsList');
+            if (!listContainer) return;
+            
+            listContainer.innerHTML = `
+                <h4 style="margin: 1rem 0 0.5rem;">Manage Existing Images (${galleryItems.length})</h4>
+                ${galleryItems.map((item, index) => `
+                    <div class="list-item">
+                        <img src="${item.url}" alt="${escapeHtml(item.title)}" onerror="this.src='https://placehold.co/60x60/e4f2db/2d6a30?text=Error'">
+                        <div class="list-item-info">
+                            <div class="list-item-title">${escapeHtml(item.title)}</div>
+                            <div class="list-item-desc">${escapeHtml(item.desc || 'No description')}</div>
+                        </div>
+                        <div>
+                            <button class="edit-btn" onclick="editImage(${index})"><i class="fas fa-edit"></i></button>
+                            <button class="delete-btn" onclick="deleteImage(${index})"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                `).join('')}
+                ${galleryItems.length === 0 ? '<p style="text-align: center; color: #666; padding: 1rem;">No images yet. Add your first image above!</p>' : ''}
+            `;
+        }
+
+        // Handle file selection from device
+        function handleFileSelect(input) {
+            const file = input.files[0];
+            if (!file) return;
+            
+            // Check file size (max 5MB)
+            if (file.size > 5 * 1024 * 1024) {
+                alert('File is too large! Maximum size is 5MB.');
+                input.value = '';
+                return;
+            }
+            
+            // Check file type
+            const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+            if (!validTypes.includes(file.type)) {
+                alert('Please select a valid image file (JPG, PNG, GIF, or WebP).');
+                input.value = '';
+                return;
+            }
+            
+            selectedFile = file;
+            
+            // Preview the image
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById('previewImg');
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+                // Clear URL input if file is selected
+                document.getElementById('imageUrl').value = '';
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        // Drag and drop functionality
+        const uploadArea = document.getElementById('uploadArea');
+        if (uploadArea) {
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('drag-over');
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('drag-over');
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('drag-over');
+                const file = e.dataTransfer.files[0];
+                if (file && file.type.startsWith('image/')) {
+                    const fileInput = document.getElementById('imageFile');
+                    const dataTransfer = new DataTransfer();
+                    dataTransfer.items.add(file);
+                    fileInput.files = dataTransfer.files;
+                    handleFileSelect(fileInput);
+                } else {
+                    alert('Please drop an image file.');
+                }
+            });
+        }
+        
+        function addGalleryImage() {
+            const title = document.getElementById('imageTitle').value.trim();
+            const desc = document.getElementById('imageDesc').value.trim();
+            let imageUrl = document.getElementById('imageUrl').value.trim();
+            
+            if (!title) {
+                alert('Please enter a title for the image');
+                return;
+            }
+            
+            // Check if we have a file upload or URL
+            if (selectedFile) {
+                // Convert file to base64 and store
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const base64Image = e.target.result;
+                    const newItem = {
+                        id: Date.now(),
+                        url: base64Image,
+                        title: title,
+                        desc: desc,
+                        isBase64: true
+                    };
+                    galleryItems.push(newItem);
+                    saveGalleryData();
+                    renderGallery();
+                    renderAdminList();
+                    clearForm();
+                    alert('Image added successfully!');
+                };
+                reader.readAsDataURL(selectedFile);
+            } else if (imageUrl) {
+                const newItem = {
+                    id: Date.now(),
+                    url: imageUrl,
+                    title: title,
+                    desc: desc,
+                    isBase64: false
+                };
+                galleryItems.push(newItem);
+                saveGalleryData();
+                renderGallery();
+                renderAdminList();
+                clearForm();
+                alert('Image added successfully!');
+            } else {
+                alert('Please select an image from your device or enter an image URL');
+            }
+        }
+        
+        function clearForm() {
+            document.getElementById('imageTitle').value = '';
+            document.getElementById('imageDesc').value = '';
+            document.getElementById('imageUrl').value = '';
+            document.getElementById('imageFile').value = '';
+            selectedFile = null;
+            const preview = document.getElementById('previewImg');
+            preview.style.display = 'none';
+            preview.src = '';
+        }
+
+        function deleteImage(index) {
+            if (confirm('Are you sure you want to delete this image?')) {
+                galleryItems.splice(index, 1);
+                saveGalleryData();
+                renderGallery();
+                renderAdminList();
+                alert('Image deleted.');
+            }
+        }
+
+        function editImage(index) {
+            const item = galleryItems[index];
+            const newTitle = prompt('Edit Title:', item.title);
+            const newDesc = prompt('Edit Description:', item.desc || '');
+            
+            if (newTitle !== null) item.title = newTitle;
+            if (newDesc !== null) item.desc = newDesc;
+            
+            saveGalleryData();
+            renderGallery();
+            renderAdminList();
+        }
+
+        // Admin authentication
+        let isAdminAuthenticated = false;
+        
+        function showAdminLogin() {
+            const storedPassword = localStorage.getItem('mohaduba_admin_password') || 'admin123';
+            const adminPanel = document.getElementById('adminPanel');
+            const adminAuth = document.getElementById('adminAuth');
+            const adminControls = document.getElementById('adminControls');
+            
+            adminPanel.classList.add('open');
+            
+            if (!isAdminAuthenticated) {
+                adminAuth.style.display = 'block';
+                adminControls.style.display = 'none';
+                document.getElementById('adminPassword').value = '';
+            } else {
+                adminAuth.style.display = 'none';
+                adminControls.style.display = 'block';
+                renderAdminList();
+            }
+        }
+        
+        function authenticateAdmin() {
+            const password = document.getElementById('adminPassword').value;
+            const storedPassword = localStorage.getItem('mohaduba_admin_password') || 'admin123';
+            
+            if (password === storedPassword) {
+                isAdminAuthenticated = true;
+                document.getElementById('adminAuth').style.display = 'none';
+                document.getElementById('adminControls').style.display = 'block';
+                renderAdminList();
+            } else {
+                alert('Incorrect password. Please try again.');
+            }
+        }
+        
+        function closeAdminPanel() {
+            document.getElementById('adminPanel').classList.remove('open');
+        }
+        
+        function changeAdminPassword() {
+            const currentPassword = prompt('Enter current password:');
+            const storedPassword = localStorage.getItem('mohaduba_admin_password') || 'admin123';
+            
+            if (currentPassword === storedPassword) {
+                const newPassword = prompt('Enter new password (at least 4 characters):');
+                if (newPassword && newPassword.length >= 4) {
+                    localStorage.setItem('mohaduba_admin_password', newPassword);
+                    alert('Password changed successfully!');
+                    isAdminAuthenticated = false;
+                    document.getElementById('adminAuth').style.display = 'block';
+                    document.getElementById('adminControls').style.display = 'none';
+                } else {
+                    alert('Password must be at least 4 characters.');
+                }
+            } else {
+                alert('Current password is incorrect.');
+            }
+        }
+        
+        function exportGalleryData() {
+            const dataStr = JSON.stringify(galleryItems, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            const exportFileDefaultName = 'mohaduba_gallery_backup.json';
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+        }
+        
+        // Lightbox functions
+        function openLightbox(url, title) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            lightboxImg.src = url;
+            lightboxImg.alt = title;
+            lightbox.style.display = 'flex';
+        }
+        
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+        
+        // Escape HTML to prevent XSS
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+        }
+        
+        // Navigation functions
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('open');
+        }
+        
+        // Nav background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(255,255,255,0.85)';
+            } else {
+                nav.style.background = 'rgba(255,255,255,0.55)';
+            }
+        });
+        
+        // Initialize
+        loadGalleryData();
+        
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeLightbox();
+                closeAdminPanel();
+            }
+        });
+    </script>
+</body>
+</html>
