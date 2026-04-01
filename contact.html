@@ -6,7 +6,7 @@
     <title>Mohaduba · Contact Us</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="icon" type="image/x-icon" href="./assets/Mologo.png">
+    <link rel="icon" type="image/x-icon" href="./assets/Mologo.png">
 
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 
@@ -374,8 +374,9 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="services.html">Services</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="gallery.htmlm,">Gallery</a></li>
 
+            <li><a href="contact.html">Contact</a></li>
             <li><a href="contact.html" class="active nav-cta">Get in Touch</a></li>
         </ul>
         <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
@@ -387,8 +388,7 @@
         <a href="index.html" onclick="toggleMenu()">Home</a>
         <a href="about.html" onclick="toggleMenu()">About</a>
         <a href="services.html" onclick="toggleMenu()">Services</a>
-                    <li><a href="gallery.html">Gallery</a></li>
-
+        <a href="gallery.html" onclick="toggleMenu()">Gallery</a>
         <a href="contact.html" onclick="toggleMenu()" style="background:var(--light-green);color:var(--primary);font-weight:600;">Contact ✓</a>
     </div>
 
@@ -486,6 +486,7 @@
                     </div>
                 </div>
 
+                <!-- ==================== WORKING CONTACT FORM ==================== -->
                 <div class="glass-card form-card reveal reveal-delay-1">
                     <div class="form-card-header">
                         <span class="section-eyebrow">Send a message</span>
@@ -493,53 +494,61 @@
                         <p style="font-size:0.85rem;color:#5a7a5e;margin-top:0.5rem;line-height:1.55;">Fill in the form and Joseph or a team member will get back to you promptly.</p>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">First Name</label>
-                            <input type="text" class="form-input" placeholder="e.g. Thabo">
+                    <form action="https://formsubmit.co/kmngomezulu82@gmail.com" method="POST">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">First Name</label>
+                                <input type="text" name="First Name" class="form-input" placeholder="e.g. Thabo" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" name="Last Name" class="form-input" placeholder="e.g. Mokoena" required>
+                            </div>
                         </div>
+
                         <div class="form-group">
-                            <label class="form-label">Last Name</label>
-                            <input type="text" class="form-input" placeholder="e.g. Mokoena">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" name="Email" class="form-input" placeholder="your@email.com" required>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label class="form-label">Email Address</label>
-                        <input type="email" class="form-input" placeholder="your@email.com">
-                    </div>
+                        <div class="form-group">
+                            <label class="form-label">Phone / WhatsApp</label>
+                            <input type="tel" name="Phone" class="form-input" placeholder="+27 …">
+                        </div>
 
-                    <div class="form-group">
-                        <label class="form-label">Phone / WhatsApp</label>
-                        <input type="tel" class="form-input" placeholder="+27 …">
-                    </div>
+                        <div class="form-group">
+                            <label class="form-label">I'm enquiring about</label>
+                            <select name="Enquiry Topic" class="form-select" required>
+                                <option value="" disabled selected>Select a topic…</option>
+                                <option>Bedding plants &amp; shrubs</option>
+                                <option>Trees &amp; landscaping</option>
+                                <option>Vegetable plants</option>
+                                <option>Garden accessories</option>
+                                <option>Fertilizers &amp; soils</option>
+                                <option>Contractor bulk order</option>
+                                <option>General enquiry</option>
+                            </select>
+                        </div>
 
-                    <div class="form-group">
-                        <label class="form-label">I'm enquiring about</label>
-                        <select class="form-select">
-                            <option value="" disabled selected>Select a topic…</option>
-                            <option>Bedding plants &amp; shrubs</option>
-                            <option>Trees &amp; landscaping</option>
-                            <option>Vegetable plants</option>
-                            <option>Garden accessories</option>
-                            <option>Fertilizers &amp; soils</option>
-                            <option>Contractor bulk order</option>
-                            <option>General enquiry</option>
-                        </select>
-                    </div>
+                        <div class="form-group">
+                            <label class="form-label">Message</label>
+                            <textarea name="Message" class="form-input" placeholder="Tell us what you need, how many, any specific requests…" required></textarea>
+                        </div>
 
-                    <div class="form-group">
-                        <label class="form-label">Message</label>
-                        <textarea class="form-input" placeholder="Tell us what you need, how many, any specific requests…"></textarea>
-                    </div>
+                        <!-- Hidden fields for clean email -->
+                        <input type="hidden" name="_subject" value="New Contact Form Submission - Mohaduba Website">
+                        <input type="hidden" name="_next" value="https://yourwebsite.com/contact.html?sent=1">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="table">
 
-                    <button class="submit-btn" onclick="handleSubmit(this)">
-                        <span>📨</span> Send Message
-                    </button>
+                        <button type="submit" class="submit-btn">
+                            <span>📨</span> Send Message
+                        </button>
 
-                    <div class="form-footer-note">
-                        🔒 Your details are safe with us — no spam, ever.
-                    </div>
+                        <div class="form-footer-note">
+                            🔒 Your details are safe with us — no spam, ever.
+                        </div>
+                    </form>
                 </div>
 
             </div>
@@ -640,7 +649,7 @@
         <div class="footer-inner">
             <div class="footer-top">
                 <div>
-                    <div class="footer-logo"><img src="./assets/Mologo2.png"  style="height: 80px; width: auto;" alt="Mohaduba Logo"></div>
+                    <div class="footer-logo"><img src="./assets/Mologo2.png" style="height: 80px; width: auto;" alt="Mohaduba Logo"></div>
                     <div class="footer-tagline">Rooted in Kuruman, grown with passion</div>
                 </div>
                 <div class="footer-links">
@@ -675,15 +684,9 @@
             nav.style.background = window.scrollY > 50 ? 'rgba(255,255,255,0.88)' : 'rgba(255,255,255,0.55)';
         });
 
-        function handleSubmit(btn) {
-            btn.innerHTML = '<span>✅</span> Message Sent!';
-            btn.style.background = 'linear-gradient(135deg, #1f5522, #154d1a)';
-            btn.disabled = true;
-            setTimeout(() => {
-                btn.innerHTML = '<span>📨</span> Send Message';
-                btn.style.background = '';
-                btn.disabled = false;
-            }, 3000);
+        // Optional success message
+        if (window.location.search.includes('sent=1')) {
+            alert("✅ Thank you! Your message has been sent successfully to kmngomezulu82@gmail.com");
         }
     </script>
 
