@@ -457,6 +457,163 @@
         .catalogue-item-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--mid-green); flex-shrink: 0; }
         .catalogue-note { margin-top: 1.5rem; padding: 0.85rem 1.2rem; background: rgba(45,106,48,0.06); border-radius: 12px; font-size: 0.8rem; font-style: italic; color: #5a7a5e; }
 
+        /* ── SERVICES OFFERINGS SECTION (NEW) ── */
+        .offerings-section { padding: 2rem 1.5rem 5rem; }
+
+        .offerings-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 3.5rem;
+        }
+
+        /* Hero service card — large panoramic */
+        .offering-hero-card {
+            position: relative;
+            border-radius: 28px;
+            overflow: hidden;
+            height: 380px;
+            background: linear-gradient(135deg, #0e2410, #1c4520);
+            cursor: pointer;
+        }
+        .offering-hero-pattern {
+            position: absolute; inset: 0;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(122,184,106,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(45,106,48,0.2) 0%, transparent 40%),
+                repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(255,255,255,0.015) 30px, rgba(255,255,255,0.015) 31px);
+        }
+        .offering-hero-card-content { position: relative; z-index: 2; padding: 2.5rem; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
+        .offering-hero-icon { font-size: 3.5rem; display: block; margin-bottom: 0.5rem; filter: drop-shadow(0 4px 16px rgba(0,0,0,0.3)); }
+        .offering-hero-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(168,217,148,0.2); border: 1px solid rgba(168,217,148,0.4);
+            color: #a8d994; font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+            padding: 0.35rem 0.9rem; border-radius: 50px; margin-bottom: 1rem; width: fit-content;
+        }
+        .offering-hero-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: white; line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 0.75rem; }
+        .offering-hero-title em { font-style: italic; color: #a8d994; }
+        .offering-hero-body { font-size: 0.9rem; line-height: 1.7; color: rgba(255,255,255,0.68); max-width: 360px; }
+        .offering-hero-footer { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+        .offering-hero-stat { }
+        .offering-hero-stat-num { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: #a8d994; line-height: 1; display: block; }
+        .offering-hero-stat-label { font-size: 0.62rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+
+        .offering-hero-card:hover .offering-hero-pattern {
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(122,184,106,0.25) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(45,106,48,0.3) 0%, transparent 40%),
+                repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(255,255,255,0.02) 30px, rgba(255,255,255,0.02) 31px);
+            transition: all 0.4s ease;
+        }
+
+        /* Right side stacked mini cards */
+        .offering-stack { display: flex; flex-direction: column; gap: 1rem; }
+        .offering-mini-card {
+            background: rgba(255,255,255,0.65);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.85);
+            border-radius: 20px;
+            padding: 1.4rem 1.6rem;
+            display: flex;
+            align-items: center;
+            gap: 1.1rem;
+            cursor: pointer;
+            transition: all 0.28s ease;
+            border-left: 4px solid transparent;
+        }
+        .offering-mini-card:hover {
+            background: white;
+            border-left-color: var(--primary);
+            box-shadow: 0 12px 40px rgba(22,56,26,0.14);
+            transform: translateX(6px);
+        }
+        .offering-mini-icon {
+            width: 48px; height: 48px; flex-shrink: 0;
+            background: linear-gradient(135deg, #e4f2db, #c0ddb0);
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem;
+            transition: all 0.28s;
+        }
+        .offering-mini-card:hover .offering-mini-icon {
+            background: linear-gradient(135deg, #2d6a30, #1c4520);
+            box-shadow: 0 4px 16px rgba(22,56,26,0.3);
+        }
+        .offering-mini-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: 2px; }
+        .offering-mini-desc { font-size: 0.77rem; color: #5a7a5e; line-height: 1.4; }
+        .offering-mini-arrow {
+            margin-left: auto; flex-shrink: 0;
+            width: 28px; height: 28px;
+            background: rgba(45,106,48,0.08);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; color: var(--primary);
+            transition: all 0.28s;
+        }
+        .offering-mini-card:hover .offering-mini-arrow { background: var(--primary); color: white; transform: translateX(2px); }
+
+        /* Bottom 3 large offering tiles */
+        .offering-tiles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+
+        .offering-tile {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.55);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.8);
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .offering-tile::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--mid-green));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .offering-tile:hover { background: white; box-shadow: 0 20px 60px rgba(22,56,26,0.16); transform: translateY(-6px); border-color: #b5dba8; }
+        .offering-tile:hover::before { opacity: 1; }
+
+        .offering-tile-icon-wrap {
+            width: 64px; height: 64px;
+            background: linear-gradient(135deg, #dff0d4, #b5dba8);
+            border-radius: 20px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.2rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .offering-tile:hover .offering-tile-icon-wrap {
+            background: linear-gradient(135deg, #2d6a30, #143816);
+            box-shadow: 0 8px 28px rgba(22,56,26,0.35);
+        }
+
+        .offering-tile-label {
+            font-size: 0.62rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+            color: var(--primary); margin-bottom: 0.5rem; display: block;
+        }
+        .offering-tile-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem; font-weight: 700; color: var(--dark);
+            line-height: 1.2; margin-bottom: 0.75rem;
+        }
+        .offering-tile-body { font-size: 0.83rem; line-height: 1.7; color: #4a6b4e; margin-bottom: 1rem; }
+        .offering-tile-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+        .offering-tile-tag {
+            font-size: 0.68rem; font-weight: 600;
+            background: rgba(45,106,48,0.08); border: 1px solid rgba(45,106,48,0.18);
+            color: var(--primary); border-radius: 50px; padding: 0.2rem 0.65rem;
+            transition: all 0.2s;
+        }
+        .offering-tile:hover .offering-tile-tag { background: rgba(45,106,48,0.14); }
+
         /* ── CTA SECTION ── */
         .cta-section {
             padding: 5rem 1.5rem;
@@ -464,7 +621,7 @@
         }
         .cta-bg {
             position: absolute; inset: 0;
-            background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80&auto=format&fit=crop');
+            background-image: url('./assets/footer.png');
             background-size: cover; background-position: center;
             filter: brightness(0.28) saturate(1.4);
         }
@@ -511,6 +668,8 @@
             .catalogue-col { padding: 0; border-right: none; }
             .cta-inner { grid-template-columns: 1fr; }
             .cta-actions { flex-direction: row; }
+            .offerings-intro { grid-template-columns: 1fr; }
+            .offering-tiles-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 768px) {
             .nav-links { display: none; }
@@ -521,6 +680,7 @@
             .catalogue-grid { grid-template-columns: 1fr 1fr; }
             .greenhouse-feature-content { padding: 2rem; }
             .cta-actions { flex-direction: column; }
+            .offering-tiles-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 480px) {
             .plants-grid { grid-template-columns: 1fr; }
@@ -539,7 +699,6 @@
             <li><a href="about.html">About</a></li>
             <li><a href="services.html" class="active">Services</a></li>
             <li><a href="contact.html">Contact</a></li>
-
             <li><a href="contact.html" class="nav-cta">Get in Touch</a></li>
         </ul>
         <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
@@ -551,8 +710,7 @@
         <a href="index.html" onclick="toggleMenu()">Home</a>
         <a href="about.html" onclick="toggleMenu()">About</a>
         <a href="services.html" onclick="toggleMenu()">Services</a>
-                <a href="contact.html" onclick="toggleMenu()">Contact</a>
-
+        <a href="contact.html" onclick="toggleMenu()">Contact</a>
         <a href="contact.html" onclick="toggleMenu()" style="background:var(--light-green);color:var(--primary);font-weight:600;">Get in Touch →</a>
     </div>
 
@@ -575,6 +733,9 @@
                 <span class="hero-tag">⛲ Fountains</span>
                 <span class="hero-tag">🪨 Stepping Stones</span>
                 <span class="hero-tag">🌱 Soils &amp; Fertilizers</span>
+                <span class="hero-tag">🏡 Landscaping</span>
+                <span class="hero-tag">🌿 Indigenous Species</span>
+                <span class="hero-tag">⛏️ Mining Rehabilitation</span>
             </div>
         </div>
     </section>
@@ -584,8 +745,9 @@
         <div class="tabs-inner">
             <a href="#plants" class="tab-item active">🌳 Plants &amp; Trees</a>
             <a href="#accessories" class="tab-item">⛲ Accessories</a>
+            <a href="#offerings" class="tab-item">🏡 Our Services</a>
             <a href="#greenhouse" class="tab-item">🏭 Our Greenhouses</a>
-            <a href="#commitment" class="tab-item">🤝 Our Service</a>
+            <a href="#commitment" class="tab-item">🤝 Our Promise</a>
             <a href="#catalogue" class="tab-item">📋 Full Catalogue</a>
         </div>
     </div>
@@ -594,14 +756,8 @@
     <section class="intro-section">
         <div class="section-wrap">
             <div class="intro-grid">
-                <!-- image -->
                 <div class="intro-img-wrap reveal">
-                    <img
-                        src="assets/greenhouse1.png"
-                        alt="Mohaduba nursery plant selection"
-                        class="intro-img"
-                        loading="lazy"
-                    />
+                    <img src="assets/greenhouse1.png" alt="Mohaduba nursery plant selection" class="intro-img" loading="lazy" />
                     <div class="intro-img-overlay"></div>
                     <div class="greenhouse-badge">
                         <span class="greenhouse-badge-icon">🏭</span>
@@ -609,8 +765,6 @@
                         <div class="greenhouse-badge-value">Own Greenhouses</div>
                     </div>
                 </div>
-
-                <!-- text -->
                 <div class="reveal reveal-delay-1">
                     <span class="section-eyebrow">Our offering</span>
                     <h2 class="section-title">Grown with care,<br><em>offered</em> with pride</h2>
@@ -626,6 +780,8 @@
                         <div class="intro-pill">🏡 Residential &amp; contractors</div>
                         <div class="intro-pill">🌍 Kuruman, Northern Cape</div>
                         <div class="intro-pill">🧠 Expert staff advice</div>
+                        <div class="intro-pill">🌿 Indigenous species</div>
+                        <div class="intro-pill">⛏️ Rehabilitation specialists</div>
                     </div>
                 </div>
             </div>
@@ -643,7 +799,6 @@
                 <span class="category-sub">Most varieties greenhouse-grown on-site</span>
             </div>
             <div class="plants-grid">
-
                 <div class="plant-card reveal">
                     <div class="plant-card-bg" style="background-image:url('./assets/beddingplant.png')"></div>
                     <div class="plant-card-overlay"></div>
@@ -655,7 +810,6 @@
                         <span class="plant-card-tag">Wide variety</span>
                     </div>
                 </div>
-
                 <div class="plant-card reveal reveal-delay-1">
                     <div class="plant-card-bg" style="background-image:url('./assets/shrubsss.png')"></div>
                     <div class="plant-card-overlay"></div>
@@ -667,7 +821,6 @@
                         <span class="plant-card-tag">Native &amp; exotic</span>
                     </div>
                 </div>
-
                 <div class="plant-card reveal reveal-delay-2">
                     <div class="plant-card-bg" style="background-image:url('./assets/treeees.png')"></div>
                     <div class="plant-card-overlay"></div>
@@ -679,7 +832,6 @@
                         <span class="plant-card-tag">Advanced sizes</span>
                     </div>
                 </div>
-
                 <div class="plant-card reveal reveal-delay-3">
                     <div class="plant-card-bg" style="background-image:url('./assets/plantveg.png')"></div>
                     <div class="plant-card-overlay"></div>
@@ -691,7 +843,6 @@
                         <span class="plant-card-tag">Kitchen ready</span>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -706,7 +857,6 @@
                 </div>
             </div>
             <div class="accessories-grid">
-
                 <div class="acc-card reveal">
                     <div class="acc-icon-wrap">⛲</div>
                     <div>
@@ -714,7 +864,6 @@
                         <div class="acc-body">Decorative water features that bring movement and tranquility to any outdoor space. Various sizes and styles available.</div>
                     </div>
                 </div>
-
                 <div class="acc-card reveal reveal-delay-1">
                     <div class="acc-icon-wrap">🪨</div>
                     <div>
@@ -722,7 +871,6 @@
                         <div class="acc-body">Create beautiful garden pathways with our range of stepping stones and paving options. Durable and stylish.</div>
                     </div>
                 </div>
-
                 <div class="acc-card reveal reveal-delay-2">
                     <div class="acc-icon-wrap">🔧</div>
                     <div>
@@ -730,7 +878,6 @@
                         <div class="acc-body">From spades and forks to pruners and watering cans — quality tools for every gardening task, big or small.</div>
                     </div>
                 </div>
-
                 <div class="acc-card reveal">
                     <div class="acc-icon-wrap">🧪</div>
                     <div>
@@ -738,7 +885,6 @@
                         <div class="acc-body">A curated range of organic and compound fertilizers to feed your plants and keep your garden thriving throughout the year.</div>
                     </div>
                 </div>
-
                 <div class="acc-card reveal reveal-delay-1">
                     <div class="acc-icon-wrap">🪴</div>
                     <div>
@@ -746,7 +892,6 @@
                         <div class="acc-body">Premium potting mixes, composts and bark mulch for container gardens, raised beds and planting holes.</div>
                     </div>
                 </div>
-
                 <div class="acc-card reveal reveal-delay-2">
                     <div class="acc-icon-wrap">🚿</div>
                     <div>
@@ -754,10 +899,142 @@
                         <div class="acc-body">Watering cans, hose pipes, sprinklers and irrigation supplies — keeping your garden hydrated the right way.</div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SERVICE OFFERINGS (NEW SECTION)               -->
+    <!-- ══════════════════════════════════════════════ -->
+    <section class="offerings-section" id="offerings">
+        <div class="section-wrap">
+
+            <!-- Section header -->
+            <div style="margin-bottom: 2.5rem;" class="reveal">
+                <span class="section-eyebrow">What we do</span>
+                <h2 class="section-title">Professional <em>Services</em></h2>
+                <div class="accent-bar"></div>
+                <p style="font-size:1rem; color:#3a5c3e; line-height:1.75; max-width:580px;">
+                    Beyond supplying plants and products, Mohaduba offers a full range of hands-on horticultural and environmental services — from your backyard garden to large-scale mining rehabilitation projects.
+                </p>
+            </div>
+
+            <!-- Top layout: hero card + stacked mini cards -->
+            <div class="offerings-intro reveal">
+
+                <!-- Hero service: Landscaping -->
+                <div class="offering-hero-card">
+                    <div class="offering-hero-pattern"></div>
+                    <div class="offering-hero-card-content">
+                        <div>
+                            <span class="offering-hero-badge">✦ Flagship Service</span>
+                            <span class="offering-hero-icon">🏡</span>
+                            <h3 class="offering-hero-title">Professional<br><em>Landscaping</em></h3>
+                            <p class="offering-hero-body">We design and build beautiful outdoor spaces — from residential gardens to commercial grounds. Our team handles everything: planning, planting, paving, water features and ongoing maintenance.</p>
+                        </div>
+                        <div class="offering-hero-footer">
+                            <div class="offering-hero-stat">
+                                <span class="offering-hero-stat-num">Full</span>
+                                <span class="offering-hero-stat-label">Design to finish</span>
+                            </div>
+                            <div class="offering-hero-stat">
+                                <span class="offering-hero-stat-num">All</span>
+                                <span class="offering-hero-stat-label">Project sizes</span>
+                            </div>
+                            <div class="offering-hero-stat">
+                                <span class="offering-hero-stat-num">Kuruman</span>
+                                <span class="offering-hero-stat-label">& surrounds</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right stacked mini cards -->
+                <div class="offering-stack">
+
+                    <div class="offering-mini-card">
+                        <div class="offering-mini-icon">🧑🏿‍🌾</div>
+                        <div>
+                            <div class="offering-mini-title">Gardening Services</div>
+                            <div class="offering-mini-desc">Regular maintenance, planting, pruning and cleanup for homes and businesses.</div>
+                        </div>
+                        <div class="offering-mini-arrow">→</div>
+                    </div>
+
+                    <div class="offering-mini-card">
+                        <div class="offering-mini-icon">🌱</div>
+                        <div>
+                            <div class="offering-mini-title">Vegetable Seedlings</div>
+                            <div class="offering-mini-desc">Healthy, greenhouse-raised seedlings ready to transplant into your kitchen garden.</div>
+                        </div>
+                        <div class="offering-mini-arrow">→</div>
+                    </div>
+
+                    <div class="offering-mini-card">
+                        <div class="offering-mini-icon">🌿</div>
+                        <div>
+                            <div class="offering-mini-title">Indigenous Species Supply</div>
+                            <div class="offering-mini-desc">Locally sourced and propagated indigenous plants suited to the Northern Cape environment.</div>
+                        </div>
+                        <div class="offering-mini-arrow">→</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Bottom 3 tiles: rehabilitation, invasive control + one more -->
+            <div class="offering-tiles-grid" style="margin-top: 1.5rem;">
+
+                <div class="offering-tile reveal">
+                    <div class="offering-tile-icon-wrap">⛏️</div>
+                    <span class="offering-tile-label">Environmental</span>
+                    <h3 class="offering-tile-title">Mining Rehabilitation</h3>
+                    <p class="offering-tile-body">We specialise in restoring land affected by mining activity. Using indigenous and hardy species, our team re-establishes ground cover, soil stability and ecological function on disturbed sites across the Northern Cape.</p>
+                    <div class="offering-tile-tags">
+                        <span class="offering-tile-tag">Site assessment</span>
+                        <span class="offering-tile-tag">Revegetation</span>
+                        <span class="offering-tile-tag">Erosion control</span>
+                    </div>
+                </div>
+
+                <div class="offering-tile reveal reveal-delay-1">
+                    <div class="offering-tile-icon-wrap">🚫🌾</div>
+                    <span class="offering-tile-label">Ecological Management</span>
+                    <h3 class="offering-tile-title">Invasive Vegetation Control</h3>
+                    <p class="offering-tile-body">Invasive plant species threaten local ecosystems, farmland and water sources. Our trained teams identify, remove and manage invasive vegetation using responsible, targeted methods — protecting your land and the region's biodiversity.</p>
+                    <div class="offering-tile-tags">
+                        <span class="offering-tile-tag">Species ID</span>
+                        <span class="offering-tile-tag">Removal &amp; control</span>
+                        <span class="offering-tile-tag">Follow-up monitoring</span>
+                    </div>
+                </div>
+
+                <div class="offering-tile reveal reveal-delay-2">
+                    <div class="offering-tile-icon-wrap">🌍</div>
+                    <span class="offering-tile-label">Bulk Supply</span>
+                    <h3 class="offering-tile-title">Indigenous Species Supply</h3>
+                    <p class="offering-tile-body">We propagate and supply indigenous plant species in bulk for rehabilitation projects, public landscaping, municipal greening initiatives and eco-sensitive developments. All stock is locally acclimatised and sourced responsibly.</p>
+                    <div class="offering-tile-tags">
+                        <span class="offering-tile-tag">Bulk orders</span>
+                        <span class="offering-tile-tag">On-site propagated</span>
+                        <span class="offering-tile-tag">Contractor supply</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Enquiry nudge -->
+            <div style="margin-top: 2.5rem; background: rgba(45,106,48,0.07); border: 1px solid rgba(45,106,48,0.18); border-radius: 20px; padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;" class="reveal">
+                <div>
+                    <div style="font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--dark); margin-bottom:4px;">Need a service quote?</div>
+                    <div style="font-size:0.84rem; color:#4a6b4e;">Contact us to discuss your project — residential, commercial or environmental.</div>
+                </div>
+                <a href="contact.html" class="btn-primary" style="box-shadow: 0 6px 20px rgba(20,55,22,0.35);">Get a Quote →</a>
+            </div>
+
+        </div>
+    </section>
+    <!-- ══════════════════════════════════════════════ -->
 
     <!-- GREENHOUSE FEATURE -->
     <section class="greenhouse-section" id="greenhouse">
@@ -836,6 +1113,8 @@
                         <div class="catalogue-item"><div class="catalogue-item-dot"></div>Shrubs (evergreen)</div>
                         <div class="catalogue-item"><div class="catalogue-item-dot"></div>Flowering shrubs</div>
                         <div class="catalogue-item"><div class="catalogue-item-dot"></div>Groundcovers</div>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Indigenous species</div>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Vegetable seedlings</div>
                     </div>
                     <div class="catalogue-col">
                         <span class="catalogue-col-title">Trees &amp; Edibles</span>
@@ -854,16 +1133,17 @@
                         <div class="catalogue-item"><div class="catalogue-item-dot"></div>Pots &amp; planters</div>
                     </div>
                     <div class="catalogue-col">
-                        <span class="catalogue-col-title">Supplies &amp; Tools</span>
-                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Garden tools</div>
-                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Fertilizers</div>
-                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Potting soils</div>
-                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Composts</div>
-                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Watering equipment</div>
+                        <span class="catalogue-col-title">Services</span>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Gardening services</div>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Landscaping</div>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Mining rehabilitation</div>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Invasive veg. control</div>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Indigenous supply</div>
+                        <div class="catalogue-item"><div class="catalogue-item-dot"></div>Contractor planting</div>
                     </div>
                 </div>
                 <div class="catalogue-note">
-                    ✳ Most plants are greenhouse-grown on site — availability varies by season. Ask our staff for current stock and recommendations.
+                    ✳ Most plants are greenhouse-grown on site — availability varies by season. Ask our staff for current stock and recommendations. Service quotes available on request.
                 </div>
             </div>
         </div>
@@ -929,7 +1209,7 @@
 
         // Active tab highlight on scroll
         const tabLinks = document.querySelectorAll('.tab-item');
-        const sections = ['plants','accessories','greenhouse','commitment','catalogue'].map(id => document.getElementById(id));
+        const sections = ['plants','accessories','offerings','greenhouse','commitment','catalogue'].map(id => document.getElementById(id));
         window.addEventListener('scroll', () => {
             let current = '';
             sections.forEach(sec => {
