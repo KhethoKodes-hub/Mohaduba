@@ -4,753 +4,1316 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery · Mohaduba Enterprise Nursery</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="icon" type="image/x-icon" href="./assets/Mologo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --white: #ffffff;
-            --cream: #f8fdf5;
-            --light-green: #e4f2db;
-            --mid-green: #7ab86a;
-            --primary: #2d6a30;
-            --dark: #16381a;
-            --glass: rgba(255,255,255,0.18);
-            --glass-border: rgba(255,255,255,0.35);
-            --shadow-green: rgba(22, 56, 26, 0.18);
-        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --g1: #2d6a30;
+            --g2: #1c4520;
+            --g3: #3a7d3f;
+            --gl: #e4f2db;
+            --td: #16381a;
+        }
 
         body {
             font-family: 'DM Sans', sans-serif;
             background: linear-gradient(160deg, #ffffff 0%, #f0f9ea 35%, #dff0d4 65%, #c9e5b8 100%);
+            background-attachment: fixed;
             min-height: 100vh;
+            color: var(--td);
             overflow-x: hidden;
-            color: var(--dark);
         }
 
-        /* Navbar styles (matching homepage) */
+        .orb {
+            position: fixed; border-radius: 50%; pointer-events: none; z-index: 0;
+        }
+        .orb-1 {
+            width: 600px; height: 600px; top: -200px; left: -200px;
+            background: radial-gradient(circle, rgba(45,106,48,0.12) 0%, transparent 70%);
+            animation: floatOrb 12s ease-in-out infinite;
+        }
+        .orb-2 {
+            width: 500px; height: 500px; bottom: -150px; right: -150px;
+            background: radial-gradient(circle, rgba(45,106,48,0.08) 0%, transparent 70%);
+            animation: floatOrb 15s ease-in-out infinite reverse;
+        }
+        @keyframes floatOrb {
+            0%,100% { transform: translate(0,0) scale(1); }
+            50% { transform: translate(40px,40px) scale(1.1); }
+        }
+
+        /* NAV */
         .nav {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 100;
-            background: rgba(255,255,255,0.55);
-            backdrop-filter: blur(18px) saturate(180%);
-            -webkit-backdrop-filter: blur(18px) saturate(180%);
-            border-bottom: 1px solid rgba(255,255,255,0.5);
-            box-shadow: 0 4px 30px rgba(45,106,48,0.08);
-            padding: 0 1.5rem;
-            height: 68px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255,255,255,0.55);
+            padding: 0 1.5rem; height: 68px;
+            display: flex; align-items: center; justify-content: space-between;
+            transition: background 0.3s;
         }
-
-        .nav-logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 900;
-            letter-spacing: -0.5px;
-            color: var(--dark);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .nav-logo span { color: var(--primary); }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-            list-style: none;
-        }
+        .nav.scrolled { background: rgba(255,255,255,0.88); }
+        .nav-logo { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+        .nav-logo img { height: 54px; width: auto; }
+        .nav-logo-text { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 900; color: var(--td); display: none; }
+        .nav-logo-text span { color: var(--g1); }
+        .nav-links { display: flex; align-items: center; gap: 0.2rem; list-style: none; }
         .nav-links a {
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--dark);
-            padding: 0.45rem 0.9rem;
-            border-radius: 50px;
-            transition: all 0.22s ease;
-            letter-spacing: 0.2px;
+            text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--td);
+            padding: 0.45rem 0.9rem; border-radius: 50px; transition: all 0.2s;
         }
-        .nav-links a:hover {
-            background: var(--light-green);
-            color: var(--primary);
-        }
-        .nav-cta {
-            background: linear-gradient(135deg, #2d6a30, #1c4520);
-            color: white !important;
-            padding: 0.5rem 1.2rem !important;
-            border-radius: 50px !important;
-            box-shadow: 0 4px 14px rgba(22,56,26,0.3);
-        }
-        .nav-cta:hover {
-            background: linear-gradient(135deg, #3a8040, #2d6a30) !important;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(22,56,26,0.4) !important;
-        }
-
+        .nav-links a:hover { background: var(--gl); color: var(--g1); }
+        .nav-links a.active-link { background: var(--gl); color: var(--g1); font-weight: 600; }
+        .nav-cta { background: linear-gradient(135deg, var(--g1), var(--g2)) !important; color: white !important; }
         .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            padding: 4px;
-            background: none;
-            border: none;
+            display: none; flex-direction: column; gap: 5px;
+            cursor: pointer; background: none; border: none; padding: 4px;
         }
-        .hamburger span {
-            display: block;
-            width: 24px; height: 2px;
-            background: var(--dark);
-            border-radius: 4px;
-            transition: all 0.25s;
-        }
+        .hamburger span { display: block; width: 24px; height: 2px; background: var(--td); border-radius: 4px; transition: all 0.3s; }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
         .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 68px; left: 0; right: 0;
-            background: rgba(255,255,255,0.97);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--light-green);
-            padding: 1rem 1.5rem 1.5rem;
-            z-index: 99;
-            flex-direction: column;
-            gap: 0.25rem;
+            display: none; position: fixed; top: 68px; left: 0; right: 0;
+            background: rgba(255,255,255,0.97); backdrop-filter: blur(24px);
+            padding: 0.75rem 1.5rem 1.25rem; z-index: 199;
+            flex-direction: column; gap: 0.2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.6);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
         }
-        .mobile-menu a {
-            display: block;
-            text-decoration: none;
-            color: var(--dark);
-            font-size: 1rem;
-            font-weight: 500;
-            padding: 0.75rem 1rem;
-            border-radius: 12px;
-            transition: all 0.2s;
-        }
-        .mobile-menu a:hover { background: var(--light-green); color: var(--primary); }
         .mobile-menu.open { display: flex; }
+        .mobile-menu a {
+            display: block; text-decoration: none; color: var(--td);
+            padding: 0.7rem 1rem; border-radius: 12px; font-weight: 500; transition: background 0.2s;
+        }
+        .mobile-menu a:hover { background: var(--gl); }
+        .mobile-cta { background: var(--gl) !important; color: var(--g1) !important; font-weight: 700 !important; margin-top: 0.25rem; }
 
-        /* Gallery specific styles */
+        /* ANNOUNCEMENT BANNER */
+        #announcementBanner {
+            display: none; position: fixed; top: 68px; left: 0; right: 0; z-index: 190;
+            padding: 0.55rem 1.5rem;
+            background: linear-gradient(90deg, var(--g2), var(--g1), var(--g3), var(--g2));
+            background-size: 300% 100%;
+            animation: gradientShift 6s ease infinite;
+            color: white; font-size: 0.82rem; font-weight: 500;
+            align-items: center; justify-content: space-between; gap: 1rem;
+        }
+        #announcementBanner.visible { display: flex; }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .ann-pulse {
+            width: 8px; height: 8px; border-radius: 50%; background: #a8e6a1;
+            flex-shrink: 0; animation: pulseAnim 2s ease-in-out infinite;
+        }
+        @keyframes pulseAnim { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.5; transform:scale(1.5); } }
+        .ann-dismiss {
+            background: rgba(255,255,255,0.2); border: none; color: white;
+            width: 26px; height: 26px; border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem; flex-shrink: 0; transition: background 0.2s; line-height: 1;
+        }
+        .ann-dismiss:hover { background: rgba(255,255,255,0.35); }
+
+        /* GALLERY HEADER */
         .gallery-header {
-            padding: 120px 1.5rem 60px;
-            text-align: center;
-            position: relative;
+            padding: 130px 1.5rem 50px; text-align: center;
+            max-width: 1100px; margin: 0 auto; position: relative; z-index: 1;
+            transition: padding-top 0.3s;
         }
-
-        .section-eyebrow {
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: var(--primary);
-            display: block;
-            margin-bottom: 0.6rem;
+        .gallery-header.with-ann { padding-top: 168px; }
+        .eyebrow {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            font-size: 0.68rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
+            color: var(--g1); background: rgba(45,106,48,0.08); border: 1px solid rgba(45,106,48,0.15);
+            padding: 0.3rem 1rem; border-radius: 50px; margin-bottom: 0.9rem;
         }
-
         .section-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 700;
-            line-height: 1.1;
-            color: var(--dark);
-            letter-spacing: -1px;
+            font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 700; color: var(--td); line-height: 1.15;
         }
+        .section-title em { font-style: italic; color: var(--g1); }
+        .header-sub { max-width: 500px; margin: 0.9rem auto 0; color: #3a5c3e; font-size: 0.9rem; line-height: 1.65; }
 
-        .section-title em { font-style: italic; color: var(--primary); }
-
-        .gallery-filters {
-            display: flex;
-            justify-content: center;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-            margin: 2rem 0 3rem;
-        }
-
+        .filter-bar { display: flex; justify-content: center; gap: 0.4rem; margin-top: 1.8rem; flex-wrap: wrap; }
         .filter-btn {
-            background: rgba(255,255,255,0.55);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255,255,255,0.8);
-            padding: 0.6rem 1.5rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--dark);
-            cursor: pointer;
-            transition: all 0.25s ease;
-            font-family: 'DM Sans', sans-serif;
+            background: rgba(255,255,255,0.65); backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.75); color: var(--td);
+            padding: 0.42rem 1.1rem; border-radius: 50px; cursor: pointer;
+            font-size: 0.78rem; font-weight: 500; font-family: 'DM Sans', sans-serif;
+            transition: all 0.22s; white-space: nowrap;
         }
-
-        .filter-btn:hover {
-            background: var(--light-green);
-            transform: translateY(-2px);
-        }
-
+        .filter-btn:hover { background: rgba(45,106,48,0.1); border-color: rgba(45,106,48,0.3); }
         .filter-btn.active {
-            background: linear-gradient(135deg, #2d6a30, #1c4520);
-            color: white;
-            border-color: transparent;
-            box-shadow: 0 4px 12px rgba(22,56,26,0.3);
+            background: linear-gradient(135deg, var(--g1), var(--g2));
+            color: white; border-color: transparent;
+            box-shadow: 0 4px 16px rgba(45,106,48,0.3);
         }
 
+        /* GALLERY GRID */
         .gallery-grid {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 1.5rem 4rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 1.5rem;
+            max-width: 1380px; margin: 0 auto; padding: 0 1.5rem 120px;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            gap: 1.4rem; position: relative; z-index: 1;
         }
 
         .gallery-item {
-            position: relative;
-            border-radius: 20px;
+            position: relative; border-radius: 22px; overflow: hidden;
+            cursor: pointer; aspect-ratio: 4/3.5;
+            background: var(--gl);
+            box-shadow: 0 4px 24px rgba(45,106,48,0.1), inset 0 1px 0 rgba(255,255,255,0.8);
+            border: 1px solid rgba(255,255,255,0.65);
+            transition: transform 0.38s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.38s ease;
+            animation: itemIn 0.5s ease both;
+        }
+        .gallery-item:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 20px 50px rgba(45,106,48,0.22), inset 0 1px 0 rgba(255,255,255,0.9);
+        }
+        .gallery-item:focus { outline: 2px solid var(--g1); outline-offset: 3px; }
+        @keyframes itemIn { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; display: block; }
+        .gallery-item:hover img { transform: scale(1.07); }
+
+        .gallery-overlay {
+            position: absolute; inset: 0; top: auto;
+            background: linear-gradient(transparent, rgba(8,22,10,0.88));
+            padding: 2rem 1.1rem 1.1rem;
+            transform: translateY(12px); opacity: 0; transition: all 0.32s ease;
+        }
+        .gallery-item:hover .gallery-overlay { opacity: 1; transform: translateY(0); }
+        .g-title { font-weight: 600; font-size: 0.95rem; color: white; margin-bottom: 0.2rem; }
+        .g-desc { font-size: 0.75rem; color: rgba(255,255,255,0.72); line-height: 1.4; }
+        .g-price { font-size: 0.85rem; color: #a8e6a1; font-weight: 700; margin-top: 0.45rem; }
+
+        .price-badge {
+            position: absolute; top: 10px; right: 10px;
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+            color: var(--g2); font-weight: 700; font-size: 0.76rem;
+            padding: 0.28rem 0.75rem; border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.9);
+            box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+        }
+        .num-badge {
+            position: absolute; top: 10px; left: 10px;
+            background: rgba(255,255,255,0.92); backdrop-filter: blur(10px);
+            color: var(--g1); font-weight: 700; font-size: 0.68rem;
+            width: 26px; height: 26px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid rgba(255,255,255,0.9);
+        }
+
+        .empty-state {
+            grid-column: 1/-1; text-align: center; padding: 80px 40px;
+            background: rgba(255,255,255,0.45); backdrop-filter: blur(20px);
+            border-radius: 24px; border: 2px dashed rgba(45,106,48,0.2);
+        }
+        .empty-state .big-icon { font-size: 3.5rem; margin-bottom: 1rem; opacity: 0.35; }
+        .empty-state p { color: #5a7a5e; font-size: 0.9rem; line-height: 1.6; }
+
+        /* BACKDROP */
+        .backdrop {
+            position: fixed; inset: 0;
+            background: rgba(8,22,10,0.35);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            z-index: 499; display: none; opacity: 0; transition: opacity 0.3s;
+        }
+        .backdrop.show { display: block; opacity: 1; }
+
+        /* ADMIN PANEL */
+        .admin-panel {
+            position: fixed; top: 0; right: -560px; width: min(520px, 100vw); height: 100dvh;
+            background: rgba(248,253,245,0.82);
+            backdrop-filter: blur(40px) saturate(200%);
+            -webkit-backdrop-filter: blur(40px) saturate(200%);
+            z-index: 500;
+            box-shadow: -16px 0 60px rgba(22,56,26,0.18), -1px 0 0 rgba(255,255,255,0.7);
+            border-left: 1px solid rgba(255,255,255,0.6);
+            transition: right 0.42s cubic-bezier(0.34,1.1,0.64,1);
+            display: flex; flex-direction: column;
             overflow: hidden;
-            cursor: pointer;
-            aspect-ratio: 4/3;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.6s ease forwards;
         }
+        .admin-panel.open { right: 0; }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .panel-head {
+            background: linear-gradient(135deg, rgba(45,106,48,0.95), rgba(28,69,32,0.98));
+            color: white; padding: 1.3rem 1.4rem; flex-shrink: 0;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.12);
         }
-
-        .gallery-item-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
+        .panel-head-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; }
+        .panel-head-sub { font-size: 0.68rem; opacity: 0.6; margin-top: 0.1rem; }
+        .panel-close {
+            background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2);
+            color: white; width: 32px; height: 32px; border-radius: 50%;
+            cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s; flex-shrink: 0;
         }
+        .panel-close:hover { background: rgba(255,255,255,0.3); }
 
-        .gallery-item:hover .gallery-item-img {
-            transform: scale(1.08);
+        .panel-body { flex: 1; overflow-y: auto; padding: 1.4rem; }
+        .panel-body::-webkit-scrollbar { width: 4px; }
+        .panel-body::-webkit-scrollbar-thumb { background: rgba(45,106,48,0.25); border-radius: 10px; }
+
+        /* Auth */
+        .auth-box { text-align: center; padding: 1rem 0 2rem; }
+        .auth-icon { font-size: 3.5rem; margin-bottom: 0.75rem; }
+        .auth-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--td); margin-bottom: 0.3rem; }
+        .auth-sub { font-size: 0.8rem; color: #666; margin-bottom: 1.5rem; }
+
+        /* Tabs */
+        .tabs { display: flex; gap: 0.35rem; background: rgba(45,106,48,0.07); padding: 0.3rem; border-radius: 14px; margin-bottom: 1.4rem; }
+        .tab-btn {
+            flex: 1; padding: 0.5rem 0.25rem; text-align: center; font-size: 0.72rem; font-weight: 600;
+            border-radius: 10px; cursor: pointer; border: none; background: transparent;
+            color: #3a5c3e; font-family: 'DM Sans', sans-serif; transition: all 0.22s; white-space: nowrap;
         }
+        .tab-btn.active { background: white; color: var(--g2); box-shadow: 0 2px 12px rgba(45,106,48,0.13); }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
 
-        .gallery-item-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(0deg, rgba(22,56,26,0.85) 0%, transparent 60%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 1.5rem;
+        /* Form */
+        .fsec { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--g1); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.4rem; }
+        .fgroup { margin-bottom: 0.9rem; }
+        .fgroup label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--td); margin-bottom: 0.3rem; }
+        .fgroup input, .fgroup textarea, .fgroup select {
+            width: 100%; padding: 0.65rem 0.95rem;
+            border: 1.5px solid rgba(45,106,48,0.18); border-radius: 13px;
+            font-family: 'DM Sans', sans-serif; font-size: 0.84rem;
+            background: rgba(255,255,255,0.7); color: var(--td);
+            transition: all 0.2s; outline: none; -webkit-appearance: none; appearance: none;
         }
-
-        .gallery-item:hover .gallery-item-overlay {
-            opacity: 1;
+        .fgroup input:focus, .fgroup textarea:focus, .fgroup select:focus {
+            border-color: var(--g1); background: rgba(255,255,255,0.95);
+            box-shadow: 0 0 0 3px rgba(45,106,48,0.1);
         }
+        .fgroup textarea { resize: vertical; min-height: 70px; }
+        .fgroup select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%232d6a30' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.9rem center; padding-right: 2rem; }
 
-        .gallery-item-title {
-            color: white;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 0.25rem;
-            transform: translateY(10px);
-            transition: transform 0.3s ease;
+        /* Upload */
+        .upload-zone {
+            border: 2px dashed rgba(45,106,48,0.3); border-radius: 16px;
+            padding: 1.4rem 1rem; text-align: center;
+            background: rgba(228,242,219,0.35); cursor: pointer;
+            transition: all 0.22s; margin-bottom: 0.9rem; position: relative;
         }
-
-        .gallery-item-category {
-            color: rgba(255,255,255,0.8);
-            font-size: 0.75rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transform: translateY(10px);
-            transition: transform 0.3s ease 0.05s;
+        .upload-zone:hover, .upload-zone.drag-over {
+            background: rgba(228,242,219,0.65); border-color: var(--g1);
         }
+        .upload-zone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+        .uz-icon { font-size: 1.9rem; color: var(--g1); margin-bottom: 0.4rem; pointer-events: none; }
+        .uz-text { font-size: 0.82rem; font-weight: 500; color: #3a5c3e; pointer-events: none; }
+        .uz-sub { font-size: 0.7rem; color: #888; margin-top: 0.2rem; pointer-events: none; }
+        .preview-wrap { text-align: center; margin-bottom: 0.75rem; }
+        .preview-wrap img { width: 90px; height: 90px; object-fit: cover; border-radius: 12px; border: 2px solid rgba(255,255,255,0.9); box-shadow: 0 4px 16px rgba(0,0,0,0.1); display: none; }
 
-        .gallery-item:hover .gallery-item-title,
-        .gallery-item:hover .gallery-item-category {
-            transform: translateY(0);
+        /* Buttons */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
+            font-family: 'DM Sans', sans-serif; font-size: 0.84rem; font-weight: 600;
+            padding: 0.72rem 1.3rem; border-radius: 13px; cursor: pointer; border: none;
+            transition: all 0.22s; width: 100%; text-align: center;
         }
+        .btn:hover { opacity: 0.92; transform: translateY(-1px); }
+        .btn-green { background: linear-gradient(135deg, var(--g1), var(--g2)); color: white; box-shadow: 0 4px 16px rgba(45,106,48,0.22); }
+        .btn-red { background: linear-gradient(135deg, #dc2626, #b91c1c); color: white; }
+        .btn-amber { background: linear-gradient(135deg, #d97706, #b45309); color: white; }
+        .btn-slate { background: linear-gradient(135deg, #64748b, #475569); color: white; }
+        .btn-outline { background: rgba(45,106,48,0.07); border: 1.5px solid rgba(45,106,48,0.2); color: var(--g1); }
+        .btn-sm { padding: 0.32rem 0.7rem; border-radius: 9px; font-size: 0.7rem; width: auto; }
+        .btn + .btn { margin-top: 0.5rem; }
 
-        /* Lightbox Modal */
+        /* Toggle */
+        .toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 0.65rem 0; border-bottom: 1px solid rgba(45,106,48,0.07); }
+        .toggle-label { font-size: 0.8rem; font-weight: 500; }
+        .toggle { position: relative; width: 42px; height: 23px; flex-shrink: 0; }
+        .toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+        .toggle-track {
+            position: absolute; inset: 0; background: #d0d0d0; border-radius: 50px; cursor: pointer; transition: 0.3s;
+        }
+        .toggle-track::before {
+            content: ''; position: absolute; width: 17px; height: 17px; left: 3px; bottom: 3px;
+            background: white; border-radius: 50%; transition: 0.3s; box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+        }
+        .toggle input:checked + .toggle-track { background: var(--g1); }
+        .toggle input:checked + .toggle-track::before { transform: translateX(19px); }
+
+        .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(45,106,48,0.14), transparent); margin: 1.1rem 0; }
+
+        /* List */
+        .list-section-head { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--g1); margin: 1.2rem 0 0.65rem; }
+        .list-item {
+            display: flex; gap: 0.7rem; padding: 0.7rem; border-radius: 13px;
+            background: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.75);
+            margin-bottom: 0.45rem; align-items: center; transition: background 0.2s;
+        }
+        .list-item:hover { background: rgba(255,255,255,0.8); }
+        .list-thumb { width: 50px; height: 50px; object-fit: cover; border-radius: 9px; flex-shrink: 0; background: var(--gl); }
+        .list-info { flex: 1; min-width: 0; }
+        .list-name { font-weight: 600; font-size: 0.8rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .list-meta { font-size: 0.68rem; color: #777; margin-top: 0.1rem; }
+        .list-price-tag { font-size: 0.7rem; color: var(--g1); font-weight: 600; }
+        .list-actions { display: flex; gap: 0.25rem; flex-shrink: 0; }
+
+        /* Announcements */
+        .ann-item {
+            background: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.75);
+            border-radius: 13px; padding: 0.85rem; margin-bottom: 0.45rem;
+        }
+        .ann-item-text { font-size: 0.81rem; color: var(--td); line-height: 1.45; margin-bottom: 0.55rem; word-break: break-word; }
+        .ann-item-footer { display: flex; align-items: center; justify-content: space-between; gap: 0.4rem; flex-wrap: wrap; }
+        .ann-tag {
+            font-size: 0.64rem; font-weight: 700; padding: 0.18rem 0.55rem; border-radius: 50px;
+        }
+        .ann-tag.live { background: rgba(45,106,48,0.12); color: var(--g1); }
+        .ann-tag.paused { background: rgba(0,0,0,0.06); color: #888; }
+        .ann-tag.page { background: rgba(45,106,48,0.08); color: #3a5c3e; }
+
+        /* LIGHTBOX */
         .lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.95);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
+            display: none; position: fixed; inset: 0;
+            background: rgba(4,12,5,0.93);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            z-index: 800;
+            align-items: center; justify-content: center;
         }
-
-        .lightbox.active {
-            display: flex;
+        .lightbox.open { display: flex; animation: lbIn 0.22s ease; }
+        @keyframes lbIn { from { opacity:0; } to { opacity:1; } }
+        .lb-inner {
+            position: relative; max-width: min(90vw, 900px); max-height: 90dvh;
+            display: flex; flex-direction: column; align-items: center;
         }
+        .lb-inner img {
+            max-width: 100%; max-height: 72dvh; object-fit: contain;
+            border-radius: 14px; box-shadow: 0 30px 80px rgba(0,0,0,0.55); display: block;
+        }
+        .lb-caption { margin-top: 0.9rem; text-align: center; }
+        .lb-title { color: rgba(255,255,255,0.9); font-size: 0.95rem; font-weight: 600; }
+        .lb-price { color: #a8e6a1; font-size: 1rem; font-weight: 700; margin-top: 0.25rem; }
+        .lb-desc { color: rgba(255,255,255,0.55); font-size: 0.78rem; margin-top: 0.2rem; }
+        .lb-close {
+            position: absolute; top: -14px; right: -14px;
+            background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.22);
+            color: white; width: 34px; height: 34px; border-radius: 50%;
+            cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s;
+        }
+        .lb-close:hover { background: rgba(255,255,255,0.3); }
+        .lb-nav {
+            position: absolute; top: 38%; transform: translateY(-50%);
+            background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+            color: white; width: 42px; height: 42px; border-radius: 50%;
+            cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s; flex-shrink: 0;
+        }
+        .lb-nav:hover { background: rgba(255,255,255,0.25); }
+        .lb-prev { left: -60px; }
+        .lb-next { right: -60px; }
+        .lb-counter { position: absolute; top: -40px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.5); font-size: 0.78rem; white-space: nowrap; }
 
-        .lightbox-content {
+        /* TOAST */
+        .toast {
+            position: fixed; bottom: 28px; left: 50%;
+            transform: translateX(-50%) translateY(90px);
+            background: rgba(28,69,32,0.96); backdrop-filter: blur(16px);
+            color: white; padding: 0.75rem 1.4rem; border-radius: 50px;
+            font-size: 0.84rem; font-weight: 500;
+            box-shadow: 0 8px 30px rgba(45,106,48,0.3);
+            border: 1px solid rgba(255,255,255,0.18);
+            z-index: 900; transition: transform 0.38s cubic-bezier(0.34,1.56,0.64,1);
+            display: flex; align-items: center; gap: 0.45rem; white-space: nowrap;
             max-width: 90vw;
-            max-height: 90vh;
-            position: relative;
         }
+        .toast.up { transform: translateX(-50%) translateY(0); }
+        .toast.err { background: rgba(185,28,28,0.96); }
 
-        .lightbox-img {
-            max-width: 100%;
-            max-height: 90vh;
-            object-fit: contain;
-            border-radius: 8px;
-        }
-
-        .lightbox-caption {
-            position: absolute;
-            bottom: -40px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            color: white;
-            font-size: 0.9rem;
-            padding: 0.5rem;
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .lightbox-close:hover {
-            transform: scale(1.1);
-        }
-
-        .lightbox-prev,
-        .lightbox-next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255,255,255,0.2);
-            color: white;
-            padding: 1rem;
-            cursor: pointer;
-            border-radius: 50%;
-            transition: all 0.2s;
-            font-size: 1.5rem;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .lightbox-prev:hover,
-        .lightbox-next:hover {
-            background: rgba(255,255,255,0.4);
-            transform: translateY(-50%) scale(1.05);
-        }
-
-        .lightbox-prev {
-            left: 20px;
-        }
-
-        .lightbox-next {
-            right: 20px;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            padding: 5rem 1.5rem;
-            background: linear-gradient(135deg, #16381a 0%, #0c2410 100%);
-            text-align: center;
-        }
-
-        .cta-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            color: white;
-            margin-bottom: 1rem;
-        }
-
-        .cta-text {
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #3a8040, #1f5522);
-            color: white;
-            font-size: 0.9rem;
-            font-weight: 600;
-            padding: 0.85rem 2rem;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 8px 32px rgba(20,55,22,0.5);
-            transition: all 0.25s ease;
-            letter-spacing: 0.3px;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 16px 40px rgba(20,55,22,0.6);
-        }
-
-        /* Footer */
+        /* FOOTER */
         footer {
             background: linear-gradient(180deg, #0c2410, #091b0c);
-            padding: 3rem 1.5rem 2rem;
-            color: rgba(255,255,255,0.6);
+            padding: 3rem 1.5rem 2rem; color: rgba(255,255,255,0.6);
+            position: relative; z-index: 1;
         }
-        .footer-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .footer-inner { max-width: 1200px; margin: 0 auto; }
         .footer-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            gap: 2rem;
-            flex-wrap: wrap;
+            display: flex; justify-content: space-between; align-items: flex-start;
+            padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.08);
+            flex-wrap: wrap; gap: 2rem;
         }
-        .footer-logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: white;
-            letter-spacing: -0.5px;
-        }
-        .footer-logo span { color: #7ab86a; }
-        .footer-tagline {
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.45);
-            margin-top: 4px;
-            font-style: italic;
-        }
-        .footer-links {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-        .footer-links a {
-            color: rgba(255,255,255,0.55);
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: color 0.2s;
-        }
-        .footer-links a:hover { color: #7ab86a; }
-        .footer-bottom {
-            margin-top: 1.5rem;
-            font-size: 0.75rem;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
+        .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center; }
+        .footer-links a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+        .footer-links a:hover { color: #a8e6a1; }
+        .footer-bottom { margin-top: 1.4rem; font-size: 0.74rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
 
+        /* RESPONSIVE */
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .hamburger { display: flex; }
-            .gallery-grid {
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-                gap: 1rem;
-            }
-            .lightbox-prev,
-            .lightbox-next {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
-            }
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
+            .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+            .lb-prev, .lb-next { display: none; }
+            .lb-inner { max-width: 95vw; }
         }
     </style>
 </head>
 <body>
 
-    <nav class="nav">
-        <div class="nav-logo"><img src="./assets/Mologo.png" alt="Mohaduba Logo" style="height: 60px; width: auto;"></div>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="gallery.html" style="background: var(--light-green); color: var(--primary);">Gallery</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="contact.html" class="nav-cta">Get in Touch</a></li>
-        </ul>
-        <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
-            <span></span><span></span><span></span>
-        </button>
-    </nav>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
 
-    <div class="mobile-menu" id="mobileMenu">
-        <a href="index.html" onclick="toggleMenu()">Home</a>
-        <a href="about.html" onclick="toggleMenu()">About</a>
-        <a href="services.html" onclick="toggleMenu()">Services</a>
-        <a href="gallery.html" onclick="toggleMenu()" style="background:var(--light-green);color:var(--primary);">Gallery</a>
-        <a href="contact.html" onclick="toggleMenu()">Contact</a>
-        <a href="contact.html" onclick="toggleMenu()" style="background:var(--light-green);color:var(--primary);font-weight:600;">Get in Touch →</a>
+<!-- ANNOUNCEMENT BANNER -->
+<div id="announcementBanner" role="alert">
+    <div style="display:flex;align-items:center;gap:0.5rem;flex:1;min-width:0;">
+        <div class="ann-pulse"></div>
+        <span id="annBannerText" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></span>
     </div>
+    <button class="ann-dismiss" onclick="dismissBanner()" aria-label="Dismiss announcement">&#215;</button>
+</div>
 
-    <div class="gallery-header">
-        <span class="section-eyebrow reveal">Visual Journey</span>
-        <h1 class="section-title reveal">Our <em>Nursery</em> Gallery</h1>
-        <p class="reveal" style="max-width: 600px; margin: 1rem auto 0; color: #4a6b4e;">Take a visual tour through Mohaduba Enterprise Nursery — from our lush greenhouses to beautiful plants ready for your garden.</p>
+<!-- NAV -->
+<nav class="nav" id="mainNav">
+    <a class="nav-logo" href="index.html">
+        <img src="./assets/Mologo.png" alt="Mohaduba Enterprise Nursery" onerror="this.style.display='none';document.getElementById('logoText').style.display='block'">
+        <span id="logoText" class="nav-logo-text">Mo<span>haduba</span></span>
+    </a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="gallery.html" class="active-link">Gallery</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html" class="nav-cta">Get in Touch</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html" class="mobile-cta">Get in Touch &#8594;</a>
+</div>
+
+<!-- GALLERY HEADER -->
+<header class="gallery-header" id="galleryHeader">
+    <div class="eyebrow">&#127807; Our Work</div>
+    <h1 class="section-title">Our <em>Gallery</em></h1>
+    <p class="header-sub">Explore our nursery, plants, and projects. Click any image to view it full size.</p>
+    <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterGallery('all',this)">&#127807; All</button>
+        <button class="filter-btn" onclick="filterGallery('plants',this)">&#127796; Plants</button>
+        <button class="filter-btn" onclick="filterGallery('flowers',this)">&#127800; Flowers</button>
+        <button class="filter-btn" onclick="filterGallery('trees',this)">&#127795; Trees</button>
+        <button class="filter-btn" onclick="filterGallery('projects',this)">&#127968; Projects</button>
     </div>
+</header>
 
-    <div class="gallery-filters reveal">
-        <button class="filter-btn active" data-filter="all">All Photos</button>
-        <button class="filter-btn" data-filter="plants">Plants & Flowers</button>
-        <button class="filter-btn" data-filter="trees">Trees</button>
-        <button class="filter-btn" data-filter="greenhouse">Greenhouse</button>
-        <button class="filter-btn" data-filter="accessories">Accessories</button>
-    </div>
+<!-- GALLERY GRID -->
+<main class="gallery-grid" id="galleryGrid" role="list">
+    <div class="empty-state"><div class="big-icon">&#127807;</div><p>Loading gallery&hellip;</p></div>
+</main>
 
-    <div class="gallery-grid" id="galleryGrid">
-        <!-- Gallery items will be populated by JavaScript -->
-    </div>
+<!-- BACKDROP -->
+<div class="backdrop" id="backdrop" onclick="closeAdminPanel()"></div>
 
-    <!-- Lightbox Modal -->
-    <div class="lightbox" id="lightbox">
-        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-        <div class="lightbox-prev" onclick="changeImage(-1)">‹</div>
-        <div class="lightbox-next" onclick="changeImage(1)">›</div>
-        <div class="lightbox-content">
-            <img class="lightbox-img" id="lightboxImg" src="" alt="">
-            <div class="lightbox-caption" id="lightboxCaption"></div>
+<!-- ADMIN PANEL -->
+<aside class="admin-panel" id="adminPanel">
+    <div class="panel-head">
+        <div>
+            <div class="panel-head-title"><i class="fas fa-seedling"></i> Gallery Manager</div>
+            <div class="panel-head-sub">Mohaduba Enterprise Nursery &middot; Admin</div>
         </div>
+        <button class="panel-close" onclick="closeAdminPanel()">&#215;</button>
     </div>
+    <div class="panel-body">
 
-    <section class="cta-section">
-        <div class="reveal">
-            <h2 class="cta-title">Visit Us In Person</h2>
-            <p class="cta-text">Experience the beauty of our nursery firsthand. Come explore our collection and get expert advice for your garden.</p>
-            <a href="contact.html" class="btn-primary">📍 Find Us on Seven Miles →</a>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-inner">
-            <div class="footer-top">
-                <div>
-                    <div class="footer-logo"><img src="./assets/Mologo2.png" style="height: 80px; width: auto;" alt="Mohaduba Logo"></div>
-                    <div class="footer-tagline">Rooted in Kuruman, grown with passion</div>
+        <!-- AUTH -->
+        <div id="authView">
+            <div class="auth-box">
+                <div class="auth-icon">&#128272;</div>
+                <div class="auth-title">Admin Access</div>
+                <div class="auth-sub">Enter your password to manage the gallery &amp; announcements</div>
+                <div class="fgroup">
+                    <input type="password" id="pwdInput" placeholder="Password&hellip;" autocomplete="current-password">
                 </div>
-                <div class="footer-links">
-                    <a href="index.html#about">About</a>
-                    <a href="index.html#products">Products</a>
-                    <a href="index.html#mission">Mission</a>
-                    <a href="gallery.html">Gallery</a>
-                    <a href="contact.html">Contact</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <span>© 2024 Mohaduba Enterprise Nursery · Kuruman</span>
-                <span>100% Black Owned &amp; Managed · Reg. 2017/360951/07</span>
+                <button class="btn btn-green" onclick="doLogin()"><i class="fas fa-unlock"></i> Sign In</button>
             </div>
         </div>
-    </footer>
 
-    <script>
-        // Gallery data with Unsplash placeholder images
-        // Replace these URLs with your actual image paths when available
-        const galleryData = [
-            { title: "", category: "", image: "assets/mo1.jpeg", description: "Seasonal flowers ready for your garden" },
-            { title: "", category: "", image: "assets/mo2.jpeg", description: "Healthy shrubs grown in our greenhouses" },
-            { title: "", category: "", image: "assets/mo3.jpeg", description: "Native trees perfect for landscaping" },
-            { title: "", category: "", image: "assets/mo4.jpeg", description: "Beautiful shade trees for your property" },
-            { title: "", category: "", image: "assets/mo5.jpeg", description: "Our state-of-the-art growing facilities" },
-            { title: "", category: "", image: "assets/mo6.jpeg", description: "Young plants starting their journey" },
-            { title: "", category: "", image: "assets/mo7.jpeg", description: "Fresh vegetable plants for your kitchen garden" },
-            { title: "", category: "", image: "assets/mo8.jpeg", description: "Quality tools for every gardener" },
-            { title: "", category: "", image: "assets/mo9.jpeg", description: "Premium supplies for healthy plants" },
-            { title: "", category: "", image: "assets/mo10.jpeg", description: "Beautiful blooms for every season" },
-            { title: "", category: "", image: "assets/mo11.jpeg", description: "Established trees ready for planting" },
-            { title: "", category: "", image: "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=800&q=80", description: "Inside our main greenhouse facility" }
-        ];
+        <!-- ADMIN VIEW -->
+        <div id="adminView" style="display:none;">
+            <div class="tabs">
+                <button class="tab-btn active" id="tabGallery" onclick="showTab('gallery',this)"><i class="fas fa-images"></i> Gallery</button>
+                <button class="tab-btn" id="tabAnnounce" onclick="showTab('announce',this)"><i class="fas fa-bullhorn"></i> Announce</button>
+                <button class="tab-btn" id="tabSettings" onclick="showTab('settings',this)"><i class="fas fa-cog"></i> Settings</button>
+            </div>
 
-        let currentImageIndex = 0;
-        let currentFilteredItems = [];
+            <!-- GALLERY TAB -->
+            <div class="tab-panel active" id="tp-gallery">
+                <div class="fsec"><i class="fas fa-plus-circle"></i> Add New Image</div>
+                <div class="upload-zone" id="uploadZone">
+                    <input type="file" id="fileInput" accept="image/*" onchange="onFileChange(this)">
+                    <div class="uz-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                    <div class="uz-text">Click or drag &amp; drop image here</div>
+                    <div class="uz-sub">JPG &middot; PNG &middot; GIF &middot; WebP &nbsp;|&nbsp; max 5 MB</div>
+                </div>
+                <div class="preview-wrap"><img id="previewImg" alt="preview"></div>
+                <div class="fgroup">
+                    <label>Or paste image URL</label>
+                    <input type="url" id="fUrl" placeholder="https://&hellip;" oninput="onUrlInput()">
+                </div>
+                <div class="fgroup">
+                    <label>Title <span style="color:#dc2626">*</span></label>
+                    <input type="text" id="fTitle" placeholder="e.g., Flowering Plants" maxlength="80">
+                </div>
+                <div class="fgroup">
+                    <label>Price <span style="color:#aaa;font-weight:400;">(optional)</span></label>
+                    <input type="text" id="fPrice" placeholder="e.g., R120 each" maxlength="50">
+                </div>
+                <div class="fgroup">
+                    <label>Category</label>
+                    <select id="fCat">
+                        <option value="all">General</option>
+                        <option value="plants">Plants</option>
+                        <option value="flowers">Flowers</option>
+                        <option value="trees">Trees</option>
+                        <option value="projects">Projects</option>
+                    </select>
+                </div>
+                <div class="fgroup">
+                    <label>Description <span style="color:#aaa;font-weight:400;">(optional)</span></label>
+                    <textarea id="fDesc" placeholder="Brief description&hellip;" maxlength="200"></textarea>
+                </div>
+                <button class="btn btn-green" onclick="addImage()"><i class="fas fa-plus"></i> Add to Gallery</button>
+                <div class="divider"></div>
+                <div class="list-section-head" id="listHead">Manage Images (0)</div>
+                <div id="imageList"></div>
+            </div>
 
-        function renderGallery(filter = "all") {
-            const grid = document.getElementById('galleryGrid');
-            grid.innerHTML = '';
-            
-            const filtered = filter === "all" 
-                ? galleryData 
-                : galleryData.filter(item => item.category === filter);
-            
-            currentFilteredItems = filtered;
-            
-            filtered.forEach((item, index) => {
-                const delay = Math.min(index * 0.05, 0.5);
-                const galleryItem = document.createElement('div');
-                galleryItem.className = 'gallery-item';
-                galleryItem.style.animationDelay = `${delay}s`;
-                galleryItem.setAttribute('data-category', item.category);
-                galleryItem.onclick = () => openLightbox(index);
-                
-                galleryItem.innerHTML = `
-                    <img class="gallery-item-img" src="${item.image}" alt="${item.title}" loading="lazy">
-                    <div class="gallery-item-overlay">
-                        <div class="gallery-item-title">${item.title}</div>
-                        <div class="gallery-item-category">${getCategoryLabel(item.category)}</div>
+            <!-- ANNOUNCE TAB -->
+            <div class="tab-panel" id="tp-announce">
+                <div class="fsec"><i class="fas fa-bullhorn"></i> Publish Announcement</div>
+                <div class="fgroup">
+                    <label>Announcement Text <span style="color:#dc2626">*</span></label>
+                    <textarea id="annInput" placeholder="e.g., &#127807; Spring sale &mdash; 30% off all seedlings this weekend!" maxlength="300"></textarea>
+                </div>
+                <div class="fgroup">
+                    <label style="margin-bottom:0.5rem;">Display on:</label>
+                    <div class="toggle-row">
+                        <span class="toggle-label">Gallery page</span>
+                        <label class="toggle"><input type="checkbox" id="annGallery" checked><span class="toggle-track"></span></label>
                     </div>
-                `;
-                
-                grid.appendChild(galleryItem);
-            });
-        }
+                    <div class="toggle-row">
+                        <span class="toggle-label">Home (index) page</span>
+                        <label class="toggle"><input type="checkbox" id="annHome" checked><span class="toggle-track"></span></label>
+                    </div>
+                </div>
+                <button class="btn btn-green" onclick="addAnnouncement()"><i class="fas fa-paper-plane"></i> Publish</button>
+                <div class="divider"></div>
+                <div class="list-section-head" id="annListHead">Announcements (0)</div>
+                <div id="annList"></div>
+            </div>
 
-        function getCategoryLabel(category) {
-            const labels = {
-                plants: "🌿 Plants & Flowers",
-                trees: "🌳 Trees",
-                greenhouse: "🏭 Greenhouse",
-                accessories: "🛠️ Accessories"
+            <!-- SETTINGS TAB -->
+            <div class="tab-panel" id="tp-settings">
+                <div class="fsec"><i class="fas fa-key"></i> Change Password</div>
+                <div class="fgroup">
+                    <label>Current Password</label>
+                    <input type="password" id="sCurrent" placeholder="Current password" autocomplete="current-password">
+                </div>
+                <div class="fgroup">
+                    <label>New Password</label>
+                    <input type="password" id="sNew" placeholder="Minimum 6 characters" autocomplete="new-password">
+                </div>
+                <div class="fgroup">
+                    <label>Confirm New Password</label>
+                    <input type="password" id="sConfirm" placeholder="Repeat new password" autocomplete="new-password">
+                </div>
+                <button class="btn btn-amber" onclick="changePwd()"><i class="fas fa-save"></i> Update Password</button>
+                <div class="divider"></div>
+                <div class="fsec"><i class="fas fa-database"></i> Data</div>
+                <button class="btn btn-slate" onclick="exportData()"><i class="fas fa-download"></i> Backup All Data</button>
+                <button class="btn btn-red" onclick="clearGallery()"><i class="fas fa-trash-alt"></i> Clear All Gallery Images</button>
+                <div class="divider"></div>
+                <button class="btn btn-outline" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
+            </div>
+        </div>
+    </div>
+</aside>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <div class="lb-inner" onclick="event.stopPropagation()">
+        <div class="lb-counter" id="lbCounter"></div>
+        <button class="lb-close" onclick="closeLb()" aria-label="Close lightbox">&#215;</button>
+        <button class="lb-nav lb-prev" onclick="navLb(-1)" aria-label="Previous image">&#8592;</button>
+        <img id="lbImg" src="" alt="">
+        <button class="lb-nav lb-next" onclick="navLb(1)" aria-label="Next image">&#8594;</button>
+        <div class="lb-caption">
+            <div class="lb-title" id="lbTitle"></div>
+            <div class="lb-price" id="lbPrice"></div>
+            <div class="lb-desc" id="lbDesc"></div>
+        </div>
+    </div>
+    <div style="position:fixed;inset:0;z-index:-1;" onclick="closeLb()"></div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast" role="status" aria-live="polite">
+    <i id="toastIcon" class="fas fa-check-circle"></i>
+    <span id="toastMsg"></span>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div>
+                <img src="./assets/Mologo2.png" alt="Mohaduba Logo" style="height:76px;width:auto;" onerror="this.style.display='none'">
+                <div style="font-size:0.78rem;color:rgba(255,255,255,0.4);margin-top:6px;">Rooted in Kuruman, grown with passion</div>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="services.html">Services</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2024 Mohaduba Enterprise Nursery &middot; Kuruman, Northern Cape</span>
+            <span>100% Black Owned &amp; Managed &middot; Reg. 2017/360951/07</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════
+//  CONSTANTS & STATE
+// ═══════════════════════════════════════════
+var GKEY = 'mohaduba_gallery';
+var AKEY = 'mohaduba_announcements';
+var PKEY = 'mohaduba_admin_pwd';
+var DEFAULT_PWD = 'admin123';
+var SECRET = 'mohadubaadmin1';
+
+var gallery = [];
+var announcements = [];
+var selectedFile = null;
+var currentFilter = 'all';
+var lbIndex = 0;
+var lbFiltered = [];
+var secretBuf = '';
+var adminLoggedIn = false;
+var toastTimer = null;
+
+// ═══════════════════════════════════════════
+//  BOOT
+// ═══════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', function() {
+    loadData();
+    setupDragDrop();
+    setupKeyboard();
+    setupScroll();
+    renderGallery();
+    renderBanner();
+    // Enter key on password field
+    document.getElementById('pwdInput').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') doLogin();
+    });
+});
+
+// ═══════════════════════════════════════════
+//  STORAGE
+// ═══════════════════════════════════════════
+function loadData() {
+    try {
+        var g = localStorage.getItem(GKEY);
+        gallery = g ? JSON.parse(g) : defaultGallery();
+        if (!g) saveGallery();
+        var a = localStorage.getItem(AKEY);
+        announcements = a ? JSON.parse(a) : [];
+    } catch(e) {
+        gallery = defaultGallery();
+        announcements = [];
+    }
+}
+
+function saveGallery() {
+    try {
+        localStorage.setItem(GKEY, JSON.stringify(gallery));
+    } catch(e) {
+        showToast('Storage full — try removing some images first.', true);
+    }
+}
+
+function saveAnnouncements() {
+    try { localStorage.setItem(AKEY, JSON.stringify(announcements)); } catch(e) {}
+}
+
+function defaultGallery() {
+    var t = Date.now();
+    return [
+        { id:t+1, url:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=700&q=80', title:'Lush Green Nursery',   price:'',         cat:'plants',   desc:'Our beautiful greenhouse with thriving plants',  b64:false },
+        { id:t+2, url:'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=700&q=80', title:'Colorful Flower Beds', price:'R85/pot',  cat:'flowers',  desc:'Seasonal flowers ready for your garden',         b64:false },
+        { id:t+3, url:'https://images.unsplash.com/photo-1558389186-438424b3b6e6?w=700&q=80', title:'Succulent Collection',  price:'R45 each', cat:'plants',   desc:'Low-maintenance succulents for any space',       b64:false },
+        { id:t+4, url:'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=700&q=80', title:'Vegetable Seedlings',  price:'R25/tray', cat:'plants',   desc:'Fresh veggie starters for your kitchen garden',  b64:false },
+        { id:t+5, url:'https://images.unsplash.com/photo-1523348837708-15c4ad3243d9?w=700&q=80', title:'Shade Trees',          price:'R350+',    cat:'trees',    desc:'Beautiful indigenous trees for landscaping',     b64:false },
+        { id:t+6, url:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=700&q=80', title:'Nursery Aerial View',  price:'',         cat:'projects', desc:'Our state-of-the-art facilities',                b64:false }
+    ];
+}
+
+// ═══════════════════════════════════════════
+//  GALLERY RENDER
+// ═══════════════════════════════════════════
+function getFiltered() {
+    if (currentFilter === 'all') return gallery.slice();
+    return gallery.filter(function(i) { return i.cat === currentFilter; });
+}
+
+function renderGallery() {
+    lbFiltered = getFiltered();
+    var grid = document.getElementById('galleryGrid');
+
+    if (!lbFiltered.length) {
+        grid.innerHTML = '<div class="empty-state"><div class="big-icon">&#127807;</div><p>No images in this category yet.</p></div>';
+        return;
+    }
+
+    var html = '';
+    for (var i = 0; i < lbFiltered.length; i++) {
+        var item = lbFiltered[i];
+        var delay = (i * 0.055).toFixed(2);
+        html += '<div class="gallery-item" role="listitem" style="animation-delay:' + delay + 's"' +
+                ' tabindex="0" aria-label="' + h(item.title) + '"' +
+                ' data-idx="' + i + '">' +
+                '<img src="' + h(item.url) + '" alt="' + h(item.title) + '" loading="lazy"' +
+                ' onerror="this.src=\'https://placehold.co/600x420/e4f2db/2d6a30?text=Not+Found\'">' +
+                '<div class="num-badge">' + (i+1) + '</div>' +
+                (item.price ? '<div class="price-badge">' + h(item.price) + '</div>' : '') +
+                '<div class="gallery-overlay">' +
+                '<div class="g-title">' + h(item.title) + '</div>' +
+                (item.desc  ? '<div class="g-desc">' + h(item.desc) + '</div>' : '') +
+                (item.price ? '<div class="g-price">&#128176; ' + h(item.price) + '</div>' : '') +
+                '</div></div>';
+    }
+    grid.innerHTML = html;
+
+    // Attach click & keyboard events
+    var items = grid.querySelectorAll('.gallery-item');
+    items.forEach(function(el) {
+        el.addEventListener('click', function() { openLb(parseInt(this.dataset.idx)); });
+        el.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLb(parseInt(this.dataset.idx)); }
+        });
+    });
+}
+
+function filterGallery(cat, btn) {
+    currentFilter = cat;
+    var btns = document.querySelectorAll('.filter-btn');
+    for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+    btn.classList.add('active');
+    renderGallery();
+}
+
+// ═══════════════════════════════════════════
+//  ADMIN LIST RENDER
+// ═══════════════════════════════════════════
+function renderImageList() {
+    var el = document.getElementById('imageList');
+    var head = document.getElementById('listHead');
+    head.textContent = 'Manage Images (' + gallery.length + ')';
+
+    if (!gallery.length) {
+        el.innerHTML = '<p style="text-align:center;color:#999;font-size:0.8rem;padding:1rem 0;">No images yet. Add one above!</p>';
+        return;
+    }
+
+    var html = '';
+    for (var i = 0; i < gallery.length; i++) {
+        var item = gallery[i];
+        html += '<div class="list-item">' +
+            '<img class="list-thumb" src="' + h(item.url) + '" alt="" onerror="this.src=\'https://placehold.co/50x50/e4f2db/2d6a30?text=!\'">'+
+            '<div class="list-info">' +
+            '<div class="list-name" title="' + h(item.title) + '">' + h(item.title) + '</div>' +
+            '<div class="list-meta">' + h(item.cat || 'general') + (item.desc ? ' &middot; ' + h(item.desc).substring(0,28) + '&hellip;' : '') + '</div>' +
+            (item.price ? '<div class="list-price-tag">&#128176; ' + h(item.price) + '</div>' : '') +
+            '</div>' +
+            '<div class="list-actions">' +
+            '<button class="btn btn-amber btn-sm" onclick="editImage(' + i + ')" title="Edit"><i class="fas fa-edit"></i></button>' +
+            '<button class="btn btn-red btn-sm" onclick="deleteImage(' + i + ')" title="Delete"><i class="fas fa-trash"></i></button>' +
+            '</div></div>';
+    }
+    el.innerHTML = html;
+}
+
+function renderAnnList() {
+    var el = document.getElementById('annList');
+    var head = document.getElementById('annListHead');
+    head.textContent = 'Announcements (' + announcements.length + ')';
+
+    if (!announcements.length) {
+        el.innerHTML = '<p style="text-align:center;color:#999;font-size:0.8rem;padding:1rem 0;">No announcements yet.</p>';
+        return;
+    }
+
+    var html = '';
+    for (var i = 0; i < announcements.length; i++) {
+        var a = announcements[i];
+        html += '<div class="ann-item">' +
+            '<div class="ann-item-text">' + h(a.text) + '</div>' +
+            '<div class="ann-item-footer">' +
+            '<div style="display:flex;gap:0.3rem;flex-wrap:wrap;">' +
+            '<span class="ann-tag ' + (a.active ? 'live' : 'paused') + '">' + (a.active ? '&#9679; Live' : '&#9675; Paused') + '</span>' +
+            (a.showGallery ? '<span class="ann-tag page">Gallery</span>' : '') +
+            (a.showHome    ? '<span class="ann-tag page">Home</span>'    : '') +
+            '</div>' +
+            '<div style="display:flex;gap:0.3rem;">' +
+            '<button class="btn ' + (a.active ? 'btn-slate' : 'btn-green') + ' btn-sm" onclick="toggleAnn(' + i + ')">' + (a.active ? 'Pause' : 'Activate') + '</button>' +
+            '<button class="btn btn-red btn-sm" onclick="deleteAnn(' + i + ')"><i class="fas fa-trash"></i></button>' +
+            '</div></div></div>';
+    }
+    el.innerHTML = html;
+}
+
+// ═══════════════════════════════════════════
+//  ANNOUNCEMENT BANNER
+// ═══════════════════════════════════════════
+function renderBanner() {
+    var banner = document.getElementById('announcementBanner');
+    var header = document.getElementById('galleryHeader');
+    var active = null;
+    for (var i = 0; i < announcements.length; i++) {
+        if (announcements[i].active && announcements[i].showGallery) { active = announcements[i]; break; }
+    }
+    var dismissed = active ? sessionStorage.getItem('ann_' + active.id) : null;
+    if (active && !dismissed) {
+        document.getElementById('annBannerText').textContent = active.text;
+        banner.classList.add('visible');
+        header.classList.add('with-ann');
+    } else {
+        banner.classList.remove('visible');
+        header.classList.remove('with-ann');
+    }
+}
+
+function dismissBanner() {
+    var active = null;
+    for (var i = 0; i < announcements.length; i++) {
+        if (announcements[i].active && announcements[i].showGallery) { active = announcements[i]; break; }
+    }
+    if (active) sessionStorage.setItem('ann_' + active.id, '1');
+    document.getElementById('announcementBanner').classList.remove('visible');
+    document.getElementById('galleryHeader').classList.remove('with-ann');
+}
+
+// ═══════════════════════════════════════════
+//  FILE UPLOAD
+// ═══════════════════════════════════════════
+function onFileChange(input) {
+    var file = input.files[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) { showToast('File too large! Max 5 MB.', true); input.value = ''; return; }
+    if (!file.type.startsWith('image/')) { showToast('Please select an image file.', true); input.value = ''; return; }
+    selectedFile = file;
+    document.getElementById('fUrl').value = '';
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        var img = document.getElementById('previewImg');
+        img.src = e.target.result;
+        img.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+}
+
+function onUrlInput() {
+    // Clear file selection when URL is typed
+    if (document.getElementById('fUrl').value.trim()) {
+        selectedFile = null;
+        document.getElementById('fileInput').value = '';
+        var img = document.getElementById('previewImg');
+        img.style.display = 'none'; img.src = '';
+    }
+}
+
+function setupDragDrop() {
+    var zone = document.getElementById('uploadZone');
+    if (!zone) return;
+    zone.addEventListener('dragover', function(e) { e.preventDefault(); zone.classList.add('drag-over'); });
+    zone.addEventListener('dragleave', function() { zone.classList.remove('drag-over'); });
+    zone.addEventListener('drop', function(e) {
+        e.preventDefault(); zone.classList.remove('drag-over');
+        var file = e.dataTransfer.files[0];
+        if (!file || !file.type.startsWith('image/')) { showToast('Please drop an image file.', true); return; }
+        try {
+            var dt = new DataTransfer(); dt.items.add(file);
+            var fi = document.getElementById('fileInput'); fi.files = dt.files; onFileChange(fi);
+        } catch(err) {
+            // DataTransfer not supported — read directly
+            selectedFile = file;
+            var reader = new FileReader();
+            reader.onload = function(ev) {
+                var img = document.getElementById('previewImg');
+                img.src = ev.target.result; img.style.display = 'block';
             };
-            return labels[category] || category;
+            reader.readAsDataURL(file);
         }
+    });
+}
 
-        function openLightbox(index) {
-            currentImageIndex = index;
-            const item = currentFilteredItems[currentImageIndex];
-            const lightbox = document.getElementById('lightbox');
-            const img = document.getElementById('lightboxImg');
-            const caption = document.getElementById('lightboxCaption');
-            
-            img.src = item.image;
-            img.alt = item.title;
-            caption.innerHTML = `${item.title} — ${item.description || getCategoryLabel(item.category)}`;
-            
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
+// ═══════════════════════════════════════════
+//  GALLERY CRUD
+// ═══════════════════════════════════════════
+function addImage() {
+    var title = document.getElementById('fTitle').value.trim();
+    var desc  = document.getElementById('fDesc').value.trim();
+    var price = document.getElementById('fPrice').value.trim();
+    var cat   = document.getElementById('fCat').value;
+    var url   = document.getElementById('fUrl').value.trim();
+
+    if (!title) { showToast('Please enter a title!', true); document.getElementById('fTitle').focus(); return; }
+    if (!selectedFile && !url) { showToast('Select an image or paste a URL.', true); return; }
+
+    function saveItem(imgUrl, b64) {
+        gallery.push({ id: Date.now(), url: imgUrl, title: title, desc: desc, price: price, cat: cat, b64: b64 });
+        saveGallery(); renderGallery(); renderImageList(); clearAddForm();
+        showToast('Image added to gallery!');
+    }
+
+    if (selectedFile) {
+        var reader = new FileReader();
+        reader.onload = function(e) { saveItem(e.target.result, true); };
+        reader.readAsDataURL(selectedFile);
+    } else {
+        saveItem(url, false);
+    }
+}
+
+function clearAddForm() {
+    var ids = ['fTitle','fDesc','fPrice','fUrl'];
+    for (var i = 0; i < ids.length; i++) document.getElementById(ids[i]).value = '';
+    document.getElementById('fCat').value = 'all';
+    selectedFile = null;
+    document.getElementById('fileInput').value = '';
+    var img = document.getElementById('previewImg');
+    img.style.display = 'none'; img.src = '';
+}
+
+function deleteImage(idx) {
+    if (!confirm('Delete "' + gallery[idx].title + '"? This cannot be undone.')) return;
+    gallery.splice(idx, 1);
+    saveGallery(); renderGallery(); renderImageList();
+    showToast('Image removed.');
+}
+
+function editImage(idx) {
+    var item = gallery[idx];
+    var t = prompt('Title:', item.title);
+    if (t === null) return;
+    var d = prompt('Description:', item.desc || '');
+    if (d === null) return;
+    var p = prompt('Price (leave blank for none):', item.price || '');
+    if (p === null) return;
+    var c = prompt('Category:\nall / plants / flowers / trees / projects', item.cat || 'all');
+    if (c === null) return;
+    var validCats = ['all','plants','flowers','trees','projects'];
+    item.title = t.trim() || item.title;
+    item.desc  = d.trim();
+    item.price = p.trim();
+    item.cat   = validCats.indexOf(c.trim().toLowerCase()) !== -1 ? c.trim().toLowerCase() : item.cat;
+    saveGallery(); renderGallery(); renderImageList();
+    showToast('Image updated!');
+}
+
+// ═══════════════════════════════════════════
+//  ANNOUNCEMENTS
+// ═══════════════════════════════════════════
+function addAnnouncement() {
+    var text = document.getElementById('annInput').value.trim();
+    var showGallery = document.getElementById('annGallery').checked;
+    var showHome = document.getElementById('annHome').checked;
+    if (!text) { showToast('Enter announcement text!', true); document.getElementById('annInput').focus(); return; }
+    if (!showGallery && !showHome) { showToast('Select at least one page to display on.', true); return; }
+    announcements.push({ id: Date.now(), text: text, active: true, showGallery: showGallery, showHome: showHome });
+    saveAnnouncements(); renderAnnList(); renderBanner();
+    document.getElementById('annInput').value = '';
+    showToast('Announcement published!');
+}
+
+function toggleAnn(idx) {
+    announcements[idx].active = !announcements[idx].active;
+    saveAnnouncements(); renderAnnList(); renderBanner();
+}
+
+function deleteAnn(idx) {
+    if (!confirm('Remove this announcement?')) return;
+    announcements.splice(idx, 1);
+    saveAnnouncements(); renderAnnList(); renderBanner();
+    showToast('Announcement removed.');
+}
+
+// ═══════════════════════════════════════════
+//  LIGHTBOX
+// ═══════════════════════════════════════════
+function openLb(idx) {
+    lbIndex = idx;
+    updateLb();
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function updateLb() {
+    var item = lbFiltered[lbIndex];
+    if (!item) return;
+    document.getElementById('lbImg').src = item.url;
+    document.getElementById('lbImg').alt = item.title;
+    document.getElementById('lbTitle').textContent = item.title;
+    document.getElementById('lbPrice').textContent = item.price ? '\uD83D\uDCB0 ' + item.price : '';
+    document.getElementById('lbDesc').textContent  = item.desc || '';
+    document.getElementById('lbCounter').textContent = (lbIndex + 1) + ' / ' + lbFiltered.length;
+}
+
+function navLb(dir) {
+    lbIndex = (lbIndex + dir + lbFiltered.length) % lbFiltered.length;
+    updateLb();
+}
+
+function closeLb() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+// ═══════════════════════════════════════════
+//  ADMIN AUTH & PANEL
+// ═══════════════════════════════════════════
+function openAdminPanel() {
+    document.getElementById('adminPanel').classList.add('open');
+    document.getElementById('backdrop').classList.add('show');
+    document.body.style.overflow = 'hidden';
+    if (!adminLoggedIn) {
+        document.getElementById('authView').style.display = 'block';
+        document.getElementById('adminView').style.display = 'none';
+        setTimeout(function() { document.getElementById('pwdInput').focus(); }, 450);
+    } else {
+        showAdminView();
+    }
+}
+
+function closeAdminPanel() {
+    document.getElementById('adminPanel').classList.remove('open');
+    document.getElementById('backdrop').classList.remove('show');
+    document.body.style.overflow = '';
+}
+
+function showAdminView() {
+    document.getElementById('authView').style.display = 'none';
+    document.getElementById('adminView').style.display = 'block';
+    renderImageList();
+    renderAnnList();
+}
+
+function doLogin() {
+    var entered = document.getElementById('pwdInput').value;
+    var stored  = localStorage.getItem(PKEY) || DEFAULT_PWD;
+    if (entered === stored) {
+        adminLoggedIn = true;
+        document.getElementById('pwdInput').value = '';
+        showAdminView();
+        showToast('Welcome back, Admin!');
+    } else {
+        showToast('Incorrect password. Try again.', true);
+        document.getElementById('pwdInput').value = '';
+        document.getElementById('pwdInput').focus();
+    }
+}
+
+function doLogout() {
+    adminLoggedIn = false;
+    closeAdminPanel();
+    showToast('Signed out.');
+}
+
+function changePwd() {
+    var current = document.getElementById('sCurrent').value;
+    var newPwd  = document.getElementById('sNew').value;
+    var confirm = document.getElementById('sConfirm').value;
+    var stored  = localStorage.getItem(PKEY) || DEFAULT_PWD;
+    if (current !== stored) { showToast('Current password is wrong.', true); return; }
+    if (newPwd.length < 6) { showToast('New password must be at least 6 characters.', true); return; }
+    if (newPwd !== confirm) { showToast('Passwords do not match.', true); return; }
+    localStorage.setItem(PKEY, newPwd);
+    document.getElementById('sCurrent').value = '';
+    document.getElementById('sNew').value = '';
+    document.getElementById('sConfirm').value = '';
+    showToast('Password changed! Please sign in again.');
+    doLogout();
+}
+
+function exportData() {
+    var data = { gallery: gallery, announcements: announcements, exported: new Date().toISOString() };
+    var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    var url  = URL.createObjectURL(blob);
+    var a    = document.createElement('a');
+    a.href = url; a.download = 'mohaduba_backup_' + Date.now() + '.json'; a.click();
+    setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+    showToast('Backup downloaded!');
+}
+
+function clearGallery() {
+    if (!confirm('Delete ALL gallery images? This cannot be undone.')) return;
+    gallery = []; saveGallery(); renderGallery(); renderImageList();
+    showToast('Gallery cleared.');
+}
+
+// ═══════════════════════════════════════════
+//  TABS
+// ═══════════════════════════════════════════
+function showTab(name, btn) {
+    var tabs = document.querySelectorAll('.tab-btn');
+    var panels = document.querySelectorAll('.tab-panel');
+    for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
+    for (var i = 0; i < panels.length; i++) panels[i].classList.remove('active');
+    btn.classList.add('active');
+    document.getElementById('tp-' + name).classList.add('active');
+    if (name === 'gallery')  renderImageList();
+    if (name === 'announce') renderAnnList();
+}
+
+// ═══════════════════════════════════════════
+//  TOAST
+// ═══════════════════════════════════════════
+function showToast(msg, err) {
+    var el   = document.getElementById('toast');
+    var icon = document.getElementById('toastIcon');
+    var span = document.getElementById('toastMsg');
+    span.textContent = msg;
+    el.className = 'toast' + (err ? ' err' : '');
+    icon.className = 'fas fa-' + (err ? 'exclamation-circle' : 'check-circle');
+    el.classList.add('up');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function() { el.classList.remove('up'); }, 3400);
+}
+
+// ═══════════════════════════════════════════
+//  SECRET KEYBOARD TRIGGER
+//  Just type "mohadubaadmin1" anywhere on the page
+// ═══════════════════════════════════════════
+function setupKeyboard() {
+    document.addEventListener('keydown', function(e) {
+        // Escape
+        if (e.key === 'Escape') {
+            if (document.getElementById('lightbox').classList.contains('open')) { closeLb(); return; }
+            if (document.getElementById('adminPanel').classList.contains('open')) { closeAdminPanel(); return; }
         }
-
-        function closeLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            lightbox.classList.remove('active');
-            document.body.style.overflow = '';
+        // Lightbox arrow navigation
+        if (document.getElementById('lightbox').classList.contains('open')) {
+            if (e.key === 'ArrowLeft')  { navLb(-1); return; }
+            if (e.key === 'ArrowRight') { navLb(1);  return; }
         }
-
-        function changeImage(direction) {
-            const newIndex = currentImageIndex + direction;
-            if (newIndex >= 0 && newIndex < currentFilteredItems.length) {
-                currentImageIndex = newIndex;
-                const item = currentFilteredItems[currentImageIndex];
-                const img = document.getElementById('lightboxImg');
-                const caption = document.getElementById('lightboxCaption');
-                
-                img.style.opacity = '0';
-                setTimeout(() => {
-                    img.src = item.image;
-                    img.alt = item.title;
-                    caption.innerHTML = `${item.title} — ${item.description || getCategoryLabel(item.category)}`;
-                    img.style.opacity = '1';
-                }, 200);
+        // Secret phrase — only when not typing in a form field
+        var tag = document.activeElement ? document.activeElement.tagName.toUpperCase() : '';
+        if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+        if (e.key && e.key.length === 1) {
+            secretBuf += e.key.toLowerCase();
+            if (secretBuf.length > SECRET.length + 5) secretBuf = secretBuf.slice(-(SECRET.length + 5));
+            if (secretBuf.indexOf(SECRET) !== -1) {
+                secretBuf = '';
+                openAdminPanel();
             }
         }
+    });
+}
 
-        // Filter functionality
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                const filter = btn.getAttribute('data-filter');
-                renderGallery(filter);
-            });
-        });
+// ═══════════════════════════════════════════
+//  NAV
+// ═══════════════════════════════════════════
+function toggleMenu() {
+    var menu = document.getElementById('mobileMenu');
+    var btn  = document.getElementById('hamburger');
+    var open = menu.classList.toggle('open');
+    btn.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', String(open));
+}
 
-        // Lightbox keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            const lightbox = document.getElementById('lightbox');
-            if (lightbox.classList.contains('active')) {
-                if (e.key === 'ArrowLeft') {
-                    changeImage(-1);
-                } else if (e.key === 'ArrowRight') {
-                    changeImage(1);
-                } else if (e.key === 'Escape') {
-                    closeLightbox();
-                }
-            }
-        });
+function setupScroll() {
+    var nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', function() {
+        nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+}
 
-        // Close lightbox when clicking background
-        document.getElementById('lightbox').addEventListener('click', (e) => {
-            if (e.target === document.getElementById('lightbox')) {
-                closeLightbox();
-            }
-        });
+// ═══════════════════════════════════════════
+//  HTML ESCAPE
+// ═══════════════════════════════════════════
+function h(str) {
+    if (!str) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+</script>
 
-        // Mobile menu toggle
-        function toggleMenu() {
-            document.getElementById('mobileMenu').classList.toggle('open');
-        }
+<!--
+╔═══════════════════════════════════════════════════════════════════╗
+║         PASTE THIS SNIPPET INTO YOUR index.html                  ║
+║         Place it right after your closing </nav> tag             ║
+║         This shows admin announcements on your home page         ║
+╚═══════════════════════════════════════════════════════════════════╝
 
-        // Scroll reveal
-        const revealEls = document.querySelectorAll('.reveal');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    e.target.classList.add('visible');
-                    observer.unobserve(e.target);
-                }
-            });
-        }, { threshold: 0.12 });
-        revealEls.forEach(el => observer.observe(el));
+<style>
+@keyframes homeBannerShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes homePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.5)}}
+#homeAnnBanner{
+  display:none;position:fixed;top:68px;left:0;right:0;z-index:190;
+  padding:.55rem 1.5rem;
+  background:linear-gradient(90deg,#1c4520,#2d6a30,#3a7d3f,#1c4520);
+  background-size:300% 100%;animation:homeBannerShift 6s ease infinite;
+  color:#fff;font-size:.82rem;font-weight:500;
+  font-family:'DM Sans',sans-serif;
+  align-items:center;justify-content:space-between;gap:1rem;
+}
+#homeAnnBanner.on{display:flex;}
+</style>
 
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('.nav');
-            if (window.scrollY > 50) {
-                nav.style.background = 'rgba(255,255,255,0.85)';
-                nav.style.boxShadow = '0 4px 30px rgba(45,106,48,0.12)';
-            } else {
-                nav.style.background = 'rgba(255,255,255,0.55)';
-                nav.style.boxShadow = '0 4px 30px rgba(45,106,48,0.08)';
-            }
-        });
+<div id="homeAnnBanner">
+  <div style="display:flex;align-items:center;gap:.5rem;flex:1;min-width:0;">
+    <div style="width:8px;height:8px;border-radius:50%;background:#a8e6a1;flex-shrink:0;animation:homePulse 2s ease-in-out infinite;"></div>
+    <span id="homeAnnText" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></span>
+  </div>
+  <button onclick="this.closest('#homeAnnBanner').classList.remove('on');var a=JSON.parse(localStorage.getItem('mohaduba_announcements')||'[]').find(function(x){return x.active&&x.showHome;});if(a)sessionStorage.setItem('home_ann_'+a.id,'1');"
+    style="background:rgba(255,255,255,.2);border:none;color:#fff;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:1rem;flex-shrink:0;">&#215;</button>
+</div>
+<script>
+(function(){
+  try{
+    var anns=JSON.parse(localStorage.getItem('mohaduba_announcements')||'[]');
+    var active=anns.find(function(a){return a.active&&a.showHome;});
+    if(active&&!sessionStorage.getItem('home_ann_'+active.id)){
+      document.getElementById('homeAnnText').textContent=active.text;
+      document.getElementById('homeAnnBanner').classList.add('on');
+    }
+  }catch(e){}
+})();
+</script>
 
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(a => {
-            a.addEventListener('click', e => {
-                const id = a.getAttribute('href');
-                const el = document.querySelector(id);
-                if (el) {
-                    e.preventDefault();
-                    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // Initialize gallery
-        renderGallery('all');
-    </script>
+-->
 
 </body>
 </html>
