@@ -930,6 +930,14 @@
         .reveal-delay-2 { transition-delay: 0.2s; }
         .reveal-delay-3 { transition-delay: 0.3s; }
 
+        /* SVG icon sizing helpers */
+        .btn-icon { width: 16px; height: 16px; flex-shrink: 0; }
+        .card-icon-svg { width: 28px; height: 28px; flex-shrink: 0; }
+        .mini-icon-svg { width: 32px; height: 32px; flex-shrink: 0; }
+        .resp-icon-svg { width: 18px; height: 18px; flex-shrink: 0; }
+        .mission-icon svg { width: 28px; height: 28px; }
+        .reg-icon-svg { width: 14px; height: 14px; flex-shrink: 0; }
+
         @media (max-width: 1024px) {
             .about-grid,
             .owner-grid { grid-template-columns: 1fr; }
@@ -972,8 +980,7 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="services.html">Services</a></li>
-                        <li><a href="gallery.html">Gallery</a></li>
-
+            <li><a href="gallery.html">Gallery</a></li>
             <!--<li><a href="contact.html">Contact</a></li>-->
             <li><a href="contact.html" class="nav-cta">Get in Touch</a></li>
         </ul>
@@ -986,8 +993,7 @@
         <a href="index.html" onclick="toggleMenu()">Home</a>
         <a href="about.html" onclick="toggleMenu()">About</a>
         <a href="services.html" onclick="toggleMenu()">Services</a>
-                <a href="gallery.html" onclick="toggleMenu()">Gallery</a>
-
+        <a href="gallery.html" onclick="toggleMenu()">Gallery</a>
         <!--<a href="contact.html" onclick="toggleMenu()">Contact</a>-->
         <a href="contact.html" onclick="toggleMenu()" style="background:var(--light-green);color:var(--primary);font-weight:600;">Get in Touch →</a>
     </div>
@@ -1000,8 +1006,16 @@
             <h1 class="hero-title">Mohaduba<br><em>Enterprise</em> Nursery</h1>
             <p class="hero-sub">Rooted in Kuruman · Grown with passion</p>
             <div class="hero-actions">
-                <a href="services.html" class="btn-primary">🌿 Explore Plants</a>
-                <a href="contact.html" class="btn-ghost">📞 Contact Us</a>
+                <a href="services.html" class="btn-primary">
+                    <!-- Leaf / plant icon -->
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+                    Explore Plants
+                </a>
+                <a href="contact.html" class="btn-ghost">
+                    <!-- Phone icon -->
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.79a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    Contact Us
+                </a>
             </div>
         </div>
         <div class="hero-stats">
@@ -1132,7 +1146,10 @@
     <section class="mission-section" id="mission">
         <div class="mission-grid">
             <div class="glass-card mission-main reveal">
-                <div class="mission-icon">🌿</div>
+                <div class="mission-icon">
+                    <!-- Sprout / leaf icon -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+                </div>
                 <span class="section-eyebrow">Our purpose</span>
                 <h2 class="section-title" style="font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:1rem;">Our <em>Mission</em></h2>
                 <p class="mission-body">
@@ -1148,17 +1165,26 @@
 
             <div class="mission-right">
                 <div class="glass-card mini-card reveal reveal-delay-1">
-                    <span class="mini-card-icon">🎯</span>
+                    <span class="mini-card-icon">
+                        <!-- Target / crosshair icon -->
+                        <svg class="mini-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                    </span>
                     <div class="mini-card-title">Strategic Objectives</div>
                     <div class="mini-card-body">Intelligently staffed with caring, well-informed employees who create a friendly open atmosphere where every customer feels at home.</div>
                 </div>
                 <div class="glass-card mini-card reveal reveal-delay-1">
-                    <span class="mini-card-icon">💰</span>
+                    <span class="mini-card-icon">
+                        <!-- Tag / price icon -->
+                        <svg class="mini-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                    </span>
                     <div class="mini-card-title">Competitive Pricing</div>
                     <div class="mini-card-body">Prices reviewed periodically to ensure affordability, paired with top-notch service that always exceeds expectations.</div>
                 </div>
                 <div class="glass-card mini-card reveal reveal-delay-2">
-                    <span class="mini-card-icon">🏡</span>
+                    <span class="mini-card-icon">
+                        <!-- Home icon -->
+                        <svg class="mini-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    </span>
                     <div class="mini-card-title">Residential &amp; Contractors</div>
                     <div class="mini-card-body">Serving both home gardeners and professional landscaping contractors with reliable, consistent garden supply across the Northern Cape.</div>
                 </div>
@@ -1175,49 +1201,15 @@
                 <p class="band-sub">Most of our plants are grown on-site in state-of-the-art greenhouses — ensuring freshness, quality, and a wide variety that no other supplier in the region can match.</p>
             </div>
             <a href="contact.html" class="btn-primary reveal reveal-delay-1" style="white-space:nowrap;flex-shrink:0;">
-                🌱 Visit Our Nursery
+                <!-- Seedling icon -->
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22V12m0 0C12 7 8 4 4 4s-1 8 8 8zm0 0c0-5 4-8 8-8s1 8-8 8"/></svg>
+                Visit Our Nursery
             </a>
         </div>
     </div>
 
     <!--<section class="owner-section" id="ownership">
-        <div class="owner-grid">
-            <div class="owner-img-stack reveal">
-                <img
-                    src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80&auto=format&fit=crop"
-                    alt="Lush nursery garden"
-                    class="owner-img-main"
-                    loading="lazy"
-                />
-                <div class="owner-badge">
-                    <div class="owner-badge-title">Founder &amp; Owner</div>
-                    <div class="owner-badge-name">Joseph Sedumedi</div>
-                    <div class="owner-badge-sub">Kuruman, Northern Cape</div>
-                </div>
-                <div class="bbbee-pill">★ 100% Black Owned</div>
-            </div>
-
-            <div class="reveal reveal-delay-1">
-                <span class="section-eyebrow">Leadership</span>
-                <h2 class="section-title">Built from a <em>dream</em></h2>
-                <div class="accent-bar"></div>
-                <p class="owner-body">
-                    Mohaduba Enterprise Nursery is 100% black owned and managed by <strong>Joseph Sedumedi</strong>. The nursery has been Joseph's dream for many years, and today it stands as a thriving business serving the entire Kuruman region and beyond.
-                </p>
-                <p class="owner-body" style="margin-top:-0.5rem;">
-                    Joseph personally oversees all operations — from ordering merchandise and garden supplies to managing tree stock and greenhouse maintenance. His hands-on approach ensures every customer receives the very best.
-                </p>
-
-                <div class="responsibilities-grid">
-                    <div class="resp-item"><span class="resp-icon">🌳</span> Tree stock management</div>
-                    <div class="resp-item"><span class="resp-icon">🪴</span> Merchandise ordering</div>
-                    <div class="resp-item"><span class="resp-icon">🏭</span> Greenhouse maintenance</div>
-                    <div class="resp-item"><span class="resp-icon">🤝</span> Customer relationships</div>
-                    <div class="resp-item"><span class="resp-icon">📦</span> Garden supply chain</div>
-                    <div class="resp-item"><span class="resp-icon">📈</span> Business operations</div>
-                </div>
-            </div>
-        </div>
+        ...
     </section>-->
 
     <section class="contact-section" id="contact">
@@ -1232,19 +1224,28 @@
 
             <div class="contact-cards reveal reveal-delay-1">
                 <div class="contact-card">
-                    <span class="contact-card-icon">📍</span>
+                    <span class="contact-card-icon">
+                        <!-- Map pin icon -->
+                        <svg class="card-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#7ab86a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </span>
                     <div class="contact-card-label">Address</div>
                     <div class="contact-card-value">H115Plot, Seven Miles<br>Kuruman, 8460<br>Northern Cape</div>
                 </div>
                 <div class="contact-card">
-                    <span class="contact-card-icon">📞</span>
+                    <span class="contact-card-icon">
+                        <!-- Phone icon -->
+                        <svg class="card-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#7ab86a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.79a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    </span>
                     <div class="contact-card-label">Phone</div>
                     <div class="contact-card-value">
                         <a href="tel:+27822243736" style="color:inherit;text-decoration:none;">+27 82-224-3736</a>
                     </div>
                 </div>
                 <div class="contact-card">
-                    <span class="contact-card-icon">✉️</span>
+                    <span class="contact-card-icon">
+                        <!-- Mail icon -->
+                        <svg class="card-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#7ab86a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    </span>
                     <div class="contact-card-label">Email</div>
                     <div class="contact-card-value">
                         <a href="mailto:josephsedumedi53@gmail.com" style="color:inherit;text-decoration:none;">josephsedumedi53@gmail.com</a>
@@ -1253,13 +1254,23 @@
             </div>
 
             <div class="reveal reveal-delay-2" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-                <a href="tel:+27822243736" class="btn-primary">📞 Call Now</a>
-                <a href="mailto:josephsedumedi53@gmail.com" class="btn-ghost">✉️ Send Email</a>
+                <a href="tel:+27822243736" class="btn-primary">
+                    <!-- Phone icon -->
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.79a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    Call Now
+                </a>
+                <a href="mailto:josephsedumedi53@gmail.com" class="btn-ghost">
+                    <!-- Mail icon -->
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    Send Email
+                </a>
             </div>
 
             <div class="reveal reveal-delay-3" style="margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.1);display:flex;justify-content:center;gap:0.5rem;">
-                <div style="background:rgba(255,255,255,0.08);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:0.6rem 1.2rem;font-size:0.75rem;color:rgba(255,255,255,0.6);">
-                    🏷️ &nbsp; Reg: 2017/360951/07
+                <div style="background:rgba(255,255,255,0.08);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:0.6rem 1.2rem;font-size:0.75rem;color:rgba(255,255,255,0.6);display:inline-flex;align-items:center;gap:8px;">
+                    <!-- Tag icon -->
+                    <svg class="reg-icon-svg" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                    Reg: 2017/360951/07
                 </div>
             </div>
         </div>
