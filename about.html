@@ -6,8 +6,7 @@
     <title>Mohaduba · About Us</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="icon" type="image/x-icon" href="./assets/Mologo.png">
-
+    <link rel="icon" type="image/x-icon" href="./assets/Mologo.png">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 
     <style>
@@ -245,6 +244,16 @@
             border-color: #c0dfb2;
         }
 
+        /* SVG icon sizing helpers */
+        .btn-icon { width: 16px; height: 16px; flex-shrink: 0; }
+        .inline-icon { width: 18px; height: 18px; flex-shrink: 0; }
+        .card-icon-svg { width: 28px; height: 28px; flex-shrink: 0; }
+        .avatar-icon { width: 28px; height: 28px; }
+        .mission-icon svg { width: 28px; height: 28px; }
+        .value-icon-svg { width: 36px; height: 36px; }
+        .timeline-dot svg { width: 22px; height: 22px; }
+        .quote-author-avatar svg { width: 26px; height: 26px; }
+
         /* ── STORY SECTION ── */
         .story-section { padding: 6rem 1.5rem; }
         .story-grid {
@@ -287,7 +296,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
             flex-shrink: 0;
             box-shadow: 0 6px 20px rgba(22,56,26,0.35);
         }
@@ -304,6 +312,9 @@
             font-weight: 700;
             letter-spacing: 0.5px;
             white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .story-body {
@@ -369,7 +380,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
             border: 3px solid rgba(255,255,255,0.2);
         }
         .quote-author-name {
@@ -395,7 +405,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
             margin-bottom: 1.5rem;
             box-shadow: 0 8px 24px rgba(22,56,26,0.3);
         }
@@ -476,7 +485,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.1rem;
         }
         .timeline-card {
             background: rgba(255,255,255,0.6);
@@ -527,7 +535,7 @@
             box-shadow: 0 12px 40px rgba(22,56,26,0.12);
             transform: translateY(-5px);
         }
-        .value-icon { font-size: 2.2rem; margin-bottom: 0.75rem; display: block; }
+        .value-icon { margin-bottom: 0.75rem; display: flex; justify-content: center; }
         .value-title {
             font-family: 'Playfair Display', serif;
             font-size: 1rem;
@@ -584,7 +592,11 @@
             padding: 0.35rem 0.8rem;
             border-radius: 50px;
             border: 1px solid rgba(255,255,255,0.9);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
+        .offer-tag svg { width: 12px; height: 12px; flex-shrink: 0; }
 
         .offer-list { display: flex; flex-direction: column; gap: 0.85rem; margin-top: 1.5rem; }
         .offer-item {
@@ -603,7 +615,8 @@
             box-shadow: 0 8px 24px rgba(22,56,26,0.1);
             transform: translateX(6px);
         }
-        .offer-item-icon { font-size: 1.3rem; flex-shrink: 0; }
+        .offer-item-icon { flex-shrink: 0; display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; }
+        .offer-item-icon svg { width: 22px; height: 22px; }
         .offer-item-title { font-size: 0.88rem; font-weight: 600; color: var(--dark); }
         .offer-item-sub { font-size: 0.76rem; color: #5a7a5e; margin-top: 1px; }
 
@@ -657,7 +670,8 @@
             font-size: 0.88rem;
             color: rgba(255,255,255,0.75);
         }
-        .strip-detail-icon { font-size: 1rem; }
+        .strip-detail-icon { display: flex; align-items: center; }
+        .strip-detail-icon svg { width: 16px; height: 16px; flex-shrink: 0; }
         .strip-detail a { color: inherit; text-decoration: none; }
         .strip-detail a:hover { color: #a8d994; }
         .strip-actions { display: flex; flex-direction: column; gap: 0.75rem; flex-shrink: 0; }
@@ -769,10 +783,8 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html" class="active">About</a></li>
             <li><a href="services.html">Services</a></li>
-                        <li><a href="gallery.html">Gallery</a></li>
-
-                        <!--<li><a href="contact.html">Contact</a></li>-->
-
+            <li><a href="gallery.html">Gallery</a></li>
+            <!--<li><a href="contact.html">Contact</a></li>-->
             <li><a href="contact.html" class="nav-cta">Get in Touch</a></li>
         </ul>
         <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
@@ -784,8 +796,7 @@
         <a href="index.html" onclick="toggleMenu()">Home</a>
         <a href="about.html" onclick="toggleMenu()">About</a>
         <a href="services.html" onclick="toggleMenu()">Services</a>
-                        <a href="gallery.html" onclick="toggleMenu()">Gallery</a>
-
+        <a href="gallery.html" onclick="toggleMenu()">Gallery</a>
         <a href="contact.html" onclick="toggleMenu()" style="background:var(--light-green);color:var(--primary);font-weight:600;">Get in Touch →</a>
     </div>
 
@@ -825,13 +836,20 @@
                     />
                     <div class="story-img-overlay"></div>
                     <div class="story-float-card">
-                        <div class="story-float-avatar">🧑🏿‍🌾</div>
+                        <div class="story-float-avatar">
+                            <!-- Person / farmer icon -->
+                            <svg class="avatar-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        </div>
                         <div>
                             <div class="story-float-label">Founder &amp; Manager</div>
                             <div class="story-float-name">Joseph Sedumedi</div>
                             <div class="story-float-sub">Kuruman, Northern Cape</div>
                         </div>
-                        <div class="bbbee-tag">★ 100% Black Owned</div>
+                        <div class="bbbee-tag">
+                            <!-- Star icon -->
+                            <svg style="width:12px;height:12px;flex-shrink:0;" viewBox="0 0 24 24" fill="white" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            100% Black Owned
+                        </div>
                     </div>
                 </div>
 
@@ -852,13 +870,19 @@
 
                     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:2rem;">
                         <div style="display:flex;align-items:center;gap:8px;background:rgba(45,106,48,0.08);border:1px solid rgba(45,106,48,0.2);border-radius:12px;padding:0.65rem 1rem;font-size:0.83rem;font-weight:500;color:var(--dark);">
-                            🏭 Own Greenhouse Grown
+                            <!-- Building / greenhouse icon -->
+                            <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="9" width="18" height="12" rx="2"/><path d="M3 9l9-6 9 6"/><line x1="12" y1="9" x2="12" y2="21"/></svg>
+                            Own Greenhouse Grown
                         </div>
                         <div style="display:flex;align-items:center;gap:8px;background:rgba(45,106,48,0.08);border:1px solid rgba(45,106,48,0.2);border-radius:12px;padding:0.65rem 1rem;font-size:0.83rem;font-weight:500;color:var(--dark);">
-                            🤝 Residential &amp; Contractors
+                            <!-- Handshake icon -->
+                            <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                            Residential &amp; Contractors
                         </div>
                         <div style="display:flex;align-items:center;gap:8px;background:rgba(45,106,48,0.08);border:1px solid rgba(45,106,48,0.2);border-radius:12px;padding:0.65rem 1rem;font-size:0.83rem;font-weight:500;color:var(--dark);">
-                            📍 Seven Miles, Kuruman
+                            <!-- Map pin icon -->
+                            <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            Seven Miles, Kuruman
                         </div>
                     </div>
                 </div>
@@ -876,7 +900,10 @@
                 Mohaduba is my heritage and my offering to the community — a place where <em>plants thrive</em> and people feel at home. Every customer leaves with a smile and the right advice.
             </p>
             <div class="quote-author">
-                <div class="quote-author-avatar">🌱</div>
+                <div class="quote-author-avatar">
+                    <!-- Seedling icon -->
+                    <svg class="quote-author-avatar svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:26px;height:26px;"><path d="M12 22V12m0 0C12 7 8 4 4 4s-1 8 8 8zm0 0c0-5 4-8 8-8s1 8-8 8"/></svg>
+                </div>
                 <div style="text-align:left;">
                     <div class="quote-author-name">Joseph Sedumedi</div>
                     <div class="quote-author-role">Founder &amp; Managing Director · Mohaduba Enterprise Nursery</div>
@@ -894,7 +921,10 @@
             </div>
             <div class="mission-grid">
                 <div class="glass-card mission-card reveal">
-                    <div class="mission-icon">🌿</div>
+                    <div class="mission-icon">
+                        <!-- Leaf icon -->
+                        <svg style="width:28px;height:28px;" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+                    </div>
                     <span class="section-eyebrow">Mission statement</span>
                     <h3 class="section-title" style="font-size:clamp(1.5rem,3vw,2rem);margin-bottom:1rem;">What <em>drives</em> us every day</h3>
                     <p class="mission-body">
@@ -909,7 +939,10 @@
                 </div>
 
                 <div class="glass-card objectives-card reveal reveal-delay-1">
-                    <div class="mission-icon" style="background:linear-gradient(135deg,#1f5522,#2d6a30);">🎯</div>
+                    <div class="mission-icon" style="background:linear-gradient(135deg,#1f5522,#2d6a30);">
+                        <!-- Target icon -->
+                        <svg style="width:28px;height:28px;" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                    </div>
                     <span class="section-eyebrow">Strategic objectives</span>
                     <h3 class="section-title" style="font-size:clamp(1.4rem,3vw,1.8rem);margin-bottom:1.5rem;">Our <em>commitments</em></h3>
 
@@ -953,7 +986,10 @@
                         </div>
                     </div>
                     <div class="timeline-center">
-                        <div class="timeline-dot">🌱</div>
+                        <div class="timeline-dot">
+                            <!-- Seedling icon -->
+                            <svg style="width:22px;height:22px;" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22V12m0 0C12 7 8 4 4 4s-1 8 8 8zm0 0c0-5 4-8 8-8s1 8-8 8"/></svg>
+                        </div>
                     </div>
                     <div class="timeline-empty"></div>
                 </div>
@@ -961,7 +997,10 @@
                 <div class="timeline-item">
                     <div class="timeline-empty"></div>
                     <div class="timeline-center">
-                        <div class="timeline-dot">🏭</div>
+                        <div class="timeline-dot">
+                            <!-- Building icon -->
+                            <svg style="width:22px;height:22px;" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="9" width="18" height="12" rx="2"/><path d="M3 9l9-6 9 6"/><line x1="12" y1="9" x2="12" y2="21"/></svg>
+                        </div>
                     </div>
                     <div class="timeline-content">
                         <div class="timeline-card reveal reveal-delay-1">
@@ -981,7 +1020,10 @@
                         </div>
                     </div>
                     <div class="timeline-center">
-                        <div class="timeline-dot">📈</div>
+                        <div class="timeline-dot">
+                            <!-- Trending up icon -->
+                            <svg style="width:22px;height:22px;" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                        </div>
                     </div>
                     <div class="timeline-empty"></div>
                 </div>
@@ -989,7 +1031,10 @@
                 <div class="timeline-item">
                     <div class="timeline-empty"></div>
                     <div class="timeline-center">
-                        <div class="timeline-dot">🌳</div>
+                        <div class="timeline-dot">
+                            <!-- Tree icon -->
+                            <svg style="width:22px;height:22px;" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 14l-5-5-5 5"/><path d="M12 9V3"/><path d="M5 20h14"/><path d="M8 20v-4"/><path d="M16 20v-4"/><rect x="8" y="16" width="8" height="4"/></svg>
+                        </div>
                     </div>
                     <div class="timeline-content">
                         <div class="timeline-card reveal reveal-delay-1">
@@ -1013,22 +1058,34 @@
             </div>
             <div class="values-grid">
                 <div class="value-card reveal">
-                    <span class="value-icon">🧠</span>
+                    <div class="value-icon">
+                        <!-- Brain / knowledge icon -->
+                        <svg class="value-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-1.14"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-1.14"/></svg>
+                    </div>
                     <div class="value-title">Expert Knowledge</div>
                     <div class="value-body">Our staff are trained and passionate plant lovers who answer questions with expertise and genuine care.</div>
                 </div>
                 <div class="value-card reveal reveal-delay-1">
-                    <span class="value-icon">🏷️</span>
+                    <div class="value-icon">
+                        <!-- Tag icon -->
+                        <svg class="value-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                    </div>
                     <div class="value-title">Affordable Quality</div>
                     <div class="value-body">Competitive prices reviewed regularly, so great plants and garden supplies never have to break the bank.</div>
                 </div>
                 <div class="value-card reveal reveal-delay-2">
-                    <span class="value-icon">📍</span>
+                    <div class="value-icon">
+                        <!-- Map pin icon -->
+                        <svg class="value-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
                     <div class="value-title">Great Location</div>
                     <div class="value-body">Conveniently situated at Seven Miles, Kuruman — easy to reach for both residential gardeners and contractors.</div>
                 </div>
                 <div class="value-card reveal reveal-delay-3">
-                    <span class="value-icon">🌿</span>
+                    <div class="value-icon">
+                        <!-- Leaf icon -->
+                        <svg class="value-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+                    </div>
                     <div class="value-title">Own Greenhouses</div>
                     <div class="value-body">Most plants grown on-site in state-of-the-art greenhouses, guaranteeing freshness and a wide variety year-round.</div>
                 </div>
@@ -1054,11 +1111,26 @@
                     />
                     <div class="offer-img-overlay"></div>
                     <div class="offer-tags">
-                        <span class="offer-tag">🪴 Bedding Plants</span>
-                        <span class="offer-tag">🌳 Trees</span>
-                        <span class="offer-tag">🥬 Vegetables</span>
-                        <span class="offer-tag">💧 Fountains</span>
-                        <span class="offer-tag">🪨 Stepping Stones</span>
+                        <span class="offer-tag">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
+                            Bedding Plants
+                        </span>
+                        <span class="offer-tag">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 14l-5-5-5 5"/><path d="M12 9V3"/><path d="M5 20h14"/></svg>
+                            Trees
+                        </span>
+                        <span class="offer-tag">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+                            Vegetables
+                        </span>
+                        <span class="offer-tag">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/><circle cx="12" cy="5" r="3"/></svg>
+                            Fountains
+                        </span>
+                        <span class="offer-tag">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="10" ry="4"/></svg>
+                            Stepping Stones
+                        </span>
                     </div>
                 </div>
 
@@ -1068,35 +1140,50 @@
                     </p>
                     <div class="offer-list">
                         <div class="offer-item">
-                            <span class="offer-item-icon">🌸</span>
+                            <span class="offer-item-icon">
+                                <!-- Flower icon -->
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2a4 4 0 0 1 4 4 4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1-4-4 4 4 0 0 1 4-4 4 4 0 0 1 4-4z"/></svg>
+                            </span>
                             <div>
                                 <div class="offer-item-title">Bedding Plants &amp; Shrubs</div>
                                 <div class="offer-item-sub">Seasonal colour and hardy shrubs, greenhouse-grown for freshness</div>
                             </div>
                         </div>
                         <div class="offer-item">
-                            <span class="offer-item-icon">🌳</span>
+                            <span class="offer-item-icon">
+                                <!-- Tree icon -->
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 14l-5-5-5 5"/><path d="M12 9V3"/><path d="M5 20h14"/><path d="M8 20v-4"/><path d="M16 20v-4"/><rect x="8" y="16" width="8" height="4"/></svg>
+                            </span>
                             <div>
                                 <div class="offer-item-title">Trees &amp; Shade Trees</div>
                                 <div class="offer-item-sub">Indigenous and exotic trees for every landscape</div>
                             </div>
                         </div>
                         <div class="offer-item">
-                            <span class="offer-item-icon">🥦</span>
+                            <span class="offer-item-icon">
+                                <!-- Leaf / veg icon -->
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+                            </span>
                             <div>
                                 <div class="offer-item-title">Vegetable Plants</div>
                                 <div class="offer-item-sub">Starter vegetable seedlings and herbs for your kitchen garden</div>
                             </div>
                         </div>
                         <div class="offer-item">
-                            <span class="offer-item-icon">⛲</span>
+                            <span class="offer-item-icon">
+                                <!-- Droplets / fountain icon -->
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22V8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/><circle cx="12" cy="5" r="3"/></svg>
+                            </span>
                             <div>
                                 <div class="offer-item-title">Fountains &amp; Stepping Stones</div>
                                 <div class="offer-item-sub">Beautiful garden décor and features for every outdoor space</div>
                             </div>
                         </div>
                         <div class="offer-item">
-                            <span class="offer-item-icon">🌱</span>
+                            <span class="offer-item-icon">
+                                <!-- Seedling icon -->
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22V12m0 0C12 7 8 4 4 4s-1 8 8 8zm0 0c0-5 4-8 8-8s1 8-8 8"/></svg>
+                            </span>
                             <div>
                                 <div class="offer-item-title">Fertilizers, Soils &amp; Tools</div>
                                 <div class="offer-item-sub">Premium potting mixes, composts, fertilizers and all your garden tools</div>
@@ -1116,15 +1203,41 @@
             <div>
                 <h2 class="strip-title">Ready to <em>visit</em><br>Mohaduba?</h2>
                 <div class="strip-details">
-                    <div class="strip-detail"><span class="strip-detail-icon">📍</span> H115Plot, Seven Miles, Kuruman, 8460</div>
-                    <div class="strip-detail"><span class="strip-detail-icon">📞</span> <a href="tel:+27822243736">+27 82-224-3736</a></div>
-                    <div class="strip-detail"><span class="strip-detail-icon">✉️</span> <a href="mailto:josephsedumedi53@gmail.com">josephsedumedi53@gmail.com</a></div>
-                    <div class="strip-detail"><span class="strip-detail-icon">🏷️</span> Reg: 2017/360951/07</div>
+                    <div class="strip-detail">
+                        <span class="strip-detail-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </span>
+                        H115Plot, Seven Miles, Kuruman, 8460
+                    </div>
+                    <div class="strip-detail">
+                        <span class="strip-detail-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.79a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        </span>
+                        <a href="tel:+27822243736">+27 82-224-3736</a>
+                    </div>
+                    <div class="strip-detail">
+                        <span class="strip-detail-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        </span>
+                        <a href="mailto:josephsedumedi53@gmail.com">josephsedumedi53@gmail.com</a>
+                    </div>
+                    <div class="strip-detail">
+                        <span class="strip-detail-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                        </span>
+                        Reg: 2017/360951/07
+                    </div>
                 </div>
             </div>
             <div class="strip-actions">
-                <a href="tel:+27822243736" class="btn-primary">📞 Call Now</a>
-                <a href="mailto:josephsedumedi53@gmail.com" class="btn-ghost">✉️ Email Us</a>
+                <a href="tel:+27822243736" class="btn-primary">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.79a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    Call Now
+                </a>
+                <a href="mailto:josephsedumedi53@gmail.com" class="btn-ghost">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    Email Us
+                </a>
             </div>
         </div>
     </section>
@@ -1134,7 +1247,7 @@
         <div class="footer-inner">
             <div class="footer-top">
                 <div>
-        <div class="nav-logo"><img src="./assets/mlogo2.png" alt="Mohaduba Logo" style="height: 150px; width: auto;"></div>
+                    <div class="nav-logo"><img src="./assets/mlogo2.png" alt="Mohaduba Logo" style="height: 150px; width: auto;"></div>
                     <div class="footer-tagline">Rooted in Kuruman, grown with passion</div>
                 </div>
                 <div class="footer-links">

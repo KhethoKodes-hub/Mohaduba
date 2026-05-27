@@ -6,8 +6,7 @@
     <title>Mohaduba · Services & Products</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="icon" type="image/x-icon" href="./assets/Mologo.png">
-
+    <link rel="icon" type="image/x-icon" href="./assets/Mologo.png">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 
     <style>
@@ -95,6 +94,16 @@
         .mobile-menu a:hover { background: var(--light-green); color: var(--primary); }
         .mobile-menu.open { display: flex; }
 
+        /* SVG icon helpers */
+        .btn-icon { width: 16px; height: 16px; flex-shrink: 0; }
+        .acc-icon-svg { width: 28px; height: 28px; }
+        .commitment-icon-svg { width: 44px; height: 44px; }
+        .tile-icon-svg { width: 36px; height: 36px; }
+        .mini-icon-svg { width: 28px; height: 28px; }
+        .pill-icon { width: 15px; height: 15px; flex-shrink: 0; }
+        .cta-detail-icon { width: 15px; height: 15px; flex-shrink: 0; }
+        .catalogue-note-icon { width: 13px; height: 13px; flex-shrink: 0; }
+
         /* ── SERVICES HERO ── */
         .services-hero {
             position: relative;
@@ -159,11 +168,7 @@
             line-height: 1.6;
             margin-bottom: 2rem;
         }
-        .hero-tag-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-        }
+        .hero-tag-row { display: flex; flex-wrap: wrap; gap: 0.6rem; }
         .hero-tag {
             display: inline-flex;
             align-items: center;
@@ -268,8 +273,12 @@
             padding: 1rem 1.2rem;
             box-shadow: 0 12px 40px rgba(22,56,26,0.2);
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
         }
-        .greenhouse-badge-icon { font-size: 2rem; display: block; margin-bottom: 4px; }
+        .greenhouse-badge-icon { display: flex; align-items: center; justify-content: center; margin-bottom: 4px; }
         .greenhouse-badge-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--primary); }
         .greenhouse-badge-value { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; color: var(--dark); }
 
@@ -337,7 +346,8 @@
             position: absolute; bottom: 0; left: 0; right: 0;
             padding: 1.4rem;
         }
-        .plant-card-icon { font-size: 1.8rem; display: block; margin-bottom: 0.3rem; }
+        .plant-card-icon { display: flex; align-items: center; margin-bottom: 0.3rem; }
+        .plant-card-icon svg { width: 28px; height: 28px; }
         .plant-card-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: white; line-height: 1.2; }
         .plant-card-desc {
             font-size: 0.78rem; color: rgba(255,255,255,0.7); line-height: 1.5;
@@ -379,10 +389,10 @@
             background: linear-gradient(135deg, #e4f2db, #c0ddb0);
             border-radius: 16px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.5rem;
             transition: all 0.25s;
         }
         .acc-card:hover .acc-icon-wrap { background: linear-gradient(135deg, #3a8040, #1f5522); box-shadow: 0 6px 20px rgba(22,56,26,0.3); }
+        .acc-card:hover .acc-icon-wrap svg { stroke: white; }
         .acc-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
         .acc-body { font-size: 0.82rem; line-height: 1.55; color: #4a6b4e; }
 
@@ -418,7 +428,6 @@
         .greenhouse-feature-title em { font-style: italic; color: #a8d994; }
         .greenhouse-feature-body { font-size: 1rem; color: rgba(255,255,255,0.7); line-height: 1.75; margin-bottom: 2rem; }
         .greenhouse-stats { display: flex; gap: 2rem; flex-wrap: wrap; }
-        .greenhouse-stat { }
         .greenhouse-stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: #a8d994; line-height: 1; display: block; }
         .greenhouse-stat-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); }
 
@@ -435,7 +444,7 @@
             transition: all 0.25s;
         }
         .commitment-card:hover { background: white; border-left-color: var(--dark); box-shadow: 0 16px 48px rgba(22,56,26,0.13); transform: translateY(-3px); }
-        .commitment-icon { font-size: 2.5rem; display: block; margin-bottom: 1rem; }
+        .commitment-icon { display: flex; align-items: center; margin-bottom: 1rem; }
         .commitment-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--dark); margin-bottom: 0.5rem; }
         .commitment-body { font-size: 0.88rem; line-height: 1.7; color: #4a6b4e; }
 
@@ -457,11 +466,10 @@
         .catalogue-item:last-child { border-bottom: none; }
         .catalogue-item:hover { color: var(--primary); padding-left: 4px; }
         .catalogue-item-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--mid-green); flex-shrink: 0; }
-        .catalogue-note { margin-top: 1.5rem; padding: 0.85rem 1.2rem; background: rgba(45,106,48,0.06); border-radius: 12px; font-size: 0.8rem; font-style: italic; color: #5a7a5e; }
+        .catalogue-note { margin-top: 1.5rem; padding: 0.85rem 1.2rem; background: rgba(45,106,48,0.06); border-radius: 12px; font-size: 0.8rem; font-style: italic; color: #5a7a5e; display: flex; align-items: flex-start; gap: 8px; }
 
-        /* ── SERVICES OFFERINGS SECTION (NEW) ── */
+        /* ── SERVICE OFFERINGS ── */
         .offerings-section { padding: 2rem 1.5rem 5rem; }
-
         .offerings-intro {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -470,7 +478,6 @@
             margin-bottom: 3.5rem;
         }
 
-        /* Hero service card — large panoramic */
         .offering-hero-card {
             position: relative;
             border-radius: 28px;
@@ -487,7 +494,8 @@
                 repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(255,255,255,0.015) 30px, rgba(255,255,255,0.015) 31px);
         }
         .offering-hero-card-content { position: relative; z-index: 2; padding: 2.5rem; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
-        .offering-hero-icon { font-size: 3.5rem; display: block; margin-bottom: 0.5rem; filter: drop-shadow(0 4px 16px rgba(0,0,0,0.3)); }
+        .offering-hero-icon { display: flex; align-items: center; margin-bottom: 0.5rem; }
+        .offering-hero-icon svg { width: 52px; height: 52px; filter: drop-shadow(0 4px 16px rgba(0,0,0,0.3)); }
         .offering-hero-badge {
             display: inline-flex; align-items: center; gap: 6px;
             background: rgba(168,217,148,0.2); border: 1px solid rgba(168,217,148,0.4);
@@ -498,19 +506,9 @@
         .offering-hero-title em { font-style: italic; color: #a8d994; }
         .offering-hero-body { font-size: 0.9rem; line-height: 1.7; color: rgba(255,255,255,0.68); max-width: 360px; }
         .offering-hero-footer { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
-        .offering-hero-stat { }
         .offering-hero-stat-num { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: #a8d994; line-height: 1; display: block; }
         .offering-hero-stat-label { font-size: 0.62rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.45); }
 
-        .offering-hero-card:hover .offering-hero-pattern {
-            background-image:
-                radial-gradient(circle at 20% 50%, rgba(122,184,106,0.25) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(45,106,48,0.3) 0%, transparent 40%),
-                repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(255,255,255,0.02) 30px, rgba(255,255,255,0.02) 31px);
-            transition: all 0.4s ease;
-        }
-
-        /* Right side stacked mini cards */
         .offering-stack { display: flex; flex-direction: column; gap: 1rem; }
         .offering-mini-card {
             background: rgba(255,255,255,0.65);
@@ -536,13 +534,13 @@
             background: linear-gradient(135deg, #e4f2db, #c0ddb0);
             border-radius: 14px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.4rem;
             transition: all 0.28s;
         }
         .offering-mini-card:hover .offering-mini-icon {
             background: linear-gradient(135deg, #2d6a30, #1c4520);
             box-shadow: 0 4px 16px rgba(22,56,26,0.3);
         }
+        .offering-mini-card:hover .offering-mini-icon svg { stroke: white; }
         .offering-mini-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: 2px; }
         .offering-mini-desc { font-size: 0.77rem; color: #5a7a5e; line-height: 1.4; }
         .offering-mini-arrow {
@@ -551,14 +549,14 @@
             background: rgba(45,106,48,0.08);
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            font-size: 0.8rem; color: var(--primary);
+            color: var(--primary);
             transition: all 0.28s;
+            font-size: 0.9rem;
+            font-weight: 700;
         }
         .offering-mini-card:hover .offering-mini-arrow { background: var(--primary); color: white; transform: translateX(2px); }
 
-        /* Bottom 3 large offering tiles */
         .offering-tiles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-
         .offering-tile {
             position: relative;
             border-radius: 24px;
@@ -587,7 +585,6 @@
             background: linear-gradient(135deg, #dff0d4, #b5dba8);
             border-radius: 20px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 2rem;
             margin-bottom: 1.2rem;
             transition: all 0.3s;
             position: relative;
@@ -596,16 +593,10 @@
             background: linear-gradient(135deg, #2d6a30, #143816);
             box-shadow: 0 8px 28px rgba(22,56,26,0.35);
         }
+        .offering-tile:hover .offering-tile-icon-wrap svg { stroke: white; }
 
-        .offering-tile-label {
-            font-size: 0.62rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
-            color: var(--primary); margin-bottom: 0.5rem; display: block;
-        }
-        .offering-tile-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem; font-weight: 700; color: var(--dark);
-            line-height: 1.2; margin-bottom: 0.75rem;
-        }
+        .offering-tile-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--primary); margin-bottom: 0.5rem; display: block; }
+        .offering-tile-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--dark); line-height: 1.2; margin-bottom: 0.75rem; }
         .offering-tile-body { font-size: 0.83rem; line-height: 1.7; color: #4a6b4e; margin-bottom: 1rem; }
         .offering-tile-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
         .offering-tile-tag {
@@ -617,22 +608,10 @@
         .offering-tile:hover .offering-tile-tag { background: rgba(45,106,48,0.14); }
 
         /* ── CTA SECTION ── */
-        .cta-section {
-            padding: 5rem 1.5rem;
-            position: relative; overflow: hidden;
-        }
-        .cta-bg {
-            position: absolute; inset: 0;
-            background-image: url('./assets/footer.png');
-            background-size: cover; background-position: center;
-            filter: brightness(0.28) saturate(1.4);
-        }
+        .cta-section { padding: 5rem 1.5rem; position: relative; overflow: hidden; }
+        .cta-bg { position: absolute; inset: 0; background-image: url('./assets/footer.png'); background-size: cover; background-position: center; filter: brightness(0.28) saturate(1.4); }
         .cta-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(14,36,16,0.93) 0%, rgba(22,60,26,0.86) 100%); }
-        .cta-inner {
-            position: relative; z-index: 2;
-            max-width: 1100px; margin: 0 auto;
-            display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center;
-        }
+        .cta-inner { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; }
         .cta-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: white; line-height: 1.2; margin-bottom: 0.5rem; }
         .cta-title em { color: #a8d994; font-style: italic; }
         .cta-details { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem; }
@@ -700,8 +679,7 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="services.html" class="active">Services</a></li>
-                        <li><a href="gallery.html">Gallery</a></li>
-
+            <li><a href="gallery.html">Gallery</a></li>
             <!--<li><a href="contact.html">Contact</a></li>-->
             <li><a href="contact.html" class="nav-cta">Get in Touch</a></li>
         </ul>
@@ -714,8 +692,7 @@
         <a href="index.html" onclick="toggleMenu()">Home</a>
         <a href="about.html" onclick="toggleMenu()">About</a>
         <a href="services.html" onclick="toggleMenu()">Services</a>
-                        <a href="gallery.html" onclick="toggleMenu()">Gallery</a>
-
+        <a href="gallery.html" onclick="toggleMenu()">Gallery</a>
         <!--<a href="contact.html" onclick="toggleMenu()">Contact</a>-->
         <a href="contact.html" onclick="toggleMenu()" style="background:var(--light-green);color:var(--primary);font-weight:600;">Get in Touch →</a>
     </div>
@@ -725,38 +702,10 @@
         <div class="services-hero-bg"></div>
         <div class="services-hero-overlay"></div>
         <div class="services-hero-content">
-            <!--<div class="breadcrumb">
-                <a href="index.html">Mohaduba</a>
-                <span>›</span>
-                <span>Services &amp; Products</span>
-            </div>-->
+            <!--<div class="breadcrumb">...</div>-->
             <h1 class="services-hero-title">What We<br><em>Grow</em> &amp; Offer.</h1>
-            <!--<p class="services-hero-sub">From greenhouse-grown bedding plants to shade trees, garden tools to decorative fountains — everything your garden dreams of.</p>-->
-            <!--<div class="hero-tag-row">
-                <span class="hero-tag">🌸 Bedding Plants</span>
-                <span class="hero-tag">🌳 Trees</span>
-                <span class="hero-tag">🥬 Vegetables</span>
-                <span class="hero-tag">⛲ Fountains</span>
-                <span class="hero-tag">🪨 Stepping Stones</span>
-                <span class="hero-tag">🌱 Soils &amp; Fertilizers</span>
-                <span class="hero-tag">🏡 Landscaping</span>
-                <span class="hero-tag">🌿 Indigenous Species</span>
-                <span class="hero-tag">⛏️ Mining Rehabilitation</span>
-            </div>-->
         </div>
     </section>
-
-    <!-- TABS BAR 
-    <div class="tabs-bar">
-        <div class="tabs-inner">
-            <a href="#plants" class="tab-item active">🌳 Plants &amp; Trees</a>
-            <a href="#accessories" class="tab-item">⛲ Accessories</a>
-            <a href="#offerings" class="tab-item">🏡 Our Services</a>
-            <a href="#greenhouse" class="tab-item">🏭 Our Greenhouses</a>
-            <a href="#commitment" class="tab-item">🤝 Our Promise</a>
-            <a href="#catalogue" class="tab-item">📋 Full Catalogue</a>
-        </div>
-    </div>-->
 
     <!-- INTRO -->
     <section class="intro-section">
@@ -766,7 +715,10 @@
                     <img src="assets/greenhouse1.png" alt="Mohaduba nursery plant selection" class="intro-img" loading="lazy" />
                     <div class="intro-img-overlay"></div>
                     <div class="greenhouse-badge">
-                        <span class="greenhouse-badge-icon"></span>
+                        <div class="greenhouse-badge-icon">
+                            <!-- Greenhouse / building icon -->
+                            <svg style="width:32px;height:32px;" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="9" width="18" height="12" rx="2"/><path d="M3 9l9-6 9 6"/><line x1="12" y1="9" x2="12" y2="21"/></svg>
+                        </div>
                         <div class="greenhouse-badge-label">Grown on-site</div>
                         <div class="greenhouse-badge-value">Own Greenhouses</div>
                     </div>
@@ -782,12 +734,30 @@
                         Most of our plants are grown <strong>on-site in state-of-the-art greenhouses</strong>, ensuring robust, healthy, acclimatised stock perfectly suited to the Kuruman climate. Whether you're a homeowner, landscaping contractor, or renter, we have the perfect green addition waiting for you.
                     </p>
                     <div class="intro-pills">
-                        <div class="intro-pill">🏭 On-site greenhouse grown</div>
-                        <div class="intro-pill">🏡 Residential &amp; contractors</div>
-                        <div class="intro-pill">🌍 Kuruman, Northern Cape</div>
-                        <div class="intro-pill">🧠 Expert staff advice</div>
-                        <div class="intro-pill">🌿 Indigenous species</div>
-                        <div class="intro-pill">⛏️ Rehabilitation specialists</div>
+                        <div class="intro-pill">
+                            <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="9" width="18" height="12" rx="2"/><path d="M3 9l9-6 9 6"/><line x1="12" y1="9" x2="12" y2="21"/></svg>
+                            On-site greenhouse grown
+                        </div>
+                        <div class="intro-pill">
+                            <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                            Residential &amp; contractors
+                        </div>
+                        <div class="intro-pill">
+                            <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            Kuruman, Northern Cape
+                        </div>
+                        <div class="intro-pill">
+                            <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-1.14"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-1.14"/></svg>
+                            Expert staff advice
+                        </div>
+                        <div class="intro-pill">
+                            <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+                            Indigenous species
+                        </div>
+                        <div class="intro-pill">
+                            <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 20h20"/><path d="M5 20V8l7-5 7 5v12"/><path d="M9 20v-5h6v5"/></svg>
+                            Rehabilitation specialists
+                        </div>
                     </div>
                 </div>
             </div>
@@ -810,7 +780,10 @@
                     <div class="plant-card-overlay"></div>
                     <div class="plant-card-badge">Seasonal</div>
                     <div class="plant-card-content">
-                        <span class="plant-card-icon">🌸</span>
+                        <div class="plant-card-icon">
+                            <!-- Flower icon -->
+                            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2a4 4 0 0 1 4 4 4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1-4-4 4 4 0 0 1 4-4 4 4 0 0 1 4-4z"/></svg>
+                        </div>
                         <div class="plant-card-title">Bedding Plants</div>
                         <div class="plant-card-desc">Colourful annuals and perennials for beds, borders and containers — renewed every season.</div>
                         <span class="plant-card-tag">Wide variety</span>
@@ -821,7 +794,10 @@
                     <div class="plant-card-overlay"></div>
                     <div class="plant-card-badge">Structure</div>
                     <div class="plant-card-content">
-                        <span class="plant-card-icon">🌿</span>
+                        <div class="plant-card-icon">
+                            <!-- Leaf icon -->
+                            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+                        </div>
                         <div class="plant-card-title">Shrubs</div>
                         <div class="plant-card-desc">Evergreen and flowering shrubs for garden structure — native and exotic varieties available.</div>
                         <span class="plant-card-tag">Native &amp; exotic</span>
@@ -832,7 +808,10 @@
                     <div class="plant-card-overlay"></div>
                     <div class="plant-card-badge">Landscape</div>
                     <div class="plant-card-content">
-                        <span class="plant-card-icon">🌳</span>
+                        <div class="plant-card-icon">
+                            <!-- Tree icon -->
+                            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 14l-5-5-5 5"/><path d="M12 9V3"/><path d="M5 20h14"/><path d="M8 20v-4"/><path d="M16 20v-4"/><rect x="8" y="16" width="8" height="4"/></svg>
+                        </div>
                         <div class="plant-card-title">Trees</div>
                         <div class="plant-card-desc">Shade trees, fruit trees and ornamentals in advanced sizes for residential and contractor use.</div>
                         <span class="plant-card-tag">Advanced sizes</span>
@@ -843,7 +822,10 @@
                     <div class="plant-card-overlay"></div>
                     <div class="plant-card-badge">Edible</div>
                     <div class="plant-card-content">
-                        <span class="plant-card-icon">🍅</span>
+                        <div class="plant-card-icon">
+                            <!-- Vegetable / sprout icon -->
+                            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22V12m0 0C12 7 8 4 4 4s-1 8 8 8zm0 0c0-5 4-8 8-8s1 8-8 8"/></svg>
+                        </div>
                         <div class="plant-card-title">Vegetable Plants</div>
                         <div class="plant-card-desc">Tomatoes, peppers, herbs, leafy greens — starter plants ready for your kitchen garden.</div>
                         <span class="plant-card-tag">Kitchen ready</span>
@@ -864,42 +846,60 @@
             </div>
             <div class="accessories-grid">
                 <div class="acc-card reveal">
-                    <div class="acc-icon-wrap">⛲</div>
+                    <div class="acc-icon-wrap">
+                        <!-- Fountain / water droplet icon -->
+                        <svg class="acc-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22V8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/><circle cx="12" cy="5" r="3"/></svg>
+                    </div>
                     <div>
                         <div class="acc-title">Fountains</div>
                         <div class="acc-body">Decorative water features that bring movement and tranquility to any outdoor space. Various sizes and styles available.</div>
                     </div>
                 </div>
                 <div class="acc-card reveal reveal-delay-1">
-                    <div class="acc-icon-wrap">🪨</div>
+                    <div class="acc-icon-wrap">
+                        <!-- Stepping stones / layers icon -->
+                        <svg class="acc-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="18" rx="9" ry="3"/><ellipse cx="12" cy="12" rx="9" ry="3"/><ellipse cx="12" cy="6" rx="9" ry="3"/></svg>
+                    </div>
                     <div>
                         <div class="acc-title">Stepping Stones</div>
                         <div class="acc-body">Create beautiful garden pathways with our range of stepping stones and paving options. Durable and stylish.</div>
                     </div>
                 </div>
                 <div class="acc-card reveal reveal-delay-2">
-                    <div class="acc-icon-wrap">🔧</div>
+                    <div class="acc-icon-wrap">
+                        <!-- Wrench / tool icon -->
+                        <svg class="acc-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                    </div>
                     <div>
                         <div class="acc-title">Garden Tools</div>
                         <div class="acc-body">From spades and forks to pruners and watering cans — quality tools for every gardening task, big or small.</div>
                     </div>
                 </div>
                 <div class="acc-card reveal">
-                    <div class="acc-icon-wrap">🧪</div>
+                    <div class="acc-icon-wrap">
+                        <!-- Flask / fertilizer icon -->
+                        <svg class="acc-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6l3 9H6L9 3z"/><path d="M6 12a6 6 0 0 0 12 0"/></svg>
+                    </div>
                     <div>
                         <div class="acc-title">Fertilizers</div>
                         <div class="acc-body">A curated range of organic and compound fertilizers to feed your plants and keep your garden thriving throughout the year.</div>
                     </div>
                 </div>
                 <div class="acc-card reveal reveal-delay-1">
-                    <div class="acc-icon-wrap">🪴</div>
+                    <div class="acc-icon-wrap">
+                        <!-- Plant pot icon -->
+                        <svg class="acc-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a5 5 0 0 1 5 5c0 2-1 3.5-2.5 4.5"/><path d="M7 7a5 5 0 0 1 5-5"/><rect x="5" y="14" width="14" height="7" rx="2"/><path d="M9 14v-2a3 3 0 0 1 6 0v2"/></svg>
+                    </div>
                     <div>
                         <div class="acc-title">Potting Soils</div>
                         <div class="acc-body">Premium potting mixes, composts and bark mulch for container gardens, raised beds and planting holes.</div>
                     </div>
                 </div>
                 <div class="acc-card reveal reveal-delay-2">
-                    <div class="acc-icon-wrap">🚿</div>
+                    <div class="acc-icon-wrap">
+                        <!-- Droplets / watering icon -->
+                        <svg class="acc-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+                    </div>
                     <div>
                         <div class="acc-title">Watering Equipment</div>
                         <div class="acc-body">Watering cans, hose pipes, sprinklers and irrigation supplies — keeping your garden hydrated the right way.</div>
@@ -909,13 +909,9 @@
         </div>
     </section>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SERVICE OFFERINGS (NEW SECTION)               -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!-- SERVICE OFFERINGS -->
     <section class="offerings-section" id="offerings">
         <div class="section-wrap">
-
-            <!-- Section header -->
             <div style="margin-bottom: 2.5rem;" class="reveal">
                 <span class="section-eyebrow">What we do</span>
                 <h2 class="section-title">Professional <em>Services</em></h2>
@@ -925,16 +921,22 @@
                 </p>
             </div>
 
-            <!-- Top layout: hero card + stacked mini cards -->
+            <!-- Hero card + stacked mini cards -->
             <div class="offerings-intro reveal">
-
                 <!-- Hero service: Landscaping -->
                 <div class="offering-hero-card">
                     <div class="offering-hero-pattern"></div>
                     <div class="offering-hero-card-content">
                         <div>
-                            <span class="offering-hero-badge">✦ Flagship Service</span>
-                            <span class="offering-hero-icon"></span>
+                            <span class="offering-hero-badge">
+                                <!-- Diamond / star icon -->
+                                <svg style="width:10px;height:10px;" viewBox="0 0 24 24" fill="#a8d994" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                Flagship Service
+                            </span>
+                            <div class="offering-hero-icon">
+                                <!-- Landscape / mountains icon -->
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#a8d994" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l4-8 4 5 3-3 4 6"/><path d="M3 21h18"/></svg>
+                            </div>
                             <h3 class="offering-hero-title">Professional<br><em>Landscaping</em></h3>
                             <p class="offering-hero-body">We design and build beautiful outdoor spaces — from residential gardens to commercial grounds. Our team handles everything: planning, planting, paving, water features and ongoing maintenance.</p>
                         </div>
@@ -949,7 +951,7 @@
                             </div>
                             <div class="offering-hero-stat">
                                 <span class="offering-hero-stat-num">Kuruman</span>
-                                <span class="offering-hero-stat-label">& surrounds</span>
+                                <span class="offering-hero-stat-label">&amp; surrounds</span>
                             </div>
                         </div>
                     </div>
@@ -957,9 +959,11 @@
 
                 <!-- Right stacked mini cards -->
                 <div class="offering-stack">
-
                     <div class="offering-mini-card">
-                        <div class="offering-mini-icon">🧑🏿‍🌾</div>
+                        <div class="offering-mini-icon">
+                            <!-- Person / gardener icon -->
+                            <svg class="mini-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        </div>
                         <div>
                             <div class="offering-mini-title">Gardening Services</div>
                             <div class="offering-mini-desc">Regular maintenance, planting, pruning and cleanup for homes and businesses.</div>
@@ -968,7 +972,10 @@
                     </div>
 
                     <div class="offering-mini-card">
-                        <div class="offering-mini-icon">🌱</div>
+                        <div class="offering-mini-icon">
+                            <!-- Seedling icon -->
+                            <svg class="mini-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22V12m0 0C12 7 8 4 4 4s-1 8 8 8zm0 0c0-5 4-8 8-8s1 8-8 8"/></svg>
+                        </div>
                         <div>
                             <div class="offering-mini-title">Vegetable Seedlings</div>
                             <div class="offering-mini-desc">Healthy, greenhouse-raised seedlings ready to transplant into your kitchen garden.</div>
@@ -977,22 +984,26 @@
                     </div>
 
                     <div class="offering-mini-card">
-                        <div class="offering-mini-icon">🌿</div>
+                        <div class="offering-mini-icon">
+                            <!-- Leaf icon -->
+                            <svg class="mini-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+                        </div>
                         <div>
                             <div class="offering-mini-title">Indigenous Species Supply</div>
                             <div class="offering-mini-desc">Locally sourced and propagated indigenous plants suited to the Northern Cape environment.</div>
                         </div>
                         <div class="offering-mini-arrow">→</div>
                     </div>
-
                 </div>
             </div>
 
-            <!-- Bottom 3 tiles: rehabilitation, invasive control + one more -->
+            <!-- Bottom 3 tiles -->
             <div class="offering-tiles-grid" style="margin-top: 1.5rem;">
-
                 <div class="offering-tile reveal">
-                    <div class="offering-tile-icon-wrap">⛏️</div>
+                    <div class="offering-tile-icon-wrap">
+                        <!-- Pickaxe / mining icon -->
+                        <svg class="tile-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 20h20"/><path d="M5 20V8l7-5 7 5v12"/><path d="M9 20v-5h6v5"/></svg>
+                    </div>
                     <span class="offering-tile-label">Environmental</span>
                     <h3 class="offering-tile-title">Mining Rehabilitation</h3>
                     <p class="offering-tile-body">We specialise in restoring land affected by mining activity. Using indigenous and hardy species, our team re-establishes ground cover, soil stability and ecological function on disturbed sites across the Northern Cape.</p>
@@ -1004,7 +1015,10 @@
                 </div>
 
                 <div class="offering-tile reveal reveal-delay-1">
-                    <div class="offering-tile-icon-wrap">🚫🌾</div>
+                    <div class="offering-tile-icon-wrap">
+                        <!-- X / ban + plant icon -->
+                        <svg class="tile-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+                    </div>
                     <span class="offering-tile-label">Ecological Management</span>
                     <h3 class="offering-tile-title">Invasive Vegetation Control</h3>
                     <p class="offering-tile-body">Invasive plant species threaten local ecosystems, farmland and water sources. Our trained teams identify, remove and manage invasive vegetation using responsible, targeted methods — protecting your land and the region's biodiversity.</p>
@@ -1016,7 +1030,10 @@
                 </div>
 
                 <div class="offering-tile reveal reveal-delay-2">
-                    <div class="offering-tile-icon-wrap">🌍</div>
+                    <div class="offering-tile-icon-wrap">
+                        <!-- Globe / earth icon -->
+                        <svg class="tile-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    </div>
                     <span class="offering-tile-label">Bulk Supply</span>
                     <h3 class="offering-tile-title">Indigenous Species Supply</h3>
                     <p class="offering-tile-body">We propagate and supply indigenous plant species in bulk for rehabilitation projects, public landscaping, municipal greening initiatives and eco-sensitive developments. All stock is locally acclimatised and sourced responsibly.</p>
@@ -1026,7 +1043,6 @@
                         <span class="offering-tile-tag">Contractor supply</span>
                     </div>
                 </div>
-
             </div>
 
             <!-- Enquiry nudge -->
@@ -1037,10 +1053,8 @@
                 </div>
                 <a href="contact.html" class="btn-primary" style="box-shadow: 0 6px 20px rgba(20,55,22,0.35);">Get a Quote →</a>
             </div>
-
         </div>
     </section>
-    <!-- ══════════════════════════════════════════════ -->
 
     <!-- GREENHOUSE FEATURE -->
     <section class="greenhouse-section" id="greenhouse">
@@ -1082,22 +1096,34 @@
             </div>
             <div class="commitment-grid">
                 <div class="commitment-card reveal">
-                    <span class="commitment-icon">🧑🏿‍🌾</span>
+                    <div class="commitment-icon">
+                        <!-- Person / expert icon -->
+                        <svg class="commitment-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
                     <div class="commitment-title">Expert Advice, Always</div>
                     <div class="commitment-body">Every customer is greeted by knowledgeable, well-informed staff who can answer questions, recommend the right plant for your soil and climate, and offer practical care advice. That's our commitment — not just selling plants, but empowering you to grow.</div>
                 </div>
                 <div class="commitment-card reveal reveal-delay-1">
-                    <span class="commitment-icon">🏗️</span>
+                    <div class="commitment-icon">
+                        <!-- Building / contractor icon -->
+                        <svg class="commitment-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                    </div>
                     <div class="commitment-title">Contractors &amp; Homeowners Welcome</div>
                     <div class="commitment-body">We supply reliable quality and volume for landscaping contractors who need consistency. Residential customers receive the same dedication — whether you need a single bedding plant or an entire landscape supply. Everyone leaves Mohaduba satisfied.</div>
                 </div>
                 <div class="commitment-card reveal reveal-delay-2">
-                    <span class="commitment-icon">🏷️</span>
+                    <div class="commitment-icon">
+                        <!-- Tag / price icon -->
+                        <svg class="commitment-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                    </div>
                     <div class="commitment-title">Competitive, Honest Pricing</div>
                     <div class="commitment-body">Our prices are reviewed periodically to ensure affordability without compromising on quality. We believe great plants and garden supplies should be accessible to everyone in our community — from first-time gardeners to seasoned landscapers.</div>
                 </div>
                 <div class="commitment-card reveal reveal-delay-3">
-                    <span class="commitment-icon">😊</span>
+                    <div class="commitment-icon">
+                        <!-- Smile / welcoming icon -->
+                        <svg class="commitment-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                    </div>
                     <div class="commitment-title">A Welcoming Atmosphere</div>
                     <div class="commitment-body">Mohaduba is more than a nursery — it's a place where customers feel genuinely at home. We've worked hard to create a friendly, open environment where you can browse freely, ask questions without hesitation, and always leave with a smile.</div>
                 </div>
@@ -1149,7 +1175,9 @@
                     </div>
                 </div>
                 <div class="catalogue-note">
-                    ✳ Most plants are greenhouse-grown on site — availability varies by season. Ask our staff for current stock and recommendations. Service quotes available on request.
+                    <!-- Info icon -->
+                    <svg class="catalogue-note-icon" style="flex-shrink:0;margin-top:2px;" viewBox="0 0 24 24" fill="none" stroke="#5a7a5e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    Most plants are greenhouse-grown on site — availability varies by season. Ask our staff for current stock and recommendations. Service quotes available on request.
                 </div>
             </div>
         </div>
@@ -1164,15 +1192,33 @@
                 <div>
                     <h2 class="cta-title">Ready to <em>visit</em><br>our nursery?</h2>
                     <div class="cta-details">
-                        <div class="cta-detail">📍 H115Plot, Seven Miles, Kuruman, 8460</div>
-                        <div class="cta-detail">📞 <a href="tel:+27822243736">+27 82-224-3736</a></div>
-                        <div class="cta-detail">✉️ <a href="mailto:josephsedumedi53@gmail.com">josephsedumedi53@gmail.com</a></div>
-                        <div class="cta-detail">🏷️ Reg: 2017/360951/07</div>
+                        <div class="cta-detail">
+                            <svg class="cta-detail-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            H115Plot, Seven Miles, Kuruman, 8460
+                        </div>
+                        <div class="cta-detail">
+                            <svg class="cta-detail-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.79a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            <a href="tel:+27822243736">+27 82-224-3736</a>
+                        </div>
+                        <div class="cta-detail">
+                            <svg class="cta-detail-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            <a href="mailto:josephsedumedi53@gmail.com">josephsedumedi53@gmail.com</a>
+                        </div>
+                        <div class="cta-detail">
+                            <svg class="cta-detail-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                            Reg: 2017/360951/07
+                        </div>
                     </div>
                 </div>
                 <div class="cta-actions">
-                    <a href="tel:+27822243736" class="btn-primary">📞 Call Now</a>
-                    <a href="mailto:josephsedumedi53@gmail.com" class="btn-ghost">✉️ Email Us</a>
+                    <a href="tel:+27822243736" class="btn-primary">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.79a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        Call Now
+                    </a>
+                    <a href="mailto:josephsedumedi53@gmail.com" class="btn-ghost">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        Email Us
+                    </a>
                 </div>
             </div>
         </div>
@@ -1183,7 +1229,7 @@
         <div class="footer-inner">
             <div class="footer-top">
                 <div>
-        <div class="nav-logo"><img src="./assets/mlogo2.png" alt="Mohaduba Logo" style="height: 150px; width: auto;"></div>
+                    <div class="nav-logo"><img src="./assets/mlogo2.png" alt="Mohaduba Logo" style="height: 150px; width: auto;"></div>
                     <div class="footer-tagline">Rooted in Kuruman, grown with passion</div>
                 </div>
                 <div class="footer-links">
