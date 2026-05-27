@@ -7,7 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="icon" type="image/x-icon" href="./assets/Mologo.png">
-
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 
     <style>
@@ -55,6 +54,14 @@
         .mobile-menu a { display: block; text-decoration: none; color: var(--dark); font-size: 1rem; font-weight: 500; padding: 0.75rem 1rem; border-radius: 12px; transition: all 0.2s; }
         .mobile-menu a:hover { background: var(--light-green); color: var(--primary); }
         .mobile-menu.open { display: flex; }
+
+        /* SVG icon helpers */
+        .btn-icon { width: 16px; height: 16px; flex-shrink: 0; }
+        .detail-icon-svg { width: 26px; height: 26px; }
+        .dir-icon-svg { width: 22px; height: 22px; flex-shrink: 0; }
+        .strip-icon-svg { width: 18px; height: 18px; flex-shrink: 0; }
+        .founder-pill-icon { width: 14px; height: 14px; flex-shrink: 0; }
+        .small-icon { width: 13px; height: 13px; flex-shrink: 0; }
 
         .contact-hero {
             position: relative;
@@ -105,7 +112,6 @@
         }
         .info-strip-item:last-child { border-right: none; }
         .info-strip-item:hover { background: rgba(255,255,255,0.07); }
-        .info-strip-icon { font-size: 1.1rem; }
         .info-strip-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #7ab86a; display: block; }
         .info-strip-value { font-size: 0.85rem; color: rgba(255,255,255,0.88); font-weight: 500; }
         .info-strip-value a { color: inherit; text-decoration: none; }
@@ -140,10 +146,10 @@
             background: linear-gradient(135deg, #e4f2db, #c0ddb0);
             border-radius: 16px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.4rem;
             transition: all 0.25s;
         }
         .detail-card:hover .detail-card-icon { background: linear-gradient(135deg, #3a8040, #1f5522); box-shadow: 0 6px 20px rgba(22,56,26,0.3); }
+        .detail-card:hover .detail-card-icon svg { stroke: white; }
         .detail-card-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--primary); margin-bottom: 4px; }
         .detail-card-value { font-size: 1rem; font-weight: 600; color: var(--dark); line-height: 1.4; }
         .detail-card-value a { color: inherit; text-decoration: none; }
@@ -239,7 +245,6 @@
             background: linear-gradient(135deg, #3a8040, #1f5522);
             border-radius: 24px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 3rem;
             border: 3px solid rgba(255,255,255,0.2);
             box-shadow: 0 12px 40px rgba(0,0,0,0.4);
         }
@@ -261,6 +266,7 @@
             background: linear-gradient(135deg, #1f5522, #2d6a30);
             color: white; padding: 0.5rem 1rem; border-radius: 50px;
             font-size: 0.72rem; font-weight: 700; letter-spacing: 1px;
+            display: flex; align-items: center; gap: 6px;
         }
 
         .directions-section { padding: 2rem 1.5rem 5rem; }
@@ -283,7 +289,7 @@
                 repeating-linear-gradient(90deg, rgba(22,56,26,0.4) 0px, rgba(22,56,26,0.4) 1px, transparent 1px, transparent 40px);
         }
         .map-content { position: relative; z-index: 2; text-align: center; padding: 2rem; }
-        .map-pin { font-size: 4rem; display: block; margin-bottom: 1rem; filter: drop-shadow(0 8px 16px rgba(22,56,26,0.4)); animation: float 3s ease-in-out infinite; }
+        .map-pin-icon { display: flex; justify-content: center; margin-bottom: 1rem; animation: float 3s ease-in-out infinite; }
         @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
         .map-address { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--dark); margin-bottom: 0.4rem; }
         .map-sub { font-size: 0.82rem; color: #3a5c3e; }
@@ -307,7 +313,7 @@
             transition: all 0.22s;
         }
         .dir-item:hover { background: white; border-color: #b5dba8; box-shadow: 0 8px 24px rgba(22,56,26,0.1); transform: translateX(5px); }
-        .dir-icon { font-size: 1.3rem; flex-shrink: 0; }
+        .dir-icon { flex-shrink: 0; display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; }
         .dir-title { font-size: 0.88rem; font-weight: 700; color: var(--dark); margin-bottom: 2px; }
         .dir-body { font-size: 0.78rem; color: #5a7a5e; line-height: 1.55; }
 
@@ -374,8 +380,7 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="services.html">Services</a></li>
-                        <li><a href="gallery.html">Gallery</a></li>
-
+            <li><a href="gallery.html">Gallery</a></li>
             <!--<li><a href="contact.html">Contact</a></li>-->
             <li><a href="contact.html" class="active nav-cta">Get in Touch</a></li>
         </ul>
@@ -406,38 +411,7 @@
         </div>
     </section>
 
-    <!--<div class="hero-info-strip">
-        <div class="hero-info-inner">
-            <div class="info-strip-item">
-                <span class="info-strip-icon">📍</span>
-                <div>
-                    <span class="info-strip-label">Address</span>
-                    <span class="info-strip-value">H115Plot, Seven Miles, Kuruman</span>
-                </div>
-            </div>
-            <div class="info-strip-item">
-                <span class="info-strip-icon">📞</span>
-                <div>
-                    <span class="info-strip-label">Phone</span>
-                    <span class="info-strip-value"><a href="tel:+27822243736">+27 82-224-3736</a></span>
-                </div>
-            </div>
-            <div class="info-strip-item">
-                <span class="info-strip-icon">✉️</span>
-                <div>
-                    <span class="info-strip-label">Email</span>
-                    <span class="info-strip-value"><a href="mailto:josephsedumedi53@gmail.com">josephsedumedi53@gmail.com</a></span>
-                </div>
-            </div>
-            <div class="info-strip-item">
-                <span class="info-strip-icon">🕒</span>
-                <div>
-                    <span class="info-strip-label">Hours</span>
-                    <span class="info-strip-value">Mon–Fri 8:00–17:00</span>
-                </div>
-            </div>
-        </div>
-    </div>-->
+    <!--<div class="hero-info-strip">...</div>-->
 
     <section class="contact-main">
         <div class="section-wrap">
@@ -450,8 +424,11 @@
                         <div class="accent-bar"></div>
                     </div>
 
+                    <!-- Address -->
                     <div class="detail-card reveal reveal-delay-1">
-                        <div class="detail-card-icon">📍</div>
+                        <div class="detail-card-icon">
+                            <svg class="detail-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
                         <div>
                             <div class="detail-card-label">Physical Address</div>
                             <div class="detail-card-value">H115Plot, Seven Miles<br>Kuruman, 8460</div>
@@ -459,8 +436,11 @@
                         </div>
                     </div>
 
+                    <!-- Phone -->
                     <div class="detail-card reveal reveal-delay-1">
-                        <div class="detail-card-icon">📞</div>
+                        <div class="detail-card-icon">
+                            <svg class="detail-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.79a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        </div>
                         <div>
                             <div class="detail-card-label">Phone / WhatsApp</div>
                             <div class="detail-card-value"><a href="tel:+27822243736">+27 82-224-3736</a></div>
@@ -468,8 +448,11 @@
                         </div>
                     </div>
 
+                    <!-- Email -->
                     <div class="detail-card reveal reveal-delay-2">
-                        <div class="detail-card-icon">✉️</div>
+                        <div class="detail-card-icon">
+                            <svg class="detail-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        </div>
                         <div>
                             <div class="detail-card-label">Email Address</div>
                             <div class="detail-card-value"><a href="mailto:josephsedumedi53@gmail.com">josephsedumedi53@gmail.com</a></div>
@@ -477,8 +460,12 @@
                         </div>
                     </div>
 
+                    <!-- Hours -->
                     <div class="hours-card reveal reveal-delay-2">
-                        <div class="hours-title">🕒 Nursery Hours</div>
+                        <div class="hours-title">
+                            <svg style="width:20px;height:20px;flex-shrink:0;" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            Nursery Hours
+                        </div>
                         <div class="hours-row"><span class="hours-day">Monday – Friday</span><span class="hours-time">08:00 – 17:00</span></div>
                         <div class="hours-row"><span class="hours-day">Saturday</span><span class="hours-time">08:00 – 15:00</span></div>
                         <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time closed">By appointment only</span></div>
@@ -486,7 +473,7 @@
                     </div>
                 </div>
 
-                <!-- ==================== WORKING CONTACT FORM ==================== -->
+                <!-- CONTACT FORM -->
                 <div class="glass-card form-card reveal reveal-delay-1">
                     <div class="form-card-header">
                         <span class="section-eyebrow">Send a message</span>
@@ -535,18 +522,22 @@
                             <textarea name="Message" class="form-input" placeholder="Tell us what you need, how many, any specific requests…" required></textarea>
                         </div>
 
-                        <!-- Hidden fields for clean email -->
+                        <!-- Hidden fields -->
                         <input type="hidden" name="_subject" value="New Contact Form Submission - Mohaduba Website">
                         <input type="hidden" name="_next" value="https://yourwebsite.com/contact.html?sent=1">
                         <input type="hidden" name="_captcha" value="false">
                         <input type="hidden" name="_template" value="table">
 
                         <button type="submit" class="submit-btn">
-                            <span>📨</span> Send Message
+                            <!-- Send icon -->
+                            <svg style="width:18px;height:18px;flex-shrink:0;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                            Send Message
                         </button>
 
                         <div class="form-footer-note">
-                            🔒 Your details are safe with us — no spam, ever.
+                            <!-- Lock icon -->
+                            <svg class="small-icon" viewBox="0 0 24 24" fill="none" stroke="#6a8a6e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                            Your details are safe with us — no spam, ever.
                         </div>
                     </form>
                 </div>
@@ -555,29 +546,46 @@
         </div>
     </section>
 
+    <!-- FOUNDER CARD -->
     <section class="founder-section">
         <div class="section-wrap">
             <div class="founder-card reveal">
                 <div class="founder-card-bg"></div>
                 <div class="founder-card-overlay"></div>
                 <div class="founder-card-content">
-                    <div class="founder-avatar">🧑🏿‍🌾</div>
+                    <div class="founder-avatar">
+                        <!-- Person icon -->
+                        <svg style="width:52px;height:52px;" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
                     <div>
                         <div class="founder-role">Founder &amp; Managing Director</div>
                         <div class="founder-name">Joseph Sedumedi</div>
                         <p class="founder-bio">Joseph personally oversees all aspects of Mohaduba — from ordering merchandise and tree stock to greenhouse maintenance and customer relations. Feel free to ask for him directly when you visit or call. He loves talking plants.</p>
                         <div class="founder-contact-pills">
-                            <a href="tel:+27822243736" class="founder-pill">📞 +27 82-224-3736</a>
-                            <a href="mailto:josephsedumedi53@gmail.com" class="founder-pill">✉️ josephsedumedi53@gmail.com</a>
-                            <span class="founder-pill">📍 Seven Miles, Kuruman</span>
+                            <a href="tel:+27822243736" class="founder-pill">
+                                <svg class="founder-pill-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.79a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                +27 82-224-3736
+                            </a>
+                            <a href="mailto:josephsedumedi53@gmail.com" class="founder-pill">
+                                <svg class="founder-pill-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                josephsedumedi53@gmail.com
+                            </a>
+                            <span class="founder-pill">
+                                <svg class="founder-pill-icon" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                Seven Miles, Kuruman
+                            </span>
                         </div>
                     </div>
                 </div>
-                <div class="bbbee-corner">★ 100% Black Owned</div>
+                <div class="bbbee-corner">
+                    <svg style="width:12px;height:12px;flex-shrink:0;" viewBox="0 0 24 24" fill="white" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    100% Black Owned
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- DIRECTIONS -->
     <section class="directions-section">
         <div class="section-wrap">
             <div style="margin-bottom:2.5rem;" class="reveal">
@@ -588,39 +596,56 @@
                 <div class="map-card reveal">
                     <div class="map-pattern"></div>
                     <div class="map-content">
-                        <span class="map-pin">📍</span>
+                        <div class="map-pin-icon">
+                            <!-- Large map pin -->
+                            <svg style="width:64px;height:64px;filter:drop-shadow(0 8px 16px rgba(22,56,26,0.4));" viewBox="0 0 24 24" fill="#2d6a30" stroke="#1c4520" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3" fill="white" stroke="none"/></svg>
+                        </div>
                         <div class="map-address">H115Plot, Seven Miles</div>
                         <div class="map-sub">Kuruman, 8460 · Northern Cape, South Africa</div>
                         <a href="https://maps.google.com/?q=Kuruman+Seven+Miles" target="_blank" rel="noopener" class="map-open-link">
-                            🗺️ Open in Google Maps
+                            <!-- External link / map icon -->
+                            <svg style="width:14px;height:14px;flex-shrink:0;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            Open in Google Maps
                         </a>
                     </div>
                 </div>
 
                 <div class="directions-info">
                     <div class="dir-item reveal reveal-delay-1">
-                        <span class="dir-icon">🚗</span>
+                        <div class="dir-icon">
+                            <!-- Car icon -->
+                            <svg class="dir-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                        </div>
                         <div>
                             <div class="dir-title">By car from Kuruman central</div>
                             <div class="dir-body">Approximately 7 miles from the Kuruman town centre. Follow the Seven Miles route — Mohaduba is at H115Plot with ample parking on site.</div>
                         </div>
                     </div>
                     <div class="dir-item reveal reveal-delay-1">
-                        <span class="dir-icon">🏗️</span>
+                        <div class="dir-icon">
+                            <!-- Building / contractor icon -->
+                            <svg class="dir-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                        </div>
                         <div>
                             <div class="dir-title">Contractors &amp; bulk deliveries</div>
                             <div class="dir-body">We cater for contractors with larger volumes. Call ahead on +27 82-224-3736 to arrange a convenient time for loading and collection.</div>
                         </div>
                     </div>
                     <div class="dir-item reveal reveal-delay-2">
-                        <span class="dir-icon">🌍</span>
+                        <div class="dir-icon">
+                            <!-- Globe icon -->
+                            <svg class="dir-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        </div>
                         <div>
                             <div class="dir-title">Service area</div>
                             <div class="dir-body">We serve Kuruman and all surrounding areas including rural communities and landscaping contractors across the Northern Cape region.</div>
                         </div>
                     </div>
                     <div class="dir-item reveal reveal-delay-2">
-                        <span class="dir-icon">🅿️</span>
+                        <div class="dir-icon">
+                            <!-- Parking / P icon -->
+                            <svg class="dir-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg>
+                        </div>
                         <div>
                             <div class="dir-title">Parking &amp; access</div>
                             <div class="dir-body">Plenty of parking available on site. Walk-ins welcome during nursery hours — no appointment necessary for retail visitors.</div>
@@ -631,16 +656,26 @@
         </div>
     </section>
 
+    <!-- CLOSING -->
     <section class="closing-section">
         <div class="section-wrap">
             <div class="closing-inner reveal">
                 <h2 class="closing-title">We'd love to meet you<br>at <em>Mohaduba</em></h2>
                 <p class="closing-sub">Come explore our plants, get expert advice, and take home something beautiful for your garden. See you at Seven Miles!</p>
                 <div class="closing-btns">
-                    <a href="tel:+27822243736" class="btn-primary">📞 Call Now</a>
-                    <a href="mailto:josephsedumedi53@gmail.com" class="btn-outline">✉️ Send Email</a>
+                    <a href="tel:+27822243736" class="btn-primary">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.79a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        Call Now
+                    </a>
+                    <a href="mailto:josephsedumedi53@gmail.com" class="btn-outline">
+                        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        Send Email
+                    </a>
                 </div>
-                <div class="reg-chip">🏷️ Reg: 2017/360951/07 &nbsp;·&nbsp; 100% Black Owned</div>
+                <div class="reg-chip">
+                    <svg class="small-icon" viewBox="0 0 24 24" fill="none" stroke="#2d6a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                    Reg: 2017/360951/07 &nbsp;·&nbsp; 100% Black Owned
+                </div>
             </div>
         </div>
     </section>
@@ -649,14 +684,14 @@
         <div class="footer-inner">
             <div class="footer-top">
                 <div>
-        <div class="nav-logo"><img src="./assets/mlogo2.png" alt="Mohaduba Logo" style="height: 150px; width: auto;"></div>
+                    <div class="nav-logo"><img src="./assets/mlogo2.png" alt="Mohaduba Logo" style="height: 150px; width: auto;"></div>
                     <div class="footer-tagline">Rooted in Kuruman, grown with passion</div>
                 </div>
                 <div class="footer-links">
-                    <a href="mohaduba-homepage.html">Home</a>
-                    <a href="mohaduba-about.html">About</a>
-                    <a href="mohaduba-services.html">Services</a>
-                    <a href="#">Contact</a>
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="services.html">Services</a>
+                    <a href="contact.html">Contact</a>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -684,9 +719,8 @@
             nav.style.background = window.scrollY > 50 ? 'rgba(255,255,255,0.88)' : 'rgba(255,255,255,0.55)';
         });
 
-        // Optional success message
         if (window.location.search.includes('sent=1')) {
-            alert("✅ Thank you! Your message has been sent successfully to kmngomezulu82@gmail.com");
+            alert("Thank you! Your message has been sent successfully.");
         }
     </script>
 
